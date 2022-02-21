@@ -10,7 +10,7 @@ import org.json.simple.parser.JSONParser;
 
 public class PersistantFile {
 
-  static String path = "src/main/resources/data.json";
+  static String path = "src/main/resources/courseData.json";
 
   public static void save(JSONArray jarr) {
     FileWriter file = null;
