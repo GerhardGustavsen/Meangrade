@@ -6,26 +6,35 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import core.User;
+public class CourseViewController {
 
-public class DashboardController {
+  @FXML
+  public Label titleLabel;
 
+  @FXML
+  public Label descriptionLabel;
 
-  User user;
+  @FXML
+  public Label medianLabel;
 
-  private void openGrades(ActionEvent event) {
+  @FXML
+  public Label avarageLabel;
 
+  @FXML
+  public Label modeLabel;
+
+  private void openDashboard(ActionEvent event) {
     Parent root;
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
       root = loader.load();
-      GradesController controller = loader.getController();
-      controller.passUser(user);
-
 
       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setTitle("Grades");
@@ -38,13 +47,12 @@ public class DashboardController {
     }
   }
 
-
   @FXML
-  private void handleOpenGrades(ActionEvent event){
-    openGrades(event);
+  void handleOpenDashboard(ActionEvent event) {
+    openDashboard(event);
   }
 
-  public void passUser(User u) {
-    user = u;
+  public void initialize() {
+
   }
 }
