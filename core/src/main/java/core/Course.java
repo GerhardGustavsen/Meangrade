@@ -1,6 +1,6 @@
 package core;
 
-import json.PersistantFile;
+import json.CourseFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
