@@ -75,9 +75,6 @@ public class GradesController {
         openGrades();
     }
 
-    /**
-     */
-
     @FXML
     public void initialize() {
 
@@ -88,5 +85,8 @@ public class GradesController {
 
     }
 
+    public void passUser(User u) {
+        user = u;
+    }
 
 }

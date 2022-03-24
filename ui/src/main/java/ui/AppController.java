@@ -159,8 +159,7 @@ public class AppController implements Initializable {
       // ADD A TRY!
       for (String str : coursesText) {
         String[] gradeText = str.split(",");
-        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0), Integer.parseInt(gradeText[2]),
-            gradeText[3]);
+        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0), Integer.parseInt(gradeText[2]));
         grades.add(grade);
       }
     }

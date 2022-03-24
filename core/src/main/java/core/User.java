@@ -14,4 +14,11 @@ public class User {
         grades = g;
     }
 
+    public String getName() {
+        return user;
+    }
+
+    public String getPass() {
+        return password;
+    }
 }
