@@ -14,5 +14,7 @@
          </font></Text>
       <Button layoutX="446.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleOpenGrades" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="New Grade --&gt;" />
       <ListView layoutX="65.0" layoutY="76.0" prefHeight="293.0" prefWidth="484.0" style="-fx-background-color: white; -fx-border-color: black;" />
+      <Button layoutX="336.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleOpenCourse" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="See Course --&gt;" />
+      <Button layoutX="224.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleOpenNewCourse" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="New  Course--&gt;" />
    </children>
 </AnchorPane>

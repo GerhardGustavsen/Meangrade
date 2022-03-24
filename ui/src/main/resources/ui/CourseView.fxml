@@ -6,7 +6,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CourseViewController">
    <children>
       <Label fx:id="titleLabel" layoutX="95.0" layoutY="44.0" prefHeight="24.0" prefWidth="353.0" text="Course kode - Course name">
@@ -42,7 +41,7 @@
       <Label fx:id="medianLabel" layoutX="151.0" layoutY="217.0" text="Median" />
       <Label fx:id="avarageLabel" layoutX="274.0" layoutY="217.0" text="Avarage" />
       <Label fx:id="modeLabel" layoutX="403.0" layoutY="217.0" text="Mode" />
-      <Button layoutX="19.0" layoutY="16.0" mnemonicParsing="false" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="&lt;-- Back">
+      <Button layoutX="19.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleOpenDashboard" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="&lt;-- Back">
          <font>
             <Font name="Courier New Bold" size="12.0" />
          </font>

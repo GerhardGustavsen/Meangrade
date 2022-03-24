@@ -74,35 +74,10 @@ public class GradesController {
   }
 
 
-    @FXML
-    private ComboBox courseInput;
-    @FXML
-    private ComboBox<Integer> scoreInput;
-    @FXML
-    private ComboBox<Character> gradeInput;
-    @FXML
-    private TextArea commentInput;
+
 
     User user;
 
-    /**
-     * Adds application description to dashboard.
-     */
-
-    private ObservableList<Integer> populateScore() {
-        ArrayList<Integer> score = new ArrayList<Integer>();
-        for (int i = 1; i < 11; i++) {
-            score.add(i);
-        }
-        ObservableList<Integer> result = FXCollections.observableArrayList(score);
-        return result;
-    }
-
-    private ObservableList<Character> populateGrade() {
-        Character[] grades = { 'A', 'B', 'C', 'D', 'E', 'F' };
-        ObservableList<Character> gradeList = FXCollections.observableArrayList(grades);
-        return gradeList;
-    }
 
     private void openGrades() {
         Parent root;
