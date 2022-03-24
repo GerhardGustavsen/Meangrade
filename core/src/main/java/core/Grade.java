@@ -4,13 +4,11 @@ public class Grade {
     private String code;
     private char grade;
     private int score;
-    private String comment;
 
-    public Grade(String c, char g, int s, String t) {
+    public Grade(String c, char g, int s) {
         code = c;
         grade = g;
         score = s;
-        comment = t;
     }
 
     public String getCode() {
@@ -23,9 +21,5 @@ public class Grade {
 
     public int getScore() {
         return score;
-    };
-
-    public String getComment() {
-        return comment;
     };
 }
