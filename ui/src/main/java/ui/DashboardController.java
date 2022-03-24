@@ -7,7 +7,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import core.User;
+
 public class DashboardController {
+
+  User user;
 
   private void openGrades(String data) {
     Parent root;
@@ -24,9 +28,14 @@ public class DashboardController {
     } catch (IOException e) {
       System.out.print("Did not find data fxml form!");
       e.printStackTrace();
-    }}
+    }
+  }
 
-  public void initialize(){
+  public void initialize() {
 
+  }
+
+  public void passUser(User u) {
+    user = u;
   }
 }

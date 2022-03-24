@@ -3,9 +3,13 @@ package ui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import core.Validator;
-import core.Vault;
+import core.Core;
+import core.Encrypt;
+import core.Grade;
+import core.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,13 +32,13 @@ import javafx.stage.Stage;
 public class AppController implements Initializable {
 
   @FXML
-  public TextField username;
+  public TextField usernameTextField;
 
   @FXML
-  public TextField pas;
+  public TextField passwordTextField;
 
   @FXML
-  public TextField repas;
+  public TextField passwordRepeatField;
 
   @FXML
   private Button btreg;
@@ -63,17 +67,17 @@ public class AppController implements Initializable {
   @FXML
   private ImageView img;
 
-  Vault app;
+  Core app;
 
   @FXML
   void handleRegister(ActionEvent e) {
-    Validator validator = new Validator(username.getText(), pas.getText(), repas.getText(), app.getdata());
-    // validator.setData(username.getText(), pas.getText(), repas.getText(),
-    // app.getdata());
+    Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
+        passwordRepeatField.getText(), app.getdata());
+    Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
     if (validator.register()) {
-      app.newprofile(username.getText(), pas.getText());
-      openDataForm("", e);
+      app.newprofile(usernameTextField.getText(), passwordTextField.getText());
+      openDash(stage, "");
     }
 
     // Error messages:
@@ -91,14 +95,14 @@ public class AppController implements Initializable {
 
   @FXML
   void handleLoggInn(ActionEvent e) {
-    Validator validator = new Validator(username.getText(), pas.getText(), repas.getText(), app.getdata());
-    // validator.setData(username.getText(), pas.getText(), repas.getText(),
-    // app.getdata());
+    Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
+        passwordRepeatField.getText(), app.getdata());
+    Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
     if (validator.logginn()) {
-      String data = app.logginn(username.getText(), pas.getText());
+      String data = app.logginn(usernameTextField.getText(), passwordTextField.getText());
       if (data != null) {
-        openDataForm(data, e);
+        openDash(stage, data);
         clear();
       } else {
         usermsg.setText("Wrong username or password!");
@@ -117,27 +121,25 @@ public class AppController implements Initializable {
       System.out.println("could not find lock img");
     }
 
-    app = new Vault();
+    app = new Core();
 
     clear();
   }
 
-  private void openDataForm(String data, ActionEvent event) {
-    String user = username.getText();
-    String pass = pas.getText();
+  private void openDash(Stage stage, String data) {
+    String user = usernameTextField.getText();
+    String pass = passwordTextField.getText();
 
     Parent root;
     try {
-
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
       root = loader.load();
 
-      // GradesController controller = loader.getController();
-      // controller.passdata(user, data, app, pass);
+      DashboardController controller = loader.getController();
+      controller.passUser(createUser(user, pass, data));
 
-      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setScene(new Scene(root));
-      stage.setTitle("Vault - " + user);
+      stage.setTitle("User: " + user);
       stage.show();
 
     } catch (IOException e) {
@@ -145,6 +147,25 @@ public class AppController implements Initializable {
       e.printStackTrace();
     }
 
+  }
+
+  private User createUser(String username, String password, String data) {
+    ArrayList<Grade> grades = new ArrayList<Grade>();
+
+    if (data != null && data.length() > 0) {
+      String decryptedData = Encrypt.decrypt(data, password);
+
+      String[] coursesText = decryptedData.split("\\|");
+      // ADD A TRY!
+      for (String str : coursesText) {
+        String[] gradeText = str.split(",");
+        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0), Integer.parseInt(gradeText[2]),
+            gradeText[3]);
+        grades.add(grade);
+      }
+    }
+
+    return new User(username, password, grades);
   }
 
   private void clear() {
@@ -156,9 +177,9 @@ public class AppController implements Initializable {
     pasmsg.setText("");
     repasmsg.setText("");
 
-    username.setText("");
-    pas.setText("");
-    repas.setText("");
+    usernameTextField.setText("");
+    passwordTextField.setText("");
+    passwordRepeatField.setText("");
   }
 
 }

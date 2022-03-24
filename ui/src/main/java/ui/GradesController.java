@@ -1,6 +1,7 @@
 package ui;
 
 import core.Grade;
+import core.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,93 +20,73 @@ import java.util.ArrayList;
 
 public class GradesController {
 
-  @FXML
-  private Label title;
+    @FXML
+    private Label title;
 
-  @FXML
-  private ComboBox courseInput;
-  @FXML
-  private ComboBox<Integer> scoreInput;
-  @FXML
-  private ComboBox<Character> gradeInput;
-  @FXML
-  private TextArea commentInput;
+    @FXML
+    private ComboBox courseInput;
+    @FXML
+    private ComboBox<Integer> scoreInput;
+    @FXML
+    private ComboBox<Character> gradeInput;
+    @FXML
+    private TextArea commentInput;
 
-  /**
-   * Adds application description to dashboard.
-   */
+    User user;
 
-  private ObservableList<Integer> populateScore() {
-    ArrayList<Integer> score = new ArrayList<Integer>();
-    for (int i = 1; i < 11; i++) {
-      score.add(i);
-    }
-    ObservableList<Integer> result = FXCollections.observableArrayList(score);
-    return result;
-  }
-
-  private ObservableList<Character> populateGrade() {
-    Character[] grades = { 'A', 'B', 'C', 'D', 'E', 'F' };
-    ObservableList<Character> gradeList = FXCollections.observableArrayList(grades);
-    return gradeList;
-  }
-
-  private void openGrades() {
-    Parent root;
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-      root = loader.load();
-
-      Stage stage = new Stage();
-      stage.setTitle("Grades");
-      stage.setScene(new Scene(root));
-      stage.show();
-
-    } catch (IOException e) {
-      System.out.print("Did not find data fxml form!");
-      e.printStackTrace();
-    }
-  }
-
-  @FXML
-  void handleOpenGrades() {
-    openGrades();
-  }
-
-  // DATA FOR THE USSR:
-  String user;
-  String password;
-
-  private ArrayList<Grade> grades = new ArrayList<Grade>();
-
-  /**
+    /**
+     * Adds application description to dashboard.
      */
 
-  @FXML
-  public void initialize() {
-
-    title.setText("New grade");
-    populateScore();
-    scoreInput.setItems(populateScore());
-    gradeInput.setItems(populateGrade());
-
-  }
-
-  public void passData(String name, String pass, String data) {
-    user = name;
-    password = pass;
-
-    if (data != null && data.length() > 0) {
-      String decryptedData = Encrypt.decrypt(data, password);
-
-      String[] coursesText = data.split("|");
-      // ADD A TRY!
-      for (String str : coursesText) {
-        String[] gradeText = data.split(",");
-        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0), Integer.parseInt(gradeText[2]),
-            gradeText[3]);
-        grades.add(grade);
-      }
+    private ObservableList<Integer> populateScore() {
+        ArrayList<Integer> score = new ArrayList<Integer>();
+        for (int i = 1; i < 11; i++) {
+            score.add(i);
+        }
+        ObservableList<Integer> result = FXCollections.observableArrayList(score);
+        return result;
     }
-  }
+
+    private ObservableList<Character> populateGrade() {
+        Character[] grades = { 'A', 'B', 'C', 'D', 'E', 'F' };
+        ObservableList<Character> gradeList = FXCollections.observableArrayList(grades);
+        return gradeList;
+    }
+
+    private void openGrades() {
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+            root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Grades");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            System.out.print("Did not find data fxml form!");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void handleOpenGrades() {
+        openGrades();
+    }
+
+    /**
+     */
+
+    @FXML
+    public void initialize() {
+
+        title.setText("New grade");
+        populateScore();
+        scoreInput.setItems(populateScore());
+        gradeInput.setItems(populateGrade());
+
+    }
+
+
 }
