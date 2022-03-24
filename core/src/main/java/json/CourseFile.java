@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 
-public class PersistantFile {
+public class CourseFile {
 
   static String path = "src/main/resources/courseData.json";
 

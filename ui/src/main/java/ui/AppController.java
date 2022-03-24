@@ -121,11 +121,9 @@ public class AppController implements Initializable {
 
     Parent root;
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Data.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
       root = loader.load();
-      DataController controller = loader.getController();
-
-      controller.passdata(user, data, app, pass);
+      GradesController controller = loader.getController();
 
       Stage stage = new Stage();
       stage.setTitle("Vault - " + user);

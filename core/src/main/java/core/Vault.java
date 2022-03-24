@@ -1,6 +1,6 @@
 package core;
 
-import json.UserFile;
+import json.CourseFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,21 +10,20 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class User {
+public class Vault {
 
   private JSONArray data = new JSONArray();
 
-  public User() {
-    data = UserFile.load();
+  public Vault() {
+    data = CourseFile.load();
   }
 
+  @SuppressWarnings("unchecked")
   public void newprofile(String user, String pas) {
     Map<String, String> map = new HashMap<String, String>();
     map.put("UserName", user);
     map.put("PassHash", Encrypt.hash(pas));
     map.put("Data", "");
-
-    //Data is stored with course code like this: TDT1000#A, TDT1001#B, 
 
     data.add(map);
   }
@@ -57,13 +56,14 @@ public class User {
       }
       if (data != newdata) {
         data = (JSONArray) newdata;
-        UserFile.save(data);
+        CourseFile.save(data);
         awnser = true;
       }
     }
     return awnser;
   }
 
+  @SuppressWarnings("unchecked")
   public boolean addData(String user, String dat) {
     JSONObject jsonUser = Validator.userexsist(user, data);
 
@@ -74,7 +74,7 @@ public class User {
 
       data.add(jsonUser);
 
-      UserFile.save(data);
+      CourseFile.save(data);
       return true;
     }
     return false;
