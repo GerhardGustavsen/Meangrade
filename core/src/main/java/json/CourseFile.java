@@ -10,7 +10,7 @@ import org.json.simple.parser.JSONParser;
 
 public class CourseFile {
 
-  static String path = "src/main/resources/courseData.json";
+  static String path = "src/main/resources/json/courses.json";
 
   public static void save(JSONArray jarr) {
     FileWriter file = null;
@@ -29,7 +29,7 @@ public class CourseFile {
         System.out.println("Successfully Copied JSON Object to File.");
         System.out.println("\nJSON Object: " + jarr);
       } catch (IOException e) {
-        System.out.println("Program faled to write to file!");
+        System.out.println("Program failed to write to file!");
         e.printStackTrace();
       }
     } catch (IOException e) {
