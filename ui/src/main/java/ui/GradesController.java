@@ -22,58 +22,8 @@ import java.util.ArrayList;
 
 public class GradesController {
 
-
-  @FXML
-  private Label title;
-
-  @FXML
-  private ComboBox courseInput;
-  @FXML
-  private ComboBox<Integer> scoreInput;
-  @FXML
-  private ComboBox<Character> gradeInput;
-  @FXML
-  private TextArea commentInput;
-
-  /**
-   * Adds application description to dashboard.
-   */
-
-  private ObservableList<Integer> populateScore() {
-    ArrayList<Integer> score = new ArrayList<>();
-    for (int i = 1; i < 11; i++) {
-      score.add(i);
-    }
-    return FXCollections.observableArrayList(score);
-  }
-
-  private ObservableList<Character> populateGrade() {
-    Character[] grades = { 'A', 'B', 'C', 'D', 'E', 'F' };
-    return FXCollections.observableArrayList(grades);
-  }
-
-  private void openDashboard(ActionEvent event) {
-    Parent root;
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-      root = loader.load();
-
-      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      stage.setTitle("Grades");
-      stage.setScene(new Scene(root));
-      stage.show();
-
-    } catch (IOException e) {
-      System.out.print("Did not find data fxml form!");
-      e.printStackTrace();
-    }
-  }
-
-  @FXML
-  void handleOpenDashboard(ActionEvent event) {
-    openDashboard(event);
-  }
-
+    @FXML
+    private Label title;
 
     @FXML
     private ComboBox courseInput;
@@ -84,6 +34,11 @@ public class GradesController {
     @FXML
     private TextArea commentInput;
 
+    @FXML
+    void handleOpenDashboard(ActionEvent event) {
+        openDashboard(event);
+    }
+
     User user;
 
     /**
@@ -91,18 +46,33 @@ public class GradesController {
      */
 
     private ObservableList<Integer> populateScore() {
-        ArrayList<Integer> score = new ArrayList<Integer>();
+        ArrayList<Integer> score = new ArrayList<>();
         for (int i = 1; i < 11; i++) {
             score.add(i);
         }
-        ObservableList<Integer> result = FXCollections.observableArrayList(score);
-        return result;
+        return FXCollections.observableArrayList(score);
     }
 
     private ObservableList<Character> populateGrade() {
         Character[] grades = { 'A', 'B', 'C', 'D', 'E', 'F' };
-        ObservableList<Character> gradeList = FXCollections.observableArrayList(grades);
-        return gradeList;
+        return FXCollections.observableArrayList(grades);
+    }
+
+    private void openDashboard(ActionEvent event) {
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
+            root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Grades");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            System.out.print("Did not find data fxml form!");
+            e.printStackTrace();
+        }
     }
 
     private void openGrades() {
@@ -121,7 +91,6 @@ public class GradesController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     void handleOpenGrades() {
