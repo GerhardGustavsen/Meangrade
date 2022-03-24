@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="322.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CourseController">
+    <children>
+        <Label fx:id="title" layoutX="224.0" layoutY="16.0" text="Title">
+            <font>
+                <Font name="Courier New Bold" size="22.0" />
+            </font>
+        </Label>
+        <TextArea fx:id="commentInput" layoutX="84.0" layoutY="114.0" prefHeight="139.0" prefWidth="360.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" />
+        <Label fx:id="title1" layoutX="82.0" layoutY="49.0" text="Course Code">
+            <font>
+                <Font name="Courier New" size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="title11" layoutX="268.0" layoutY="49.0" text="Course Name">
+            <font>
+                <Font name="Courier New" size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="title12" layoutX="82.0" layoutY="98.0" text="Description">
+            <font>
+                <Font name="Courier New" size="14.0" />
+            </font>
+        </Label>
+        <Button layoutX="394.0" layoutY="269.0" mnemonicParsing="false" style="-fx-background-color: #68BB59;" text="Save" textFill="WHITE">
+            <font>
+                <Font name="Courier New Bold" size="13.0" />
+            </font>
+        </Button>
+        <Button layoutX="8.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleOpenDashboard" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 12;" text="&lt;--Back">
+            <font>
+                <Font name="Courier New Bold" size="13.0" />
+            </font>
+        </Button>
+      <TextField layoutX="82.0" layoutY="65.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" />
+      <TextField layoutX="268.0" layoutY="65.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" />
+    </children>
+</AnchorPane>

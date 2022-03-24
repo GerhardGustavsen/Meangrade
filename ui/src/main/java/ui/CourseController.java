@@ -10,18 +10,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import core.User;
-
-public class DashboardController {
-
-
-  User user;
-
-  private void openGrades(ActionEvent event) {
-
+public class CourseController {
+  private void openDashboard(ActionEvent event) {
     Parent root;
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
       root = loader.load();
 
       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -35,13 +28,10 @@ public class DashboardController {
     }
   }
 
-
   @FXML
-  private void handleOpenGrades(ActionEvent event){
-    openGrades(event);
+  void handleOpenDashboard(ActionEvent event) {
+    openDashboard(event);
   }
 
-  public void passUser(User u) {
-    user = u;
-  }
+  public void initialize() {}
 }
