@@ -10,9 +10,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import core.User;
+
 public class DashboardController {
 
+
+  User user;
+
   private void openGrades(ActionEvent event) {
+
     Parent root;
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
@@ -26,14 +32,16 @@ public class DashboardController {
     } catch (IOException e) {
       System.out.print("Did not find data fxml form!");
       e.printStackTrace();
-    }}
+    }
+  }
+
 
   @FXML
   private void handleOpenGrades(ActionEvent event){
     openGrades(event);
   }
 
-  public void initialize(){
-
+  public void passUser(User u) {
+    user = u;
   }
 }

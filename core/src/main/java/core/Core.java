@@ -10,15 +10,14 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Vault {
+public class Core {
 
   private JSONArray data = new JSONArray();
 
-  public Vault() {
+  public Core() {
     data = CourseFile.load();
   }
 
-  @SuppressWarnings("unchecked")
   public void newprofile(String user, String pas) {
     Map<String, String> map = new HashMap<String, String>();
     map.put("UserName", user);
@@ -63,7 +62,6 @@ public class Vault {
     return awnser;
   }
 
-  @SuppressWarnings("unchecked")
   public boolean addData(String user, String dat) {
     JSONObject jsonUser = Validator.userexsist(user, data);
 
