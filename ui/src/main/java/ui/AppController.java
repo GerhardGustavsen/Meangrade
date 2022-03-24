@@ -121,9 +121,9 @@ public class AppController implements Initializable {
 
     Parent root;
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Data.fxml"));
       root = loader.load();
-      GradesController controller = loader.getController();
+
 
       Stage stage = new Stage();
       stage.setTitle("Vault - " + user);
