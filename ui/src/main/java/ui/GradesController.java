@@ -1,5 +1,6 @@
 package ui;
 
+import core.Grade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import core.Encrypt;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,28 +25,27 @@ public class GradesController {
   @FXML
   private ComboBox courseInput;
   @FXML
-  private ComboBox<Character> gradeInput;
-  @FXML
   private ComboBox<Integer> scoreInput;
   @FXML
+  private ComboBox<Character> gradeInput;
+  @FXML
   private TextArea commentInput;
+
   /**
    * Adds application description to dashboard.
    */
 
-
-
-  private ObservableList<Integer> populateScore(){
+  private ObservableList<Integer> populateScore() {
     ArrayList<Integer> score = new ArrayList<Integer>();
-    for (int i = 1; i < 11; i++){
+    for (int i = 1; i < 11; i++) {
       score.add(i);
     }
     ObservableList<Integer> result = FXCollections.observableArrayList(score);
     return result;
   }
 
-  private ObservableList<Character> populateGrade(){
-    Character[] grades = {'A', 'B', 'C', 'D', 'E', 'F'};
+  private ObservableList<Character> populateGrade() {
+    Character[] grades = { 'A', 'B', 'C', 'D', 'E', 'F' };
     ObservableList<Character> gradeList = FXCollections.observableArrayList(grades);
     return gradeList;
   }
@@ -63,13 +64,22 @@ public class GradesController {
     } catch (IOException e) {
       System.out.print("Did not find data fxml form!");
       e.printStackTrace();
-    }}
+    }
+  }
 
   @FXML
-  void handleOpenGrades(){
+  void handleOpenGrades() {
     openGrades();
   }
 
+  // DATA FOR THE USSR:
+  String user;
+  String password;
+
+  private ArrayList<Grade> grades = new ArrayList<Grade>();
+
+  /**
+     */
 
   @FXML
   public void initialize() {
@@ -78,6 +88,24 @@ public class GradesController {
     populateScore();
     scoreInput.setItems(populateScore());
     gradeInput.setItems(populateGrade());
-}
 
+  }
+
+  public void passData(String name, String pass, String data) {
+    user = name;
+    password = pass;
+
+    if (data != null && data.length() > 0) {
+      String decryptedData = Encrypt.decrypt(data, password);
+
+      String[] coursesText = data.split("|");
+      // ADD A TRY!
+      for (String str : coursesText) {
+        String[] gradeText = data.split(",");
+        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0), Integer.parseInt(gradeText[2]),
+            gradeText[3]);
+        grades.add(grade);
+      }
+    }
+  }
 }
