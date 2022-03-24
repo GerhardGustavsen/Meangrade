@@ -17,6 +17,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class AppController implements Initializable {
 
@@ -59,14 +66,14 @@ public class AppController implements Initializable {
   Vault app;
 
   @FXML
-  void handleRegister() {
+  void handleRegister(ActionEvent e) {
     Validator validator = new Validator(username.getText(), pas.getText(), repas.getText(), app.getdata());
-    //validator.setData(username.getText(), pas.getText(), repas.getText(), app.getdata());
-
+    // validator.setData(username.getText(), pas.getText(), repas.getText(),
+    // app.getdata());
 
     if (validator.register()) {
       app.newprofile(username.getText(), pas.getText());
-      openDataForm("");
+      openDataForm("", e);
     }
 
     // Error messages:
@@ -83,15 +90,15 @@ public class AppController implements Initializable {
   }
 
   @FXML
-  void handleLoggInn() {
+  void handleLoggInn(ActionEvent e) {
     Validator validator = new Validator(username.getText(), pas.getText(), repas.getText(), app.getdata());
-    //validator.setData(username.getText(), pas.getText(), repas.getText(), app.getdata());
-
+    // validator.setData(username.getText(), pas.getText(), repas.getText(),
+    // app.getdata());
 
     if (validator.logginn()) {
       String data = app.logginn(username.getText(), pas.getText());
       if (data != null) {
-        openDataForm(data);
+        openDataForm(data, e);
         clear();
       } else {
         usermsg.setText("Wrong username or password!");
@@ -115,19 +122,22 @@ public class AppController implements Initializable {
     clear();
   }
 
-  private void openDataForm(String data) {
+  private void openDataForm(String data, ActionEvent event) {
     String user = username.getText();
     String pass = pas.getText();
 
     Parent root;
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Data.fxml"));
+
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
       root = loader.load();
 
+      // GradesController controller = loader.getController();
+      // controller.passdata(user, data, app, pass);
 
-      Stage stage = new Stage();
-      stage.setTitle("Vault - " + user);
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setScene(new Scene(root));
+      stage.setTitle("Vault - " + user);
       stage.show();
 
     } catch (IOException e) {
