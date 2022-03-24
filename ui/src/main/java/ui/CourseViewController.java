@@ -6,16 +6,34 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class DashboardController {
+public class CourseViewController {
 
-  private void openGrades(ActionEvent event) {
+  @FXML
+  public Label titleLabel;
+
+  @FXML
+  public Label descriptionLabel;
+
+  @FXML
+  public Label medianLabel;
+
+  @FXML
+  public Label avarageLabel;
+
+  @FXML
+  public Label modeLabel;
+
+  private void openDashboard(ActionEvent event) {
     Parent root;
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
       root = loader.load();
 
       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -26,14 +44,15 @@ public class DashboardController {
     } catch (IOException e) {
       System.out.print("Did not find data fxml form!");
       e.printStackTrace();
-    }}
-
-  @FXML
-  private void handleOpenGrades(ActionEvent event){
-    openGrades(event);
+    }
   }
 
-  public void initialize(){
+  @FXML
+  void handleOpenDashboard(ActionEvent event) {
+    openDashboard(event);
+  }
+
+  public void initialize() {
 
   }
 }
