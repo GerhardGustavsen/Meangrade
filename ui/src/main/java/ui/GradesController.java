@@ -3,8 +3,10 @@ package ui;
 import core.Grade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
@@ -36,27 +38,25 @@ public class GradesController {
    */
 
   private ObservableList<Integer> populateScore() {
-    ArrayList<Integer> score = new ArrayList<Integer>();
+    ArrayList<Integer> score = new ArrayList<>();
     for (int i = 1; i < 11; i++) {
       score.add(i);
     }
-    ObservableList<Integer> result = FXCollections.observableArrayList(score);
-    return result;
+    return FXCollections.observableArrayList(score);
   }
 
   private ObservableList<Character> populateGrade() {
     Character[] grades = { 'A', 'B', 'C', 'D', 'E', 'F' };
-    ObservableList<Character> gradeList = FXCollections.observableArrayList(grades);
-    return gradeList;
+    return FXCollections.observableArrayList(grades);
   }
 
-  private void openGrades() {
+  private void openDashboard(ActionEvent event) {
     Parent root;
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
       root = loader.load();
 
-      Stage stage = new Stage();
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setTitle("Grades");
       stage.setScene(new Scene(root));
       stage.show();
@@ -68,8 +68,8 @@ public class GradesController {
   }
 
   @FXML
-  void handleOpenGrades() {
-    openGrades();
+  void handleOpenDashboard(ActionEvent event) {
+    openDashboard(event);
   }
 
   // DATA FOR THE USSR:
@@ -85,7 +85,6 @@ public class GradesController {
   public void initialize() {
 
     title.setText("New grade");
-    populateScore();
     scoreInput.setItems(populateScore());
     gradeInput.setItems(populateGrade());
 
@@ -98,7 +97,7 @@ public class GradesController {
     if (data != null && data.length() > 0) {
       String decryptedData = Encrypt.decrypt(data, password);
 
-      String[] coursesText = data.split("|");
+      String[] coursesText = data.split("\\|");
       // ADD A TRY!
       for (String str : coursesText) {
         String[] gradeText = data.split(",");

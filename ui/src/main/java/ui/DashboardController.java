@@ -1,6 +1,9 @@
 package ui;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,14 +12,13 @@ import java.io.IOException;
 
 public class DashboardController {
 
-  private void openGrades(String data) {
+  private void openGrades(ActionEvent event) {
     Parent root;
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
       root = loader.load();
-      GradesController controller = loader.getController();
 
-      Stage stage = new Stage();
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setTitle("Grades");
       stage.setScene(new Scene(root));
       stage.show();
@@ -25,6 +27,11 @@ public class DashboardController {
       System.out.print("Did not find data fxml form!");
       e.printStackTrace();
     }}
+
+  @FXML
+  private void handleOpenGrades(ActionEvent event){
+    openGrades(event);
+  }
 
   public void initialize(){
 
