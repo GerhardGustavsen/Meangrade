@@ -38,11 +38,39 @@ public class DashboardController {
     }
   }
 
+  private void openFXML(ActionEvent event, String fxmlPath) {
+
+    Parent root;
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+      root = loader.load();
+
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      stage.setTitle("Grades");
+      stage.setScene(new Scene(root));
+      stage.show();
+
+    } catch (IOException e) {
+      System.out.print("Did not find data fxml form!");
+      e.printStackTrace();
+    }
+  }
+
+
 
   @FXML
   private void handleOpenGrades(ActionEvent event){
-    openGrades(event);
+    openFXML(event, "Grades.fxml");
   }
+  @FXML
+  private void handleOpenCourse(ActionEvent event){
+    openFXML(event, "Course.fxml");
+  }
+  @FXML
+  private void handleOpenNewCourse(ActionEvent event){
+    openFXML(event, "CourseView.fxml");
+  }
+
 
   public void passUser(User u) {
     user = u;
