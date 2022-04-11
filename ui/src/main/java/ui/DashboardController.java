@@ -23,6 +23,9 @@ public class DashboardController {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
       root = loader.load();
+      GradesController controller = loader.getController();
+      controller.passUser(user);
+
 
       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setTitle("Grades");
