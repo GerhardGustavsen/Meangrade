@@ -14,9 +14,9 @@ public class Course {
     private String code;
     private String name;
     private String description;
-    private int[] results;
+    private ArrayList<Integer> results;
 
-    public Course(String c, String n, String d, int[] r) {
+    public Course(String c, String n, String d, ArrayList<Integer> r) {
         code = c;
         name = n;
         description = d;
@@ -35,7 +35,7 @@ public class Course {
         return description;
     };
 
-    public int[] getRes() {
+    public ArrayList<Integer> getRes() {
         return results;
     };
 }
