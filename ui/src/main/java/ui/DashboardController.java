@@ -20,14 +20,12 @@ public class DashboardController {
 
   User user;
 
-  private void openGrades(ActionEvent event) {
+  private void openFXML(ActionEvent event, String fxmlPath) {
 
     Parent root;
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Grades.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
       root = loader.load();
-      GradesController controller = loader.getController();
-      controller.passUser(user);
 
       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       stage.setTitle("Grades");
@@ -47,12 +45,21 @@ public class DashboardController {
     }
 
     ListView<String> listView = new ListView<String>(gradeCollection);
-
   }
 
   @FXML
   private void handleOpenGrades(ActionEvent event) {
-    openGrades(event);
+    openFXML(event, "Grades.fxml");
+  }
+
+  @FXML
+  private void handleOpenCourse(ActionEvent event) {
+    openFXML(event, "Course.fxml");
+  }
+
+  @FXML
+  private void handleOpenNewCourse(ActionEvent event) {
+    openFXML(event, "CourseView.fxml");
   }
 
   public void passUser(User u) {

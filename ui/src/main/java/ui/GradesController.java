@@ -24,14 +24,9 @@ public class GradesController {
     @FXML
     private Label title;
 
-    @FXML
-    private ComboBox courseInput;
-    @FXML
-    private ComboBox<Integer> scoreInput;
-    @FXML
-    private ComboBox<Character> gradeInput;
-    @FXML
-    private TextArea commentInput;
+    @FXML ComboBox scoreInput;
+
+    @FXML ComboBox gradeInput;
 
     @FXML
     void handleOpenDashboard(ActionEvent event) {
