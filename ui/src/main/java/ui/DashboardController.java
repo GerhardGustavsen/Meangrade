@@ -64,7 +64,7 @@ public class DashboardController {
   }
   @FXML
   private void handleOpenCourse(ActionEvent event){
-    openFXML(event, "Course.fmxl");
+    openFXML(event, "Course.fxml");
   }
   @FXML
   private void handleOpenNewCourse(ActionEvent event){
