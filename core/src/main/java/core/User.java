@@ -21,4 +21,8 @@ public class User {
     public String getPass() {
         return password;
     }
+
+    public ArrayList<Grade> getGrades() {
+        return grades;
+    }
 }
