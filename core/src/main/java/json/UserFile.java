@@ -10,7 +10,7 @@ import org.json.simple.parser.JSONParser;
 
 public class UserFile {
 
-  static String path = "src/main/resources/userData.json";
+  static String path = "src/main/resources/json/userData.json";
 
   public static void save(JSONArray jarr) {
     FileWriter file = null;
@@ -48,13 +48,16 @@ public class UserFile {
 
   public static JSONArray load() {
     JSONArray obj = new JSONArray();
+    System.out.println("inside load");
 
     try {
       File File = new File(path);
+
       if (File.length() > 0) {
         FileReader reader = new FileReader(File);
         JSONParser jsonParser = new JSONParser();
         obj = (JSONArray) jsonParser.parse(reader);
+
       }
 
     } catch (org.json.simple.parser.ParseException e) {

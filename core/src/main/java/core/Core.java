@@ -1,6 +1,7 @@
 package core;
 
 import json.CourseFile;
+import json.UserFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +16,8 @@ public class Core {
   private JSONArray data = new JSONArray();
 
   public Core() {
-    data = CourseFile.load();
+    data = UserFile.load();
+
   }
 
   public void newprofile(String user, String pas) {
@@ -80,6 +82,7 @@ public class Core {
 
   public JSONArray getdata() {
     return data;
+
   }
 
 }

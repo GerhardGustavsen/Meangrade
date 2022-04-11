@@ -12,6 +12,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import core.Grade;
 import core.User;
@@ -19,33 +21,22 @@ import core.User;
 public class DashboardController {
 
   User user;
+  private ObservableList<String> gradeCollection = FXCollections.observableArrayList("test\t test");
 
-  private void openFXML(ActionEvent event, String fxmlPath) {
-
-    Parent root;
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-      root = loader.load();
-
-      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      stage.setTitle("Grades");
-      stage.setScene(new Scene(root));
-      stage.show();
-
-    } catch (IOException e) {
-      System.out.print("Did not find data fxml form!");
-      e.printStackTrace();
-    }
+  @FXML
+  public void initialize() {
 
     // Add TRY???
-    ObservableList<String> gradeCollection = FXCollections.observableArrayList();
+    // Populating listview:
+    gradeList.setItems(gradeCollection);
     for (Grade grade : user.getGrades()) {
       String listString = "- " + grade.getCode() + "\t\t\t" + grade.getGrade();
       gradeCollection.add(listString);
     }
-
-    ListView<String> listView = new ListView<String>(gradeCollection);
   }
+
+  @FXML
+  private ListView<String> gradeList;
 
   @FXML
   private void handleOpenGrades(ActionEvent event) {
@@ -64,5 +55,24 @@ public class DashboardController {
 
   public void passUser(User u) {
     user = u;
+
+  }
+
+  private void openFXML(ActionEvent event, String fxmlPath) {
+
+    Parent root;
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+      root = loader.load();
+
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      stage.setTitle("Grades");
+      stage.setScene(new Scene(root));
+      stage.show();
+
+    } catch (IOException e) {
+      System.out.print("Did not find data fxml form!");
+      e.printStackTrace();
+    }
   }
 }

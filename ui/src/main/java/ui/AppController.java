@@ -112,18 +112,22 @@ public class AppController implements Initializable {
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-    File imgFile = new File("src/main/resources/ui/img.png");
-
-    if (imgFile.exists()) {
-      Image image = new Image(imgFile.toURI().toString());
-      img.setImage(image);
-    } else {
-      System.out.println("could not find lock img");
-    }
-
+    /*
+     * IMAGE DISPLAYER:
+     * 
+     * File imgFile = new File("src/main/resources/ui/img.png");
+     * 
+     * if (imgFile.exists()) {
+     * Image image = new Image(imgFile.toURI().toString());
+     * img.setImage(image);
+     * } else {
+     * System.out.println("could not find lock img");
+     * }
+     */
     app = new Core();
 
     clear();
+
   }
 
   private void openDash(Stage stage, String data) {
