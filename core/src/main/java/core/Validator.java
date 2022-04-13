@@ -25,7 +25,6 @@ public class Validator {
 
   public Validator(String un, String pas, String repas, JSONArray d) {
     data = d;
-
     username = un;
     password = pas;
     repassword = repas;

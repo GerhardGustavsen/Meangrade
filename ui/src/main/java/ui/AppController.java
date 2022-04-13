@@ -28,6 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import json.UserHandler;
 
 public class AppController implements Initializable {
 
@@ -69,14 +70,18 @@ public class AppController implements Initializable {
 
   Core app;
 
+  String path = "../core/src/main/resources/json/user.json";
+
+
+
   @FXML
-  void handleRegister(ActionEvent e) {
+  void handleRegister(ActionEvent e) throws IOException {
     Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
-        passwordRepeatField.getText(), app.getdata());
+        passwordRepeatField.getText(), UserHandler.load(path));
     Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
     if (validator.register()) {
-      app.newprofile(usernameTextField.getText(), passwordTextField.getText());
+      UserHandler.createUser(usernameTextField.getText(), passwordTextField.getText(), path, UserHandler.load(path));
       openDash(stage, "");
     }
 
@@ -121,7 +126,11 @@ public class AppController implements Initializable {
       System.out.println("could not find lock img");
     }
 
-    app = new Core();
+    try {
+      app = new Core();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     clear();
   }
