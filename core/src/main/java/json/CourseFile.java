@@ -5,14 +5,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import core.Course;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class CourseFile {
 
   static String path = "src/main/resources/json/courses.json";
 
-  public static void save(JSONArray jarr) {
+    public static void save(JSONArray jarr) {
     FileWriter file = null;
 
     try {
@@ -51,10 +54,12 @@ public class CourseFile {
 
     try {
       File File = new File(path);
-      if (File.length() > 0) {
+      System.out.println("hello");
+      if (File.length() >= 0) {
         FileReader reader = new FileReader(File);
         JSONParser jsonParser = new JSONParser();
         obj = (JSONArray) jsonParser.parse(reader);
+        System.out.println(obj);
       }
 
     } catch (org.json.simple.parser.ParseException e) {
@@ -68,3 +73,4 @@ public class CourseFile {
     return obj;
   }
 }
+
