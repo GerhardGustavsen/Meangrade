@@ -135,9 +135,17 @@ public class AppController implements Initializable {
     String pass = passwordTextField.getText();
 
     Parent root;
+    System.out.print("1\n");
     try {
+      System.out.print("2\n");
+
       FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-      root = loader.load();
+
+      System.out.print("3\n");
+
+      root = loader.load(); // ERROR
+
+      System.out.print("4\n");
 
       DashboardController controller = loader.getController();
       controller.passUser(createUser(user, pass, data));
@@ -163,7 +171,7 @@ public class AppController implements Initializable {
       // ADD A TRY!
       for (String str : coursesText) {
         String[] gradeText = str.split(",");
-        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0), Integer.parseInt(gradeText[2]));
+        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0));
         grades.add(grade);
       }
     }

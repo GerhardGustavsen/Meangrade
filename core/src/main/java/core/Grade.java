@@ -5,10 +5,9 @@ public class Grade {
     private char grade;
     private int score;
 
-    public Grade(String c, char g, int s) {
+    public Grade(String c, char g) {
         code = c;
         grade = g;
-        score = s;
     }
 
     public String getCode() {
@@ -19,7 +18,7 @@ public class Grade {
         return grade;
     };
 
-    public int getScore() {
-        return score;
-    };
+    public String toString() {
+        return getCode() + "\t\t\t\t\t\t\tGrade: " + getGrade();
+    }
 }
