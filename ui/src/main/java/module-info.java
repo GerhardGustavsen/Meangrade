@@ -1,5 +1,5 @@
-module vault.ui {
-    requires vault.core;
+module MeanGrade.ui {
+    requires MeanGrade.core;
     requires javafx.controls;
     requires javafx.fxml;
 

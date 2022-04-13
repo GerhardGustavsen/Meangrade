@@ -1,4 +1,4 @@
-@SuppressWarnings("module") module vault.core {
+@SuppressWarnings("module") module MeanGrade.core {
     requires transitive json.simple;
     requires jasypt;
 
