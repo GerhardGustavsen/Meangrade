@@ -15,7 +15,7 @@ public class CourseFile {
 
   static String path = "src/main/resources/json/courses.json";
 
-    public static void save(JSONArray jarr) {
+  public static void save(JSONArray jarr) {
     FileWriter file = null;
 
     try {
@@ -54,7 +54,6 @@ public class CourseFile {
 
     try {
       File File = new File(path);
-      System.out.println("hello");
       if (File.length() >= 0) {
         FileReader reader = new FileReader(File);
         JSONParser jsonParser = new JSONParser();
@@ -73,4 +72,3 @@ public class CourseFile {
     return obj;
   }
 }
-

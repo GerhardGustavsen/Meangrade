@@ -23,6 +23,7 @@
                </font>
             </Text>
             <AnchorPane prefHeight="33.0" prefWidth="112.0" />
+            <AnchorPane prefHeight="33.0" prefWidth="112.0" />
             <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleOpenNewCourse" prefHeight="40.0" prefWidth="105.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="New  Course" textFill="#616161">
                <opaqueInsets>
                   <Insets />
@@ -31,12 +32,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleOpenGrades" prefHeight="43.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="New Grade " textFill="#616161">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#handleOpenCourse" prefHeight="47.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="See Course " textFill="#616161">
+            <Button mnemonicParsing="false" onAction="#handleOpenNewGrade" prefHeight="43.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="New Grade " textFill="#616161">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>

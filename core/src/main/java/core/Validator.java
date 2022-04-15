@@ -70,7 +70,7 @@ public class Validator {
     if (arr != null) {
       Iterator<?> iterator = arr.iterator();
       while (iterator.hasNext()) {
-        JSONObject userobj = (JSONObject) iterator.next();
+        JSONObject userobj = (JSONObject) iterator.next(); // HER MÅ VI FÅ JACKSON!!!
         String listname = userobj.get("UserName").toString();
 
         if (name.equals(listname)) {

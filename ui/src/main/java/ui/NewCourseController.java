@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CourseController {
+public class NewCourseController extends Controller {
   private void openDashboard(ActionEvent event) {
     Parent root;
     try {
@@ -33,5 +33,6 @@ public class CourseController {
     openDashboard(event);
   }
 
-  public void initialize() {}
+  public void initialize() {
+  }
 }

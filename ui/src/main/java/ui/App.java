@@ -13,10 +13,18 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent parent = FXMLLoader.load(this.getClass().getResource("App.fxml"));
-        stage.setScene(new Scene(parent));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Loggin.fxml"));
+        Parent root = loader.load();
+
         stage.setTitle("MeanGrade");
+
+        stage.setScene(new Scene(root));
         stage.show();
+
+        // LogginController controller = loader.getController();
+        // controller.setCore();
+        // controller.clear();
+
         // CourseManager.read();
     }
 

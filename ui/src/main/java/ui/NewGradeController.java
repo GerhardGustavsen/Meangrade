@@ -19,14 +19,16 @@ import core.Encrypt;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GradesController {
+public class NewGradeController extends Controller {
 
     @FXML
     private Label title;
 
-    @FXML ComboBox scoreInput;
+    @FXML
+    ComboBox scoreInput;
 
-    @FXML ComboBox gradeInput;
+    @FXML
+    ComboBox gradeInput;
 
     @FXML
     void handleOpenDashboard(ActionEvent event) {
