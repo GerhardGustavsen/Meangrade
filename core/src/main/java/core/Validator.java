@@ -1,8 +1,9 @@
 package core;
 
 import java.util.Iterator;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Validator {
 
@@ -31,20 +32,7 @@ public class Validator {
     repassword = repas;
   }
 
-  public void setData(String un, String pas, String repas, JSONArray d) {
-    data = d;
-    username = un;
-    password = pas;
-    repassword = repas;
-  }
-
-  public String[] getData() {
-    String[] stringArray = (String[]) data.toArray(new String[data.size()]);
-    String[] arr = { username, password, repassword, stringArray.toString() };
-    return arr;
-  }
-
-  public boolean register() {
+  public boolean register() throws JSONException {
     return (vusername() & vpas() && vrepas());
   }
 
@@ -52,7 +40,7 @@ public class Validator {
     return (notEmpty(username) && vpas());
   }
 
-  public boolean vusername() {
+  public boolean vusername() throws JSONException {
     if (notEmpty(username)) {
       if (userexsist(username, data) == null) {
         return true;
@@ -65,12 +53,12 @@ public class Validator {
     return false;
   }
 
-  public static JSONObject userexsist(String name, JSONArray arr) {
+  public static JSONObject userexsist(String name, JSONArray arr) throws JSONException {
     JSONObject user = null;
     if (arr != null) {
-      Iterator<?> iterator = arr.iterator();
-      while (iterator.hasNext()) {
-        JSONObject userobj = (JSONObject) iterator.next(); // HER MÅ VI FÅ JACKSON!!!
+
+      for (int i = 0; i < arr.length(); i++) {
+        JSONObject userobj = arr.getJSONObject(i);
         String listname = userobj.get("UserName").toString();
 
         if (name.equals(listname)) {
@@ -78,6 +66,7 @@ public class Validator {
           user = userobj;
         }
       }
+
     } else {
       System.out.println("no users exist!");
     }

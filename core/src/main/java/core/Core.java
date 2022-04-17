@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Core {
 
@@ -19,11 +20,11 @@ public class Core {
   private User activeUser;
 
   public Core() {
-    userData = UserFile.load();
-    courseData = CourseFile.load();
+    // userData = UserFile.load();
+    // courseData = CourseFile.load();
   }
 
-  public boolean logginn(String user, String pas) {
+  public boolean logginn(String user, String pas) throws JSONException {
     JSONObject jsonUser = Validator.userexsist(user, userData);
     if (jsonUser != null) {
       String pasHash = jsonUser.get("PassHash").toString();
@@ -43,7 +44,7 @@ public class Core {
     map.put("PassHash", Encrypt.hash(pas));
     map.put("Data", "");
 
-    userData.add(map);
+    userData.put(map);
     // save???
   }
 
@@ -67,25 +68,29 @@ public class Core {
     activeUser = new User(username, password, grades);
   }
 
-  public boolean deleteUser(String name) {
-    ArrayList<JSONObject> newdata = new ArrayList<JSONObject>();
+  public boolean deleteUser(String name) throws JSONException {
+    JSONArray newData = new JSONArray();
     boolean awnser = false;
 
     if (userData != null) {
-      Iterator<?> iterator = userData.iterator();
-      while (iterator.hasNext()) {
-        JSONObject userobj = (JSONObject) iterator.next();
+
+      for (int i = 0; i < userData.length(); i++) {
+        JSONObject userobj = userData.getJSONObject(i);
         String listname = userobj.get("UserName").toString();
+
         if (!name.equals(listname)) {
-          newdata.add(userobj);
+          newData.put(userobj);
         }
       }
-      if (userData != newdata) {
-        userData = (JSONArray) newdata;
-        CourseFile.save(userData);
+
+      if (userData != newData) {
+        userData = newData;
+        // CourseFile.save(userData);
         awnser = true;
       }
+
     }
+
     return awnser;
   }
 

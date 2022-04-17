@@ -25,13 +25,12 @@ public class Controller {
 
   Core core;
 
-  protected void openFXML(Stage stage, String fxmlPath) {
+  protected void openFXML(Stage stage, String fxmlPath) throws CloneNotSupportedException {
 
     Parent root;
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
       root = loader.load();
-
       Controller controller = loader.getController();
       controller.sendCore(core);
 

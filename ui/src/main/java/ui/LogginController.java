@@ -29,6 +29,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Iterator;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LogginController extends Controller implements Initializable {
 
   @FXML
@@ -73,7 +78,7 @@ public class LogginController extends Controller implements Initializable {
   }
 
   @FXML
-  void handleBtnPress(ActionEvent e) {
+  void handleBtnPress(ActionEvent e) throws JSONException, CloneNotSupportedException {
 
     Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
         passwordRepeatField.getText(), core.getUserData());
@@ -85,12 +90,12 @@ public class LogginController extends Controller implements Initializable {
         // Creates the new profile before logginn:
         core.newProfile(usernameTextField.getText(), passwordTextField.getText());
         core.logginn(usernameTextField.getText(), passwordTextField.getText());
-        openFXML(stage, "DashboardController.fxml");
+        openFXML(stage, "Dashboard.fxml");
       }
     } else if (validator.logginn()) {
       // trying to logginn:
       if (core.logginn(usernameTextField.getText(), passwordTextField.getText())) {
-        openFXML(stage, "DashboardController.fxml");
+        openFXML(stage, "Dashboard.fxml");
       } else {
         pasmsg.setText("Wrong username or password!");
       }

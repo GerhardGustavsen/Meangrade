@@ -28,38 +28,44 @@ public class DashboardController extends Controller implements Initializable {
 
   @FXML
   private void handleOpenNewGrade(ActionEvent event) {
-    openFXML(stage, "NewGrade.fxml");
+    Stage stage = (Stage) gradeList.getScene().getWindow();
+    try {
+      openFXML(stage, "NewGrade.fxml");
+    } catch (CloneNotSupportedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   @FXML
   private void handleOpenNewCourse(ActionEvent event) {
-    openFXML(stage, "NewCourse.fxml");
+    Stage stage = (Stage) gradeList.getScene().getWindow();
+    try {
+      openFXML(stage, "NewCourse.fxml");
+    } catch (CloneNotSupportedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
-  private ObservableList<Grade> gradeCollection = FXCollections.observableArrayList();
-  Stage stage = (Stage) gradeList.getScene().getWindow();
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    poppulateListView();
-    initClickActions();
-  }
-
-  public void poppulateListView() {
-
+  void poppulateListView() {
     // TESTING:
     Grade test1 = new Grade("TDT0000", 'A');
     gradeCollection.add(test1);
 
     // Add TRY???
     // Populating listview:
+
     gradeList.setItems(gradeCollection);
     for (Grade grade : core.getActiveUser().getGrades()) {
       gradeCollection.add(grade);
     }
   }
 
+  private ObservableList<Grade> gradeCollection = FXCollections.observableArrayList();
+
   public void initClickActions() {
+    Stage stage = (Stage) gradeList.getScene().getWindow();
     // Detecting mouse clicked on ListView
     gradeList.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
@@ -67,9 +73,38 @@ public class DashboardController extends Controller implements Initializable {
         System.out.println(gradeList.getSelectionModel().getSelectedItem().getCode());
         // Open gradeview :)
         // NEED TO SEND GRADE!
-        openFXML(stage, "ViewGrade.fxml");
+        try {
+          openFXML(stage, "ViewGrade.fxml");
+        } catch (CloneNotSupportedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
       }
     });
   }
 
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    ObservableList<Grade> loading = FXCollections.observableArrayList();
+    loading.add(new Grade("Loading...", 'X'));
+
+    Thread one = new Thread() {
+      public void run() {
+        try {
+          while (core == null) {
+            gradeList.setItems(loading);
+            Thread.sleep(100);
+          }
+          poppulateListView();
+          initClickActions();
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+    };
+
+    one.start();
+
+  }
 }
