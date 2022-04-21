@@ -1,6 +1,5 @@
 package core;
 
-import json.FileHandler;
 import json.UserHandler;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,8 +11,9 @@ public class Core {
 
   private JSONArray data;
 
+  private UserHandler userHandler = new UserHandler();
+
   public Core() throws IOException {
-    data = UserHandler.load();
   }
 
   public String logginn(String user, String pas) {

@@ -1,63 +1,50 @@
 package json;
 
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.*;
+import java.util.Scanner;
 
 public class FileHandler {
 
-  public static JSONArray load(String path) throws IOException {
-    createFile(path);
-    JSONArray obj = new JSONArray();
-    try {
-      File file = new File(path);
-      if (file.length() >= 0) {
-        FileReader reader = new FileReader(file);
-        JSONParser jsonParser = new JSONParser();
-        obj = (JSONArray) jsonParser.parse(reader);
-      }
-    } catch (ParseException | IOException e) {
-      e.printStackTrace();
-    }
-    return obj;
+  private String path;
+
+  public FileHandler(String path){
+    this.path = path;
   }
 
-
-  static boolean createFile(String path) throws IOException {
+  public void createNewFile() {
     try {
-      File f = new File(path);
-      if (f.createNewFile()) {
-        try{
-          FileWriter fileWriter = new FileWriter(path);
-          fileWriter.write("[]");
-          fileWriter.flush();
-          fileWriter.close();
-          return true;
-        }catch (IOException e){
-          e.printStackTrace();
-        }
+      File courseFile = new File(path);
+      if (courseFile.createNewFile()) {
+        System.out.println("The file was created: " + courseFile.getName());
+      } else {
+        System.out.println("File already exists.");
       }
     } catch (IOException e) {
+      System.out.println("We were not able to create a new file.");
       e.printStackTrace();
     }
-    return false;
   }
 
-  public static boolean save(String path, JSONArray jarr) throws IOException {
-    createFile(path);
-
+  public void write(String string) {
+    createNewFile();
     try{
-      FileWriter fileWriter = new FileWriter(path);
-      fileWriter.write(jarr.toJSONString());
-      System.out.println(jarr.toJSONString());
-      fileWriter.flush();
-      fileWriter.close();
-      return true;
-    }catch (IOException e){
+      FileWriter courseWriter = new FileWriter(path, true);
+      BufferedWriter out = new BufferedWriter(courseWriter);
+      courseWriter.write(string);
+      out.newLine();
+      out.close();
+      System.out.println("Successfully wrote to the file.");
+    } catch(IOException e){
+      System.out.println("An error occurred.");
       e.printStackTrace();
-      return false;
     }
   }
+
+  public Scanner read() throws FileNotFoundException {
+    createNewFile();
+    File file = new File(path);
+    return new Scanner(file);
+  }
+
+
 }

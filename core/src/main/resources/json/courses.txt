@@ -1,0 +1,3 @@
+Code: TDT4100 | Name: Java | Description: Java course | Results: [1,2,3,4,5,6,7]
+Code: TDT4100 | Name: Java | Description: Java course | Results: []
+Code: TDT4100 | Name: Java | Description: Java course | Results: []

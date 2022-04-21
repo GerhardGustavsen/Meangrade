@@ -1,63 +1,77 @@
 package json;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import core.Course;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CourseHandler extends FileHandler {
-  static String path = "src/main/resources/json/courses.json";
 
-
-  public static void addCourse(Course course) throws IOException {
-    try {
-      FileWriter file = new FileWriter(path);
-      JSONArray array = load(path);
-      JSONArray newArray = new JSONArray();
-
-
-      System.out.println(array);
-      for (Object value : array) {
-        JSONObject o = (JSONObject) value;
-        System.out.println(o);
-      }
-      System.out.println(newArray.toJSONString());
-      file.write(newArray.toJSONString());
-      file.flush();
-      file.close();
-    }catch (IOException e){
-      e.printStackTrace();
-    }
+  public CourseHandler() {
+    super("src/main/resources/json/courses.txt");
   }
 
+  //TODO: Add addResult; lets just add an integer result to a course;
 
-  public static boolean checkIfCourseExists(String code) throws IOException {
-    JSONArray array = load(path);
-    for (Object o: array){
-      JSONObject jsonObject = (JSONObject) o;
-      if (code.equals(jsonObject.get("code"))){
-        return true;
-      }
-    };
-    return false;
+  public void addCourse(Course course) {
+    write(courseToString(course));
   }
 
-  public static Course getCourseByCode(String code) throws IOException {
-    JSONArray array = load(path);
-    for (Object o: array){
-      JSONObject jsonObject = (JSONObject) o;
-      Object courseCode = jsonObject.get("code").toString();
-      if (code.equals(courseCode)){
-        return new Course(code, (String)jsonObject.get("name"), (String)jsonObject.get("description"), (ArrayList<Integer>) jsonObject.get("results"));
+  public Course getCourse(String code) throws FileNotFoundException {
+    Scanner courseReader = read();
+    while (courseReader.hasNextLine()) {
+      String data = courseReader.nextLine();
+      if (data.contains("Code: " + code)) {
+        String[] parts = data.split("\\|");
+        ArrayList<String> courseData = new ArrayList<>();
+        for (String part : parts) {
+          Matcher m = Pattern.compile(": (.*)").matcher(part);
+          if (m.find()) {
+            courseData.add(m.group(1));
+          }
+        }
+        ArrayList<Integer> list = (resultsToArray(courseData.get(3)));
+        return new Course(courseData.get(0), courseData.get(1), courseData.get(2), list);
       }
     }
+    courseReader.close();
     return null;
   }
+
+  public boolean checkIfCourseExists(String code) throws FileNotFoundException {
+
+    Scanner courseReader = read();
+    while (courseReader.hasNextLine()) {
+      String data = courseReader.nextLine();
+      if (data.contains("Code: " + code)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  public  String courseToString(Course course){
+    return "Code: " + course.getCode() + " | Name: " + course.getName() + " | Description: " + course.getDesc() + " | Results: " + course.getRes().toString();
+  }
+
+  public  ArrayList<Integer> resultsToArray(String data){
+    //Regular expression to digits
+    String regex = "([0-9]+)";
+    //Creating a pattern object
+    Pattern pattern = Pattern.compile(regex);
+    //Creating a Matcher object
+    Matcher matcher = pattern.matcher(data);
+
+    ArrayList<Integer> result = new ArrayList<>();
+    while(matcher.find()) {
+      Integer number = Integer.parseInt(matcher.group());
+      result.add(number);
+    }
+    return result;
+  }
 }
+
+
+
