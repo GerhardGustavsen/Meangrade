@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="322.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CourseController">
+<AnchorPane prefHeight="322.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NewCourseController">
     <children>
         <Label fx:id="title" layoutX="224.0" layoutY="16.0" text="Title">
             <font>
@@ -40,7 +40,7 @@
                 <Font name="Courier New Bold" size="13.0" />
             </font>
         </Button>
-      <TextField layoutX="82.0" layoutY="65.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" />
-      <TextField layoutX="268.0" layoutY="65.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" />
+        <TextField layoutX="82.0" layoutY="65.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" />
+        <TextField layoutX="268.0" layoutY="65.0" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" />
     </children>
 </AnchorPane>

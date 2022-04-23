@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CourseViewController {
+public class ViewCourseController extends Controller {
 
   @FXML
   public Label titleLabel;

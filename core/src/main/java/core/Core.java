@@ -8,81 +8,119 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Core {
 
-  private JSONArray data = new JSONArray();
+  private JSONArray userData = new JSONArray();
+  private JSONArray courseData = new JSONArray();
+
+  private User activeUser;
 
   public Core() {
-    data = UserFile.load();
+
+    // userData = UserFile.load();
+    // courseData = CourseFile.load();
 
   }
 
-  public void newprofile(String user, String pas) {
+  public boolean logginn(String user, String pas) throws JSONException {
+    JSONObject jsonUser = Validator.userexsist(user, userData);
+    if (jsonUser != null) {
+      String pasHash = jsonUser.get("PassHash").toString();
+      if (Encrypt.hash(pas).equals(pasHash)) {
+        System.out.println("LOGG INN SUCSESS!");
+        String encryptedGrades = jsonUser.get("Data").toString();
+        setActiveUser(user, pas, encryptedGrades);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public void newProfile(String user, String pas) {
     Map<String, String> map = new HashMap<String, String>();
     map.put("UserName", user);
     map.put("PassHash", Encrypt.hash(pas));
     map.put("Data", "");
 
-    data.add(map);
+    userData.put(map);
+    // save???
   }
 
-  public String logginn(String user, String pas) {
-    JSONObject jsonUser = Validator.userexsist(user, data);
-    if (jsonUser != null) {
-      String pasHash = jsonUser.get("PassHash").toString();
-      if (Encrypt.hash(pas).equals(pasHash)) {
-        System.out.println("LOGG INN SUCSESS!");
-        String dataStr = jsonUser.get("Data").toString();
-        return dataStr;
+  private void setActiveUser(String username, String password, String encryptedGrades) {
+    ArrayList<Grade> grades = new ArrayList<Grade>();
+
+    if (encryptedGrades != null && encryptedGrades.length() > 0) {
+
+      // We decrypt the data:
+      String decryptedData = Encrypt.decrypt(encryptedGrades, password);
+
+      String[] coursesText = decryptedData.split("\\|");
+      // ADD A TRY!
+      for (String str : coursesText) {
+        String[] gradeText = str.split(",");
+        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0));
+        grades.add(grade);
       }
     }
-    return null;
+
+    activeUser = new User(username, password, grades);
   }
 
-  public boolean delete(String name) {
-    ArrayList<JSONObject> newdata = new ArrayList<JSONObject>();
+  public boolean deleteUser(String name) throws JSONException {
+    JSONArray newData = new JSONArray();
     boolean awnser = false;
 
-    if (data != null) {
-      Iterator<?> iterator = data.iterator();
-      while (iterator.hasNext()) {
-        JSONObject userobj = (JSONObject) iterator.next();
+    if (userData != null) {
+
+      for (int i = 0; i < userData.length(); i++) {
+        JSONObject userobj = userData.getJSONObject(i);
         String listname = userobj.get("UserName").toString();
+
         if (!name.equals(listname)) {
-          newdata.add(userobj);
+          newData.put(userobj);
         }
       }
-      if (data != newdata) {
-        data = (JSONArray) newdata;
-        CourseFile.save(data);
+
+      if (userData != newData) {
+        userData = newData;
+        // CourseFile.save(userData);
         awnser = true;
       }
+
     }
+
     return awnser;
   }
 
-  public boolean addData(String user, String dat) {
-    JSONObject jsonUser = Validator.userexsist(user, data);
+  /*
+   * public boolean addData(String user, String dat) { // WTF this do??? maby move
+   * to file handling???
+   * JSONObject jsonUser = Validator.userexsist(user, data);
+   * 
+   * if (jsonUser != null) {
+   * deleteUser(user);
+   * 
+   * jsonUser.put("Data", dat);
+   * 
+   * data.add(jsonUser);
+   * 
+   * CourseFile.save(data);
+   * return true;
+   * }
+   * return false;
+   * }
+   */
 
-    if (jsonUser != null) {
-      delete(user);
+  public JSONArray getUserData() {
+    return userData;
 
-      jsonUser.put("Data", dat);
-
-      data.add(jsonUser);
-
-      CourseFile.save(data);
-      return true;
-    }
-    return false;
   }
 
-  public JSONArray getdata() {
-    return data;
-
+  public User getActiveUser() {
+    return activeUser;
   }
-
 }

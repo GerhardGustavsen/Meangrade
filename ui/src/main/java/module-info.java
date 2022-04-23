@@ -1,4 +1,5 @@
 module MeanGrade.ui {
+    requires json;
     requires MeanGrade.core;
     requires javafx.controls;
     requires javafx.fxml;

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,9 +21,10 @@ import java.util.ResourceBundle;
 import core.Grade;
 import core.User;
 
-public class DashboardController {
+public class DashboardController extends Controller implements Initializable {
 
   User user;
+
   private ObservableList<Grade> gradeCollection = FXCollections.observableArrayList();
 
   @FXML
@@ -36,19 +38,21 @@ public class DashboardController {
   @FXML
   private void handleOpenCourse(ActionEvent event) {
     openFXML(event, "Course.fxml");
+
   }
 
   @FXML
   private void handleOpenNewCourse(ActionEvent event) {
-    openFXML(event, "CourseView.fxml");
+    Stage stage = (Stage) gradeList.getScene().getWindow();
+    try {
+      openFXML(stage, "NewCourse.fxml");
+    } catch (CloneNotSupportedException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
-  public void passUser(User u) {
-    user = u;
-    poppulate();
-  }
-
-  public void poppulate() {
+  void poppulateListView() {
 
     // TESTING:
     Grade test1 = new Grade("TDT0000", 'A');
@@ -56,41 +60,56 @@ public class DashboardController {
 
     // Add TRY???
     // Populating listview:
+
     gradeList.setItems(gradeCollection);
-    for (Grade grade : user.getGrades()) {
+    for (Grade grade : core.getActiveUser().getGrades()) {
       gradeCollection.add(grade);
     }
-
-    initActions();
   }
 
-  private void openFXML(ActionEvent event, String fxmlPath) {
+  private ObservableList<Grade> gradeCollection = FXCollections.observableArrayList();
 
-    Parent root;
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-      root = loader.load();
+  public void initClickActions() {
+    Stage stage = (Stage) gradeList.getScene().getWindow();
 
-      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      stage.setTitle("Grades");
-      stage.setScene(new Scene(root));
-      stage.show();
-
-    } catch (IOException e) {
-      System.out.print("Did not find data fxml form!");
-      e.printStackTrace();
-    }
-  }
-
-  public void initActions() {
     // Detecting mouse clicked on ListView
     gradeList.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent arg0) {
         System.out.println(gradeList.getSelectionModel().getSelectedItem().getCode());
         // Open gradeview :)
-
+        // NEED TO SEND GRADE!
+        try {
+          openFXML(stage, "ViewGrade.fxml");
+        } catch (CloneNotSupportedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
       }
     });
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    ObservableList<Grade> loading = FXCollections.observableArrayList();
+    loading.add(new Grade("Loading...", 'X'));
+
+    Thread one = new Thread() {
+      public void run() {
+        try {
+          while (core == null) {
+            gradeList.setItems(loading);
+            Thread.sleep(100);
+          }
+          poppulateListView();
+          initClickActions();
+        } catch (InterruptedException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+    };
+
+    one.start();
   }
 }

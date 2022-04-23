@@ -1,5 +1,6 @@
 @SuppressWarnings("module") module MeanGrade.core {
-    requires transitive json.simple;
+    requires json.simple;
+    requires json;
     requires jasypt;
 
     exports core;

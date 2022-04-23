@@ -13,7 +13,8 @@
       <Text layoutX="65.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your grades:" wrappingWidth="120.0">
          <font>
             <Font name="Courier New" size="16.0" />
-         </font></Text>
+         </font>
+      </Text>
       <ListView id="gradeList" fx:id="gradeList" layoutX="65.0" layoutY="125.0" prefHeight="293.0" prefWidth="484.0" style="-fx-background-color: white; -fx-border-color: black;" />
       <HBox layoutX="-1.0" layoutY="-1.0" prefHeight="59.0" prefWidth="600.0" style="-fx-padding: 20;">
          <children>
@@ -23,6 +24,8 @@
                </font>
             </Text>
             <AnchorPane prefHeight="33.0" prefWidth="112.0" />
+
+
             <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleOpenNewCourse" prefHeight="40.0" prefWidth="105.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="New  Course" textFill="#616161">
                <opaqueInsets>
                   <Insets />
@@ -31,12 +34,7 @@
                   <Font name="Arial Bold" size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#handleOpenGrades" prefHeight="43.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="New Grade " textFill="#616161">
-               <font>
-                  <Font name="Arial Bold" size="13.0" />
-               </font>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#handleOpenCourse" prefHeight="47.0" prefWidth="94.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="See Course " textFill="#616161">
+            <Button mnemonicParsing="false" onAction="#handleOpenNewGrade" prefHeight="43.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="New Grade " textFill="#616161">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>
