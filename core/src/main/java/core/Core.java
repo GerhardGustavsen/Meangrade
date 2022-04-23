@@ -20,8 +20,10 @@ public class Core {
   private User activeUser;
 
   public Core() {
+
     // userData = UserFile.load();
     // courseData = CourseFile.load();
+
   }
 
   public boolean logginn(String user, String pas) throws JSONException {
@@ -121,5 +123,4 @@ public class Core {
   public User getActiveUser() {
     return activeUser;
   }
-
 }

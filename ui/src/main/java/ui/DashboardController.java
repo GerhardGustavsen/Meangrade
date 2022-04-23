@@ -23,18 +23,22 @@ import core.User;
 
 public class DashboardController extends Controller implements Initializable {
 
+  User user;
+
+  private ObservableList<Grade> gradeCollection = FXCollections.observableArrayList();
+
   @FXML
   private ListView<Grade> gradeList;
 
   @FXML
-  private void handleOpenNewGrade(ActionEvent event) {
-    Stage stage = (Stage) gradeList.getScene().getWindow();
-    try {
-      openFXML(stage, "NewGrade.fxml");
-    } catch (CloneNotSupportedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+  private void handleOpenGrades(ActionEvent event) {
+    openFXML(event, "Grades.fxml");
+  }
+
+  @FXML
+  private void handleOpenCourse(ActionEvent event) {
+    openFXML(event, "Course.fxml");
+
   }
 
   @FXML
@@ -49,6 +53,7 @@ public class DashboardController extends Controller implements Initializable {
   }
 
   void poppulateListView() {
+
     // TESTING:
     Grade test1 = new Grade("TDT0000", 'A');
     gradeCollection.add(test1);
@@ -66,6 +71,7 @@ public class DashboardController extends Controller implements Initializable {
 
   public void initClickActions() {
     Stage stage = (Stage) gradeList.getScene().getWindow();
+
     // Detecting mouse clicked on ListView
     gradeList.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
@@ -105,6 +111,5 @@ public class DashboardController extends Controller implements Initializable {
     };
 
     one.start();
-
   }
 }

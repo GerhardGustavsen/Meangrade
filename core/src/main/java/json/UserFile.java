@@ -48,6 +48,7 @@ public class UserFile {
 
   public static JSONArray load() {
     JSONArray obj = new JSONArray();
+    System.out.println("inside load");
 
     try {
       File File = new File(path);
