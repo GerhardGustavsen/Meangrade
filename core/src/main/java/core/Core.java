@@ -1,16 +1,12 @@
 package core;
 
-import json.CourseFile;
-import json.UserFile;
+import json.CourseHandler;
+import json.UserHandler;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Core {
 
@@ -18,6 +14,14 @@ public class Core {
   private ArrayList<Course> courses = new ArrayList<Course>();
 
   private ActiveUser activeUser;
+
+  UserHandler userHandler = new UserHandler("core/src/main/resources/json/users.txt");
+  CourseHandler courseHandler = new CourseHandler("core/src/main/resources/json/courses.txt");
+
+  public Core() throws FileNotFoundException {
+    this.users = userHandler.getAllUsers();
+    this.courses = courseHandler.getAllCourses();
+  }
 
   public boolean logginn(String username, String pas) {
     User realUser = getuser(username); // Find the user if it exists
@@ -44,7 +48,7 @@ public class Core {
     Iterator<User> it = users.iterator();
     while (it.hasNext()) {
       User realUser = it.next();
-
+      String realUserName = realUser.getName().replaceAll("\\s+", "");
       if (realUser.getName().equals(username)) {
         System.out.println("Found user!");
         user = realUser;
@@ -72,8 +76,8 @@ public class Core {
       // ADD A TRY!
       for (String str : coursesText) {
         String[] gradeText = str.split(",");
-        Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0));
-        grades.add(grade);
+        // Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0));
+        // grades.add(grade);
       }
     }
 
@@ -84,10 +88,29 @@ public class Core {
     User user = new User(username, Encrypt.hash(pas), "");
     users.add(user);
     // save???
+    userHandler.saveUser(user);
   }
 
   public ActiveUser getActiveUser() {
     return activeUser;
+  }
+
+  public ArrayList<Course> getCourses() {
+    return courses;
+  }
+
+  public void newGrade(char grade, String courseCode, Integer score, String comment) throws IOException {
+    Grade newGrade = new Grade(courseCode, grade, score, comment);
+    activeUser.addGrade(newGrade);
+    ArrayList<Grade> grades = activeUser.getGrades();
+    String data = "";
+    for (Grade oneGrade : grades) {
+      data.concat(userHandler.gradeToString(oneGrade));
+      data.concat("&");
+    }
+    String encryptedData = Encrypt.encrypt(data, activeUser.getPass());
+    userHandler.addGrade(activeUser, encryptedData);
+    System.out.println(data);
   }
 
   public void newCourse(String code, String name, int grade, int num, String desc) {

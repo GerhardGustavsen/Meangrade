@@ -1,5 +1,6 @@
 package ui;
 
+import core.Course;
 import core.Grade;
 import core.User;
 import javafx.collections.FXCollections;
@@ -20,7 +21,9 @@ import core.Encrypt;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class NewGradeController extends Controller implements Initializable {
 
@@ -28,10 +31,21 @@ public class NewGradeController extends Controller implements Initializable {
     private Label title;
 
     @FXML
-    ComboBox scoreInput;
+    private ComboBox scoreInput;
 
     @FXML
-    ComboBox gradeInput;
+    private ComboBox gradeInput;
+
+    @FXML
+    private ComboBox courseInput;
+
+    @FXML
+    private TextArea commentInput;
+
+
+
+
+
 
     @FXML
     void handleOpenDashboard(ActionEvent event) {
@@ -44,6 +58,11 @@ public class NewGradeController extends Controller implements Initializable {
     /**
      * Adds application description to dashboard.
      */
+
+    private ObservableList<String> populateCourse(){
+        List<String> codeList = core.getCourses().stream().map(Course::getCode).collect(Collectors.toList());
+        return FXCollections.observableList(codeList);
+    }
 
     private ObservableList<Integer> populateScore() {
         ArrayList<Integer> score = new ArrayList<>();
@@ -58,12 +77,23 @@ public class NewGradeController extends Controller implements Initializable {
         return FXCollections.observableArrayList(grades);
     }
 
+
+    @FXML
+    void handleCreateGrade() throws IOException {
+        char grade = (char) gradeInput.getValue();
+        String courseCode  = (String) courseInput.getValue();
+        Integer score = (Integer)  scoreInput.getValue();
+        String comment = commentInput.getText();
+        core.newGrade(grade,courseCode,score, comment);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         title.setText("New grade");
         populateScore();
         scoreInput.setItems(populateScore());
         gradeInput.setItems(populateGrade());
+        courseInput.setItems(populateCourse());
 
     }
 

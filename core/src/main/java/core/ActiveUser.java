@@ -14,6 +14,10 @@ public class ActiveUser extends User {
         password = pass;
     }
 
+    public void addGrade(Grade grade){
+        grades.add(grade);
+    }
+
     public void setGrades(ArrayList<Grade> g) {
         grades = g;
     }

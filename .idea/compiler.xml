@@ -6,8 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="vault-ui" />
         <module name="MeanGrade-ui" />
         <module name="MeanGrade-core" />
+        <module name="vault-core" />
       </profile>
     </annotationProcessing>
   </component>
