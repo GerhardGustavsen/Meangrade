@@ -1,16 +1,7 @@
 package core;
 
-import json.CourseFile;
-import json.UserFile;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Core {
 
