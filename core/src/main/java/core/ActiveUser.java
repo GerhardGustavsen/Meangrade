@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import json.UserHandler;
+
 public class ActiveUser extends User {
 
     private String password;
@@ -14,8 +16,19 @@ public class ActiveUser extends User {
         password = pass;
     }
 
-    public void addGrade(Grade grade){
+    public void addGrade(Grade grade) {
         grades.add(grade);
+
+        System.out.println("grades: " + grades);
+
+        String data = "";
+        for (Grade oneGrade : grades) {
+            data = data + UserHandler.gradeToString(oneGrade);
+            data = data + "&";
+
+            System.out.println(oneGrade);
+        }
+        setEncryptedGrades(Encrypt.encrypt(data, password));
     }
 
     public void setGrades(ArrayList<Grade> g) {

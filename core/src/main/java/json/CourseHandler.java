@@ -14,7 +14,7 @@ public class CourseHandler extends FileHandler {
     super(path);
   }
 
-  //TODO: Add addResult; lets just add an integer result to a course;
+  // TODO: Add addResult; lets just add an integer result to a course;
 
   public void saveCourse(Course course) {
     write(courseToString(course));
@@ -22,7 +22,7 @@ public class CourseHandler extends FileHandler {
 
   public void saveCourses(ArrayList<Course> courses) throws IOException {
     deleteAll();
-    for (Course course: courses){
+    for (Course course : courses) {
       write(courseToString(course));
     }
   }
@@ -39,7 +39,7 @@ public class CourseHandler extends FileHandler {
     return null;
   }
 
-  public Course stringToCourse(String data){
+  public Course stringToCourse(String data) {
     String[] parts = data.split("\\|");
     ArrayList<String> courseData = new ArrayList<>();
     for (String part : parts) {
@@ -53,15 +53,15 @@ public class CourseHandler extends FileHandler {
   }
 
   public ArrayList<Course> getAllCourses() throws FileNotFoundException {
-    try{
+    try {
       Scanner reader = read();
       ArrayList<Course> courses = new ArrayList<>();
-      while(reader.hasNextLine()){
+      while (reader.hasNextLine()) {
         String data = reader.nextLine();
         courses.add(stringToCourse(data));
       }
       return courses;
-    }catch (FileNotFoundException e){
+    } catch (FileNotFoundException e) {
       System.out.println("Could not fetch the courses");
       e.printStackTrace();
     }
@@ -78,25 +78,26 @@ public class CourseHandler extends FileHandler {
     }
     return false;
   }
-  public  String courseToString(Course course){
-    return "Code: " + course.getCode() + " | Name: " + course.getName() + " | Description: " + course.getDesc() + " | Results: " + course.getRes().toString();
+
+  public String courseToString(Course course) {
+    return "Code: " + course.getCode() + " | Name: " + course.getName() + " | Description: " + course.getDesc()
+        + " | Results: " + course.getRes().toString();
   }
 
-  public  ArrayList<Integer> resultsToArray(String data){
-    //Regular expression to digits
+  public ArrayList<Integer> resultsToArray(String data) {
+    // Regular expression to digits
     String regex = "([0-9]+)";
-    //Creating a pattern object
+    // Creating a pattern object
     Pattern pattern = Pattern.compile(regex);
-    //Creating a Matcher object
+    // Creating a Matcher object
     Matcher matcher = pattern.matcher(data);
 
     ArrayList<Integer> result = new ArrayList<>();
-    while(matcher.find()) {
+    while (matcher.find()) {
       Integer number = Integer.parseInt(matcher.group());
       result.add(number);
     }
     return result;
   }
-
 
 }

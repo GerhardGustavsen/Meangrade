@@ -22,4 +22,8 @@ public class User {
     public String getEncryptedGrades() {
         return encryptedGrades;
     }
+
+    public void setEncryptedGrades(String s) {
+        encryptedGrades = s;
+    }
 }

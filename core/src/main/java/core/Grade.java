@@ -1,7 +1,7 @@
 package core;
 
 public class Grade {
-    
+
     private String code;
     private char grade;
     private Integer score;
@@ -12,6 +12,7 @@ public class Grade {
         grade = g;
         score = s;
         comment = com;
+        // update course score!
     }
 
     public String getCode() {
@@ -34,5 +35,8 @@ public class Grade {
         return getCode() + "\t\t\t\t\t\t\tGrade: " + getGrade();
     }
 
-
+    public void setScore(Integer i) {
+        score = i;
+        // update course score!
+    }
 }

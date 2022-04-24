@@ -19,37 +19,39 @@ public class UserHandler extends FileHandler {
     super("core/src/main/resources/json/users.txt");
   }
 
-  public void saveUser(User user){
+  public void saveUser(User user) {
     write(userToString(user));
   }
 
   public void deleteUser(String username) throws IOException {
     File file = getFile();
-    List<String> users = Files.lines(file.toPath()).filter(user -> !user.contains(username)).collect(Collectors.toList());
+    List<String> users = Files.lines(file.toPath()).filter(user -> !user.contains(username))
+        .collect(Collectors.toList());
     Files.write(file.toPath(), users, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
   }
-  //TODO: Get all users
+  // TODO: Get all users
 
   public void saveAllUsers(ArrayList<User> users) throws IOException {
     deleteAll();
-    for (User user: users){
+    for (User user : users) {
       write(userToString(user));
     }
   }
-  public ArrayList<User> getAllUsers(){
-      try{
-        Scanner reader = read();
-        ArrayList<User> users = new ArrayList<>();
-        while(reader.hasNextLine()){
-          String data = reader.nextLine();
-          users.add(stringToUser(data));
-        }
-        return users;
-      }catch (FileNotFoundException e){
-        System.out.println("Could not fetch the courses");
-        e.printStackTrace();
+
+  public ArrayList<User> getAllUsers() {
+    try {
+      Scanner reader = read();
+      ArrayList<User> users = new ArrayList<>();
+      while (reader.hasNextLine()) {
+        String data = reader.nextLine();
+        users.add(stringToUser(data));
       }
-      return null;
+      return users;
+    } catch (FileNotFoundException e) {
+      System.out.println("Could not fetch the courses");
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public User getUser(String username) throws FileNotFoundException {
@@ -64,35 +66,30 @@ public class UserHandler extends FileHandler {
     return null;
   }
 
-  public void addGrade(ActiveUser user, String data) throws IOException {
+  public void saveGrade(ActiveUser user) throws IOException {
     deleteUser(user.getName());
-    write(userToString(user, data));
+    write(userToString(user));
   }
 
-
-  public User stringToUser(String data){
-      String[] parts = data.split("\\|");
-      ArrayList<String> userData = new ArrayList<>();
-      for (String part : parts) {
-        Matcher m = Pattern.compile(": (.*)").matcher(part);
-        if (m.find()) {
-          userData.add(m.group(1));
-        }
+  public User stringToUser(String data) {
+    String[] parts = data.split("\\|");
+    ArrayList<String> userData = new ArrayList<>();
+    for (String part : parts) {
+      Matcher m = Pattern.compile(": (.*)").matcher(part);
+      if (m.find()) {
+        userData.add(m.group(1));
       }
-      return new User(userData.get(0), userData.get(1), userData.get(2));
+    }
+    return new User(userData.get(0), userData.get(1), userData.get(2));
   }
 
-  public String gradeToString(Grade grade){
-    return "Code: " + grade.getCode() + "| Grade: " + grade.getGrade() + "| Score: " + grade.getScore() + "| Comment: " + grade.getComment();
+  public static String gradeToString(Grade grade) {
+    return "Code: " + grade.getCode() + "| Grade: " + grade.getGrade() + "| Score: " + grade.getScore() + "| Comment: "
+        + grade.getComment();
   }
 
-  public String userToString(User user){
-    return "Username: " + user.getName() + "| HashPassword: " + user.getPassHash() + "| Grades: " + user.getEncryptedGrades();
-  }
-
-  public String userToString(User user, String data){
-    return "Username: " + user.getName() + "| HashPassword: " + user.getPassHash() + "| Grades: " + data;
-
+  public static String userToString(User user) {
+    return "Username: " + user.getName() + "| HashPassword: " + user.getPassHash() + "| Grades: "
+        + user.getEncryptedGrades();
   }
 }
-

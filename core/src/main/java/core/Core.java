@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Core {
 
@@ -38,7 +40,9 @@ public class Core {
     return false;
   }
 
-  public void loggOut() {
+  public void loggOut() throws FileNotFoundException {
+    this.users = userHandler.getAllUsers();
+    this.courses = courseHandler.getAllCourses();
     activeUser = null;
   }
 
@@ -71,15 +75,28 @@ public class Core {
       // We decrypt the data:
       String decryptedData = Encrypt.decrypt(encryptedGrades, password);
 
-      String[] coursesText = decryptedData.split("\\|");
-      // ADD A TRY!
-      for (String str : coursesText) {
-        String[] gradeText = str.split(",");
-        // Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0));
-        // grades.add(grade);
-      }
-    }
+      String[] gradesString = decryptedData.split("\\&");
+      for (String gradeString : gradesString) {
+        ArrayList<String> gradeData = new ArrayList<>();
 
+        String[] parts = gradeString.split("\\|");
+
+        for (String part : parts) {
+          Matcher m = Pattern.compile(": (.*)").matcher(part);
+          if (m.find()) {
+            gradeData.add(m.group(1));
+          }
+        }
+
+        Grade grade = new Grade(gradeData.get(0), gradeData.get(1).charAt(0), Integer.parseInt(gradeData.get(2)),
+            gradeData.get(3));
+
+        grades.add(grade);
+      }
+
+    } else {
+      System.out.println("no data found!");
+    }
     activeUser.setGrades(grades);
   }
 
@@ -100,15 +117,7 @@ public class Core {
   public void newGrade(char grade, String courseCode, Integer score, String comment) throws IOException {
     Grade newGrade = new Grade(courseCode, grade, score, comment);
     activeUser.addGrade(newGrade);
-    ArrayList<Grade> grades = activeUser.getGrades();
-    String data = "";
-    for (Grade oneGrade : grades) {
-      data.concat(userHandler.gradeToString(oneGrade));
-      data.concat("&");
-    }
-    String encryptedData = Encrypt.encrypt(data, activeUser.getPass());
-    userHandler.addGrade(activeUser, encryptedData);
-    System.out.println(data);
+    userHandler.saveGrade(activeUser);
   }
 
   public void newCourse(String code, String name, int grade, int num, String desc) {
@@ -119,62 +128,8 @@ public class Core {
     }
 
     Course course = new Course(code, name, desc, allGrades);
-    courses.add(course);
 
+    courses.add(course);
     courseHandler.saveCourse(course);
   }
-
-  /*
-   * public boolean deleteUser(String name) throws JSONException {
-   * JSONArray newData = new JSONArray();
-   * boolean awnser = false;
-   * 
-   * if (userData != null) {
-   * 
-   * for (int i = 0; i < userData.length(); i++) {
-   * JSONObject userobj = userData.getJSONObject(i);
-   * String listname = userobj.get("UserName").toString();
-   * 
-   * if (!name.equals(listname)) {
-   * newData.put(userobj);
-   * }
-   * }
-   * 
-   * if (userData != newData) {
-   * userData = newData;
-   * // CourseFile.save(userData);
-   * awnser = true;
-   * }
-   * 
-   * }
-   * 
-   * return awnser;
-   * }
-   */
-
-  /*
-   * public boolean addData(String user, String dat) { // WTF this do??? maby move
-   * to file handling???
-   * JSONObject jsonUser = Validator.userexsist(user, data);
-   * 
-   * if (jsonUser != null) {
-   * deleteUser(user);
-   * 
-   * jsonUser.put("Data", dat);
-   * 
-   * data.add(jsonUser);
-   * 
-   * CourseFile.save(data);
-   * return true;
-   * }
-   * return false;
-   * }
-   */
-  /*
-   * public JSONArray getUserData() {
-   * return userData;
-   * 
-   * }
-   */
-
 }

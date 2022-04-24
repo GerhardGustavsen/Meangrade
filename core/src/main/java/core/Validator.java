@@ -93,19 +93,6 @@ public class Validator {
     return arr;
   }
 
-  public static Double toNum(String strNum) {
-    Double d;
-    if (strNum == null || strNum == "") {
-      return 0.0;
-    }
-    try {
-      d = Double.parseDouble(strNum);
-    } catch (NumberFormatException nfe) {
-      return null;
-    }
-    return d;
-  }
-
   public static Integer toInt(String strNum) {
     Integer i;
     if (strNum == null || strNum == "") {

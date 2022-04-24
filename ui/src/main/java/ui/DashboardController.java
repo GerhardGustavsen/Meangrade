@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.FileNotFoundException;
+
 import core.Grade;
 
 public class DashboardController extends Controller {
@@ -29,7 +31,7 @@ public class DashboardController extends Controller {
   }
 
   @FXML
-  void handleLoggOut(ActionEvent event) {
+  void handleLoggOut(ActionEvent event) throws FileNotFoundException {
     LogginController loggin = new LogginController();
     core.loggOut();
     openFXML(loggin, "Loggin.fxml");
