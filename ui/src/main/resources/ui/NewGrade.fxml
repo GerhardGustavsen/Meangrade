@@ -38,7 +38,7 @@
             <Font name="Courier New" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="399.0" layoutY="329.0" mnemonicParsing="false" style="-fx-background-color: #68BB59;" text="Save" textFill="WHITE">
+      <Button layoutX="399.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleCreateGrade" style="-fx-background-color: #68BB59;" text="Save" textFill="WHITE">
          <font>
             <Font name="Courier New Bold" size="13.0" />
          </font>

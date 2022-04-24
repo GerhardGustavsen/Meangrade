@@ -4,11 +4,14 @@ public class Grade {
     
     private String code;
     private char grade;
-    private int score;
+    private Integer score;
+    private String comment;
 
-    public Grade(String c, char g) {
+    public Grade(String c, char g, Integer s, String com) {
         code = c;
         grade = g;
+        score = s;
+        comment = com;
     }
 
     public String getCode() {
@@ -19,7 +22,17 @@ public class Grade {
         return grade;
     };
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
     public String toString() {
         return getCode() + "\t\t\t\t\t\t\tGrade: " + getGrade();
     }
+
+
 }

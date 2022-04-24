@@ -49,7 +49,7 @@ public class DashboardController extends Controller {
   void poppulateListView() {
 
     // TESTING:
-    Grade test1 = new Grade("TDT0000", 'A');
+    Grade test1 = new Grade("TDT0000", 'A', 8, "Hello");
     gradeCollection.add(test1);
 
     // Add TRY???
