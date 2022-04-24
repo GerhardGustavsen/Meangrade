@@ -1,5 +1,8 @@
 package core;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Validator {
 
   String username;
@@ -88,5 +91,41 @@ public class Validator {
   public String[] getMsg() {
     String[] arr = { usermsg, pasmsg, repasmsg };
     return arr;
+  }
+
+  public static Double toNum(String strNum) {
+    Double d;
+    if (strNum == null || strNum == "") {
+      return 0.0;
+    }
+    try {
+      d = Double.parseDouble(strNum);
+    } catch (NumberFormatException nfe) {
+      return null;
+    }
+    return d;
+  }
+
+  public static Integer toInt(String strNum) {
+    Integer i;
+    if (strNum == null || strNum == "") {
+      return 0;
+    }
+    try {
+      i = Integer.parseInt(strNum);
+    } catch (NumberFormatException nfe) {
+      return null;
+    }
+    return i;
+  }
+
+  public static boolean regex(String string, String regex) {
+    Pattern p = Pattern.compile(regex);
+    Matcher m = p.matcher(string);
+    if (!m.matches()) {
+      return false;
+    }
+
+    return true;
   }
 }

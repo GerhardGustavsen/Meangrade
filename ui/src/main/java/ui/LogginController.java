@@ -111,10 +111,7 @@ public class LogginController extends Controller {
 
   void openDash() {
     DashboardController dash = new DashboardController();
-    dash.sendCore(core);
-
     openFXML(dash, "Dashboard.fxml");
-
     dash.poppulateListView();
     dash.initClickActions();
   }

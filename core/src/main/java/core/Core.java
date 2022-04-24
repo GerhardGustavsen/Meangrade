@@ -81,6 +81,18 @@ public class Core {
     return activeUser;
   }
 
+  public void newCourse(String code, String name, int grade, int num, String desc) {
+    ArrayList<Integer> allGrades = new ArrayList<Integer>();
+
+    for (int i = 0; i < num; i++) {
+      allGrades.add(grade);
+    }
+
+    Course course = new Course(code, name, desc, allGrades);
+    courses.add(course);
+    // save???
+  }
+
   /*
    * public boolean deleteUser(String name) throws JSONException {
    * JSONArray newData = new JSONArray();

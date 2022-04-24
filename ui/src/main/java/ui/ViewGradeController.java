@@ -38,6 +38,8 @@ public class ViewGradeController extends Controller {
   void handleOpenDashboard(ActionEvent event) {
     DashboardController dash = new DashboardController();
     openFXML(dash, "Dashboard.fxml");
+    dash.poppulateListView();
+    dash.initClickActions();
   }
 
   void SendGrade(Grade g) {

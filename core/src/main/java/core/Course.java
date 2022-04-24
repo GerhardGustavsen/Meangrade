@@ -6,6 +6,7 @@ public class Course {
     private String code;
     private String name;
     private String description;
+    private Integer score;
     private ArrayList<Integer> results;
 
     public Course(String c, String n, String d, ArrayList<Integer> r) {

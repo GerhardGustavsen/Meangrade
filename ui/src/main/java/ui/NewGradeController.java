@@ -37,6 +37,8 @@ public class NewGradeController extends Controller implements Initializable {
     void handleOpenDashboard(ActionEvent event) {
         DashboardController dash = new DashboardController();
         openFXML(dash, "Dashboard.fxml");
+        dash.poppulateListView();
+        dash.initClickActions();
     }
 
     /**

@@ -32,18 +32,16 @@ public class Controller {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
 
       loader.setController(controller);
-
       controller.sendCore(core);
       controller.sendStage(stage);
-
       Parent root = loader.load();
 
       if (core.getActiveUser() != null)
         stage.setTitle("User: " + core.getActiveUser().getName());
       else
         stage.setTitle("MeanGrade");
-      stage.setScene(new Scene(root));
 
+      stage.setScene(new Scene(root));
     } catch (IOException e) {
       System.out.print("Did not find data fxml form!");
       e.printStackTrace();
@@ -52,7 +50,6 @@ public class Controller {
 
   public void sendCore(Core c) {
     core = c;
-
   }
 
   private void sendStage(Stage s) {
