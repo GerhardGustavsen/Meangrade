@@ -87,7 +87,6 @@ public class Core {
   public void newProfile(String username, String pas) {
     User user = new User(username, Encrypt.hash(pas), "");
     users.add(user);
-    // save???
     userHandler.saveUser(user);
   }
 
@@ -122,7 +121,8 @@ public class Core {
 
     Course course = new Course(code, name, desc, allGrades);
     courses.add(course);
-    // save???
+
+    courseHandler.saveCourse(course);
   }
 
   /*
