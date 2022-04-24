@@ -67,9 +67,11 @@ public class DashboardController extends Controller {
     gradeList.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent arg0) {
-        System.out.println(gradeList.getSelectionModel().getSelectedItem().getCode());
-        // Open gradeview :)
-        OpenGrade(gradeList.getSelectionModel().getSelectedItem());
+        if (gradeList.getSelectionModel().getSelectedItem() != null) {
+          System.out.println(gradeList.getSelectionModel().getSelectedItem().getCode());
+          // Open gradeview :)
+          OpenGrade(gradeList.getSelectionModel().getSelectedItem());
+        }
       }
     });
   }

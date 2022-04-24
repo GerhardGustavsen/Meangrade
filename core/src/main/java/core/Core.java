@@ -18,8 +18,6 @@ public class Core {
   UserHandler userHandler = new UserHandler("core/src/main/resources/json/users.txt");
   CourseHandler courseHandler = new CourseHandler("core/src/main/resources/json/courses.txt");
 
-
-
   public Core() throws FileNotFoundException {
     this.users = userHandler.getAllUsers();
     this.courses = courseHandler.getAllCourses();
@@ -50,7 +48,7 @@ public class Core {
     Iterator<User> it = users.iterator();
     while (it.hasNext()) {
       User realUser = it.next();
-      String realUserName = realUser.getName().replaceAll("\\s+","");
+      String realUserName = realUser.getName().replaceAll("\\s+", "");
       if (realUser.getName().equals(username)) {
         System.out.println("Found user!");
         user = realUser;
@@ -78,8 +76,8 @@ public class Core {
       // ADD A TRY!
       for (String str : coursesText) {
         String[] gradeText = str.split(",");
-        //Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0));
-        //grades.add(grade);
+        // Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0));
+        // grades.add(grade);
       }
     }
 
@@ -97,14 +95,16 @@ public class Core {
     return activeUser;
   }
 
-  public ArrayList<Course> getCourses(){return courses;}
+  public ArrayList<Course> getCourses() {
+    return courses;
+  }
 
   public void newGrade(char grade, String courseCode, Integer score, String comment) throws IOException {
     Grade newGrade = new Grade(courseCode, grade, score, comment);
     activeUser.addGrade(newGrade);
     ArrayList<Grade> grades = activeUser.getGrades();
     String data = "";
-    for (Grade oneGrade: grades){
+    for (Grade oneGrade : grades) {
       data.concat(userHandler.gradeToString(oneGrade));
       data.concat("&");
     }
@@ -113,6 +113,17 @@ public class Core {
     System.out.println(data);
   }
 
+  public void newCourse(String code, String name, int grade, int num, String desc) {
+    ArrayList<Integer> allGrades = new ArrayList<Integer>();
+
+    for (int i = 0; i < num; i++) {
+      allGrades.add(grade);
+    }
+
+    Course course = new Course(code, name, desc, allGrades);
+    courses.add(course);
+    // save???
+  }
 
   /*
    * public boolean deleteUser(String name) throws JSONException {

@@ -24,6 +24,7 @@
                </font>
             </Text>
             <AnchorPane prefHeight="33.0" prefWidth="112.0" />
+            <AnchorPane prefHeight="33.0" prefWidth="112.0" />
 
 
             <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleOpenNewCourse" prefHeight="40.0" prefWidth="105.0" style="-fx-background-color: transparent; -fx-border-color: none;" text="New  Course" textFill="#616161">
