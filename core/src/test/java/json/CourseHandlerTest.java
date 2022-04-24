@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CourseHandlerTest {
 
-  CourseHandler testHandler = new CourseHandler();
+  CourseHandler testHandler = new CourseHandler("src/main/resources/json/courses.txt");
 
   @Test
   @DisplayName("Can save courses")

@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 
 public class CourseHandler extends FileHandler {
 
-  public CourseHandler() {
-    super("src/main/resources/json/courses.txt");
+  public CourseHandler(String path) {
+    super(path);
   }
 
   //TODO: Add addResult; lets just add an integer result to a course;

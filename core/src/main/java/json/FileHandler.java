@@ -40,6 +40,10 @@ public class FileHandler {
     }
   }
 
+  public File getFile(){
+    return new File(path);
+  }
+
   public Scanner read() throws FileNotFoundException {
     createNewFile();
     File file = new File(path);

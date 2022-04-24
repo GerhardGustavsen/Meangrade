@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserHandlerTest {
-  UserHandler test = new UserHandler();
+  UserHandler test = new UserHandler("src/main/resources/json/users.txt");
 
 
   @Test
@@ -18,6 +18,7 @@ public class UserHandlerTest {
     User user  = new User("hello", "sir", "data");
     test.saveUser(user);
   }
+
 
   @Test
   @DisplayName("Can get all users")
