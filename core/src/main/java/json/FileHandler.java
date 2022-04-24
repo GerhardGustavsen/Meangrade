@@ -11,6 +11,7 @@ public class FileHandler {
     this.path = path;
   }
 
+
   public void createNewFile() {
     try {
       File courseFile = new File(path);

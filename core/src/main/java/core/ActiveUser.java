@@ -1,5 +1,7 @@
 package core;
 
+import json.UserHandler;
+
 import java.util.ArrayList;
 
 public class ActiveUser extends User {
@@ -8,9 +10,10 @@ public class ActiveUser extends User {
 
     private ArrayList<Grade> grades = new ArrayList<Grade>();
 
+    private UserHandler userHandler = new UserHandler("core/src/main/resources/json/users.txt");
+
     public ActiveUser(String username, String passhash, String encryptedGrades, String pass) {
         super(username, passhash, encryptedGrades);
-
         password = pass;
     }
 

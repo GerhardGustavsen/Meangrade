@@ -19,6 +19,7 @@ public class UserHandler extends FileHandler {
     super("core/src/main/resources/json/users.txt");
   }
 
+
   public void saveUser(User user){
     write(userToString(user));
   }
@@ -28,7 +29,7 @@ public class UserHandler extends FileHandler {
     List<String> users = Files.lines(file.toPath()).filter(user -> !user.contains(username)).collect(Collectors.toList());
     Files.write(file.toPath(), users, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
   }
-  //TODO: Get all users
+  //TODO: Get all grades from one user
 
   public void saveAllUsers(ArrayList<User> users) throws IOException {
     deleteAll();
@@ -70,6 +71,10 @@ public class UserHandler extends FileHandler {
   }
 
 
+
+
+
+
   public User stringToUser(String data){
       String[] parts = data.split("\\|");
       ArrayList<String> userData = new ArrayList<>();
@@ -81,6 +86,7 @@ public class UserHandler extends FileHandler {
       }
       return new User(userData.get(0), userData.get(1), userData.get(2));
   }
+
 
   public String gradeToString(Grade grade){
     return "Code: " + grade.getCode() + "| Grade: " + grade.getGrade() + "| Score: " + grade.getScore() + "| Comment: " + grade.getComment();

@@ -38,6 +38,7 @@ public class Encrypt {
   public static String decrypt(String encrypted, String password) {
     StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
     encryptor.setPassword(password);
+    System.out.println(encryptor.decrypt(encrypted));
     return encryptor.decrypt(encrypted);
   }
 }

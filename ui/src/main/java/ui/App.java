@@ -1,5 +1,6 @@
 package ui;
 
+import core.Encrypt;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,9 +23,19 @@ public class App extends Application {
         controller.core = new Core();
         controller.stage = stage;
 
+
+
         stage.setTitle("MeanGrade");
         stage.setScene(new Scene(root));
         stage.show();
+
+        String test = "123";
+        String encrypt = Encrypt.encrypt(test, "123");
+        String decrypt = Encrypt.decrypt(encrypt, "123");
+        System.out.println(encrypt);
+        System.out.println(decrypt);
+
+
     }
 
     public static void main(String[] args) {

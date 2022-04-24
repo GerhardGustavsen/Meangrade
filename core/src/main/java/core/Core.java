@@ -6,7 +6,10 @@ import json.UserHandler;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Core {
 
@@ -66,19 +69,28 @@ public class Core {
 
     // decrypt the grades:
     ArrayList<Grade> grades = new ArrayList<Grade>();
-
+    System.out.println("Hello");
     if (encryptedGrades != null && encryptedGrades.length() > 0) {
-
+      System.out.println(encryptedGrades);
+      System.out.println(password);
+      System.out.println("Fire123!" == password.trim());
       // We decrypt the data:
       String decryptedData = Encrypt.decrypt(encryptedGrades, password);
-
-      String[] coursesText = decryptedData.split("\\|");
-      // ADD A TRY!
-      for (String str : coursesText) {
-        String[] gradeText = str.split(",");
-        // Grade grade = new Grade(gradeText[0], gradeText[1].charAt(0));
-        // grades.add(grade);
+      System.out.println(decryptedData);
+      String[] gradesString = decryptedData.split("\\&");
+      System.out.println(Arrays.toString(gradesString));
+      for (String grade: gradesString){
+        String[] parts = grade.split("\\|");
+        ArrayList<String> gradeData = new ArrayList<>();
+        for (String part: parts){
+          Matcher m = Pattern.compile(": (.*)").matcher(part);
+          if(m.find()){
+            gradeData.add(m.group(1));
+          }
+        }
+        grades.add(new Grade(gradeData.get(0), gradeData.get(1).charAt(0),Integer.parseInt(gradeData.get(2)), gradeData.get(3)));
       }
+
     }
 
     activeUser.setGrades(grades);
