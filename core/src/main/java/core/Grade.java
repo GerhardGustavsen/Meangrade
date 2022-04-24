@@ -1,6 +1,7 @@
 package core;
 
 public class Grade {
+    
     private String code;
     private char grade;
     private int score;

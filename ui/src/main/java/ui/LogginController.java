@@ -34,7 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LogginController extends Controller implements Initializable {
+public class LogginController extends Controller {
 
   @FXML
   public TextField usernameTextField;
@@ -72,40 +72,69 @@ public class LogginController extends Controller implements Initializable {
   @FXML
   private ImageView img;
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    core = new Core();
-  }
-
   @FXML
-  void handleBtnPress(ActionEvent e) throws JSONException, CloneNotSupportedException {
-
+  void handleBtnReg(ActionEvent e) throws JSONException {
+    clear();
     Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
-        passwordRepeatField.getText(), core.getUserData());
-    Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        passwordRepeatField.getText());
 
-    if (e.getSource() == btreg) {
+    if (core.getuser(usernameTextField.getText()) == null) {
       if (validator.register()) {
-        // trying to register:
         // Creates the new profile before logginn:
         core.newProfile(usernameTextField.getText(), passwordTextField.getText());
         core.logginn(usernameTextField.getText(), passwordTextField.getText());
-        openFXML(stage, "Dashboard.fxml");
-      }
-    } else if (validator.logginn()) {
-      // trying to logginn:
-      if (core.logginn(usernameTextField.getText(), passwordTextField.getText())) {
-        openFXML(stage, "Dashboard.fxml");
+        openDash();
       } else {
-        pasmsg.setText("Wrong username or password!");
+        show(validator);
       }
+    } else {
+      usermsg.setText("Username is taken!");
     }
+  }
 
+  @FXML
+  void handleBtnLog(ActionEvent e) throws JSONException {
+    clear();
+    Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
+        passwordRepeatField.getText());
+
+    if (validator.logginn()) {
+      if (core.logginn(usernameTextField.getText(), passwordTextField.getText())) {
+        openDash();
+      } else {
+        usermsg.setText("Username or passowrd wrong!");
+      }
+    } else {
+      show(validator);
+    }
+  }
+
+  void openDash() {
+    DashboardController dash = new DashboardController();
+    dash.sendCore(core);
+
+    openFXML(dash, "Dashboard.fxml");
+
+    dash.poppulateListView();
+    dash.initClickActions();
+  }
+
+  void clear() {
+    // Error msg:
+    usermsg.setText("");
+    pasmsg.setText("");
+    repasmsg.setText("");
+    // Error stars:
+    userstar.setVisible(false);
+    passtar.setVisible(false);
+    repasstar.setVisible(false);
+  }
+
+  void show(Validator v) {
     // Error messages:
-    String[] msgArr = validator.getMsg();
+    String[] msgArr = v.getMsg();
     usermsg.setText(msgArr[0]);
-    if (msgArr[1] != "")
-      pasmsg.setText(msgArr[1]);
+    pasmsg.setText(msgArr[1]);
     repasmsg.setText(msgArr[2]);
     // Error stars:
     userstar.setVisible(usermsg.getText() != "");
@@ -113,19 +142,3 @@ public class LogginController extends Controller implements Initializable {
     repasstar.setVisible(repasmsg.getText() != "");
   }
 }
-
-/*
- * void clear() { // Trenger vi denne????
- * userstar.setVisible(false);
- * passtar.setVisible(false);
- * repasstar.setVisible(false);
- * 
- * usermsg.setText("");
- * pasmsg.setText("");
- * repasmsg.setText("");
- * 
- * usernameTextField.setText("");
- * passwordTextField.setText("");
- * passwordRepeatField.setText("");
- * }
- */

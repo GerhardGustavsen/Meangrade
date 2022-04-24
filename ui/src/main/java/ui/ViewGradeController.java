@@ -13,7 +13,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import core.Grade;
+
 public class ViewGradeController extends Controller {
+
+  Grade grade;
 
   @FXML
   public Label titleLabel;
@@ -30,29 +34,13 @@ public class ViewGradeController extends Controller {
   @FXML
   public Label modeLabel;
 
-  private void openDashboard(ActionEvent event) {
-    Parent root;
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-      root = loader.load();
-
-      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      stage.setTitle("Grades");
-      stage.setScene(new Scene(root));
-      stage.show();
-
-    } catch (IOException e) {
-      System.out.print("Did not find data fxml form!");
-      e.printStackTrace();
-    }
-  }
-
   @FXML
   void handleOpenDashboard(ActionEvent event) {
-    openDashboard(event);
+    DashboardController dash = new DashboardController();
+    openFXML(dash, "Dashboard.fxml");
   }
 
-  public void initialize() {
-
+  void SendGrade(Grade g) {
+    grade = g;
   }
 }

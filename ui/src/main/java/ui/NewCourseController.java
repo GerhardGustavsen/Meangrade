@@ -11,28 +11,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class NewCourseController extends Controller {
-  private void openDashboard(ActionEvent event) {
-    Parent root;
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-      root = loader.load();
-
-      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      stage.setTitle("Grades");
-      stage.setScene(new Scene(root));
-      stage.show();
-
-    } catch (IOException e) {
-      System.out.print("Did not find data fxml form!");
-      e.printStackTrace();
-    }
-  }
 
   @FXML
   void handleOpenDashboard(ActionEvent event) {
-    openDashboard(event);
-  }
-
-  public void initialize() {
+    DashboardController dash = new DashboardController();
+    openFXML(dash, "Dashboard.fxml");
   }
 }

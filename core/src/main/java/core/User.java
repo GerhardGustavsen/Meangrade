@@ -1,28 +1,25 @@
 package core;
 
-import java.util.ArrayList;
-
 public class User {
-    private String user;
-    private String password;
+    private String username;
+    private String passHash;
+    private String encryptedGrades;
 
-    private ArrayList<Grade> grades = new ArrayList<Grade>();
-
-    public User(String u, String p, ArrayList<Grade> g) {
-        user = u;
-        password = p;
-        grades = g;
+    public User(String u, String p, String g) {
+        username = u;
+        passHash = p;
+        encryptedGrades = g;
     }
 
     public String getName() {
-        return user;
+        return username;
     }
 
-    public String getPass() {
-        return password;
+    public String getPassHash() {
+        return passHash;
     }
 
-    public ArrayList<Grade> getGrades() {
-        return grades;
+    public String getEncryptedGrades() {
+        return encryptedGrades;
     }
 }

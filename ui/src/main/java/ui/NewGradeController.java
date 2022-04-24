@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,9 +18,11 @@ import javafx.stage.Stage;
 import core.Encrypt;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class NewGradeController extends Controller {
+public class NewGradeController extends Controller implements Initializable {
 
     @FXML
     private Label title;
@@ -32,10 +35,9 @@ public class NewGradeController extends Controller {
 
     @FXML
     void handleOpenDashboard(ActionEvent event) {
-        openDashboard(event);
+        DashboardController dash = new DashboardController();
+        openFXML(dash, "Dashboard.fxml");
     }
-
-    User user;
 
     /**
      * Adds application description to dashboard.
@@ -54,56 +56,13 @@ public class NewGradeController extends Controller {
         return FXCollections.observableArrayList(grades);
     }
 
-    private void openDashboard(ActionEvent event) {
-        Parent root;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-            root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setTitle("Grades");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.print("Did not find data fxml form!");
-            e.printStackTrace();
-        }
-    }
-
-    private void openGrades() {
-        Parent root;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Dashboard.fxml"));
-            root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("Grades");
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.print("Did not find data fxml form!");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void handleOpenGrades() {
-        openGrades();
-    }
-
-    @FXML
-    public void initialize() {
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         title.setText("New grade");
         populateScore();
         scoreInput.setItems(populateScore());
         gradeInput.setItems(populateGrade());
-    }
 
-    public void passUser(User u) {
-        user = u;
     }
 
 }

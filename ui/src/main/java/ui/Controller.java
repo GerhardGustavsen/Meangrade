@@ -24,19 +24,25 @@ import core.User;
 public class Controller {
 
   Core core;
+  Stage stage;
 
-  protected void openFXML(Stage stage, String fxmlPath) throws CloneNotSupportedException {
+  protected void openFXML(Controller controller, String fxmlPath) {
 
-    Parent root;
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-      root = loader.load();
-      Controller controller = loader.getController();
-      controller.sendCore(core);
 
-      stage.setTitle("User: " + core.getActiveUser());
+      loader.setController(controller);
+
+      controller.sendCore(core);
+      controller.sendStage(stage);
+
+      Parent root = loader.load();
+
+      if (core.getActiveUser() != null)
+        stage.setTitle("User: " + core.getActiveUser().getName());
+      else
+        stage.setTitle("MeanGrade");
       stage.setScene(new Scene(root));
-      stage.show();
 
     } catch (IOException e) {
       System.out.print("Did not find data fxml form!");
@@ -44,7 +50,12 @@ public class Controller {
     }
   }
 
-  private void sendCore(Core c) {
+  public void sendCore(Core c) {
     core = c;
+
+  }
+
+  private void sendStage(Stage s) {
+    stage = s;
   }
 }
