@@ -48,7 +48,6 @@ public class Core {
     Iterator<User> it = users.iterator();
     while (it.hasNext()) {
       User realUser = it.next();
-      String realUserName = realUser.getName().replaceAll("\\s+", "");
       if (realUser.getName().equals(username)) {
         System.out.println("Found user!");
         user = realUser;

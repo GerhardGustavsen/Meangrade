@@ -1,38 +1,12 @@
 package ui;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import core.Validator;
-import core.Core;
-import core.Encrypt;
-import core.Grade;
-import core.User;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.util.Iterator;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class LogginController extends Controller {
 
@@ -73,7 +47,7 @@ public class LogginController extends Controller {
   private ImageView img;
 
   @FXML
-  void handleBtnReg(ActionEvent e) throws JSONException {
+  void handleBtnReg(ActionEvent e) {
     clear();
     Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
         passwordRepeatField.getText());
@@ -93,7 +67,7 @@ public class LogginController extends Controller {
   }
 
   @FXML
-  void handleBtnLog(ActionEvent e) throws JSONException {
+  void handleBtnLog(ActionEvent e) {
     clear();
     Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
         passwordRepeatField.getText());

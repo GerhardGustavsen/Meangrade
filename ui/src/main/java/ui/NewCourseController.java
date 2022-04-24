@@ -2,18 +2,9 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 import core.Validator;
 
@@ -77,7 +68,7 @@ public class NewCourseController extends Controller {
     } else {
       grade = Validator.toInt(iGrade.getText());
     }
-    if (grade > 1 && grade <= 6) {
+    if (!(grade > 1 && grade <= 6)) {
       errorMsg.setText("Grade must be between 1 and 6!");
       return false;
     } else if (Validator.toInt(iNum.getText()) == null) {

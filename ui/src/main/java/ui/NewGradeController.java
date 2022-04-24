@@ -1,22 +1,14 @@
 package ui;
 
 import core.Course;
-import core.Grade;
-import core.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
-import core.Encrypt;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,11 +34,6 @@ public class NewGradeController extends Controller implements Initializable {
     @FXML
     private TextArea commentInput;
 
-
-
-
-
-
     @FXML
     void handleOpenDashboard(ActionEvent event) {
         DashboardController dash = new DashboardController();
@@ -59,7 +46,7 @@ public class NewGradeController extends Controller implements Initializable {
      * Adds application description to dashboard.
      */
 
-    private ObservableList<String> populateCourse(){
+    private ObservableList<String> populateCourse() {
         List<String> codeList = core.getCourses().stream().map(Course::getCode).collect(Collectors.toList());
         return FXCollections.observableList(codeList);
     }
@@ -77,14 +64,13 @@ public class NewGradeController extends Controller implements Initializable {
         return FXCollections.observableArrayList(grades);
     }
 
-
     @FXML
     void handleCreateGrade() throws IOException {
         char grade = (char) gradeInput.getValue();
-        String courseCode  = (String) courseInput.getValue();
-        Integer score = (Integer)  scoreInput.getValue();
+        String courseCode = (String) courseInput.getValue();
+        Integer score = (Integer) scoreInput.getValue();
         String comment = commentInput.getText();
-        core.newGrade(grade,courseCode,score, comment);
+        core.newGrade(grade, courseCode, score, comment);
     }
 
     @Override
