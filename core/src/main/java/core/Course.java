@@ -33,6 +33,9 @@ public class Course {
     };
 
     public double getScore() {
+        if(score == null){
+            return 0;
+        }
         Double sum = 0.0;
         for (Integer i : score) {
             sum = sum + i;

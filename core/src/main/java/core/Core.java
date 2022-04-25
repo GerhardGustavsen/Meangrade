@@ -132,4 +132,13 @@ public class Core {
     courses.add(course);
     courseHandler.saveCourse(course);
   }
+
+  public Course getCourse(String code){
+    for (Course course: courses){
+      if (course.getCode().equals(code)){
+        return course;
+      }
+    }
+    return null;
+  }
 }

@@ -1,18 +1,24 @@
 package ui;
 
+import core.Course;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import core.Grade;
+import javafx.scene.paint.Paint;
+import json.CourseHandler;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ViewGradeController extends Controller implements Initializable {
 
   Grade grade;
+
+  Course course;
 
   @FXML
   public Label titleLabel;
@@ -21,13 +27,15 @@ public class ViewGradeController extends Controller implements Initializable {
   public Label descriptionLabel;
 
   @FXML
-  public Label medianLabel;
+  public Label scoreLabel;
 
   @FXML
   public Label avarageLabel;
 
   @FXML
   public Label modeLabel;
+
+  @FXML Label errorMsg;
 
   @FXML
   void handleOpenDashboard(ActionEvent event) {
@@ -42,14 +50,26 @@ public class ViewGradeController extends Controller implements Initializable {
   }
 
   void populateView(){
-    titleLabel.setText(grade.getCode());
+    titleLabel.setText(course.getCode() + ": " + course.getName());
+    descriptionLabel.setText(course.getDesc());
     avarageLabel.setText(String.valueOf(grade.getScore()));
+    if(course.getScore() == 0){
+      scoreLabel.setText("No data");
+    }else{
+      scoreLabel.setText(String.valueOf(course.getScore()));
+    }
   }
 
 
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    populateView();
+    course = core.getCourse(grade.getCode());
+    if(course == null){
+      errorMsg.setText("Could not get all the information");
+      errorMsg.setTextFill(Paint.valueOf("red"));
+    }else{
+      populateView();
+    }
   }
 }

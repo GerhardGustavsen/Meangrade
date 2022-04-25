@@ -28,7 +28,7 @@
             <Font name="Courier New Bold" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="141.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median" wrappingWidth="50.729713439941406">
+      <Text layoutX="141.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="50.729713439941406">
          <font>
             <Font name="Courier New Bold" size="13.0" />
          </font>
@@ -38,7 +38,7 @@
             <Font name="Courier New Bold" size="13.0" />
          </font>
       </Text>
-      <Label fx:id="medianLabel" layoutX="151.0" layoutY="217.0" text="Median" />
+      <Label fx:id="scoreLabel" layoutX="143.0" layoutY="217.0" />
       <Label fx:id="avarageLabel" layoutX="274.0" layoutY="217.0" text="Avarage" />
       <Label fx:id="modeLabel" layoutX="403.0" layoutY="217.0" text="Mode" />
       <Button layoutX="19.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleOpenDashboard" style="-fx-background-color: white; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" text="&lt;-- Back">
@@ -46,5 +46,6 @@
             <Font name="Courier New Bold" size="12.0" />
          </font>
       </Button>
+      <Label layoutX="22.0" layoutY="369.0" prefHeight="17.0" prefWidth="181.0" />
    </children>
 </AnchorPane>
