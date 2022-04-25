@@ -2,11 +2,15 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import core.Grade;
 
-public class ViewGradeController extends Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ViewGradeController extends Controller implements Initializable {
 
   Grade grade;
 
@@ -35,5 +39,17 @@ public class ViewGradeController extends Controller {
 
   void SendGrade(Grade g) {
     grade = g;
+  }
+
+  void populateView(){
+    titleLabel.setText(grade.getCode());
+    avarageLabel.setText(String.valueOf(grade.getScore()));
+  }
+
+
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    populateView();
   }
 }
