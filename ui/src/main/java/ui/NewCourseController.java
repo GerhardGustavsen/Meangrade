@@ -88,4 +88,5 @@ public class NewCourseController extends Controller {
     dash.poppulateListView();
     dash.initClickActions();
   }
+
 }
