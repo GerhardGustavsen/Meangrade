@@ -48,5 +48,6 @@
             <Font name="Courier New Bold" size="13.0" />
          </font>
       </Button>
+      <Label fx:id="errorMsg" layoutX="84.0" layoutY="321.0" prefHeight="27.0" prefWidth="202.0" />
    </children>
 </AnchorPane>
