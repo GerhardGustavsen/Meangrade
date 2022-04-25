@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Paint;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +34,9 @@ public class NewGradeController extends Controller implements Initializable {
 
     @FXML
     private TextArea commentInput;
+
+    @FXML
+    private Label errorMsg;
 
     @FXML
     void handleOpenDashboard(ActionEvent event) {
@@ -66,11 +70,38 @@ public class NewGradeController extends Controller implements Initializable {
 
     @FXML
     void handleCreateGrade() throws IOException {
-        char grade = (char) gradeInput.getValue();
-        String courseCode = (String) courseInput.getValue();
-        Integer score = (Integer) scoreInput.getValue();
-        String comment = commentInput.getText();
-        core.newGrade(grade, courseCode, score, comment);
+        if(checkInput()){
+            char grade = (char) gradeInput.getValue();
+            String courseCode = (String) courseInput.getValue();
+            Integer score = (Integer) scoreInput.getValue();
+            String comment = commentInput.getText();
+            core.newGrade(grade, courseCode, score, comment);
+            errorMsg.setText("The grade was succesfully created!");
+        }
+    }
+
+    private boolean checkInput(){
+        setErrorColor();
+        if(courseInput.getValue()== null){
+            errorMsg.setText("Please select a course code!");
+        }else if(gradeInput.getValue()== null){
+            errorMsg.setText("Please select a grade!");
+        }else if(scoreInput.getValue() == null){
+            errorMsg.setText("Please select a score!");
+        }else if(commentInput.getText().equals("")){
+            errorMsg.setText("The comment cannot be empty!");
+        }else{
+            setSuccessColor();
+            return true;
+        }
+        return false;
+    }
+
+    private void setErrorColor(){
+        errorMsg.setTextFill(Paint.valueOf("red"));
+    }
+    private void setSuccessColor(){
+        errorMsg.setTextFill(Paint.valueOf("green"));
     }
 
     @Override
