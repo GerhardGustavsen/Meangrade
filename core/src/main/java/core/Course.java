@@ -10,10 +10,22 @@ public class Course {
     private ArrayList<Integer> results;
 
     public Course(String c, String n, String d, ArrayList<Integer> r) {
-        code = c;
-        name = n;
+        setCode(c.trim());
+        name = n.trim();
         description = d;
         results = r;
+    }
+
+    public boolean codeIsValid(String code){
+        return Validator.regex(code, "[A-Z]{3}\\d{4}");
+    }
+
+    public void setCode(String code) {
+        if (codeIsValid(code)){
+            this.code = code;
+        }else{
+            throw new IllegalArgumentException("Code format is invalid");
+        }
     }
 
     public String getCode() {
