@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Paint;
@@ -39,6 +40,10 @@ public class NewGradeController extends Controller implements Initializable {
     private Label errorMsg;
 
     @FXML
+    private DialogPane dialogPane;
+
+
+    @FXML
     void handleOpenDashboard(ActionEvent event) {
         DashboardController dash = new DashboardController();
         openFXML(dash, "Dashboard.fxml");
@@ -68,6 +73,11 @@ public class NewGradeController extends Controller implements Initializable {
         return FXCollections.observableArrayList(grades);
     }
 
+    boolean codeInList(String code){
+        return core.getActiveUser().getGrades().stream()
+                .anyMatch(grade -> grade.getCode().equals(code));
+    }
+
     @FXML
     void handleCreateGrade() throws IOException {
         if(checkInput()){
@@ -75,8 +85,14 @@ public class NewGradeController extends Controller implements Initializable {
             String courseCode = (String) courseInput.getValue();
             Integer score = (Integer) scoreInput.getValue();
             String comment = commentInput.getText();
-            core.newGrade(grade, courseCode, score, comment);
-            errorMsg.setText("The grade was succesfully created!");
+            String trimmedCourse = courseCode.trim();
+            System.out.println(trimmedCourse.equals("TDT1000"));
+            if (codeInList(trimmedCourse)) {
+                dialogPane.setVisible(true);
+            }else{
+                core.newGrade(grade, trimmedCourse, score, comment);
+                errorMsg.setText("The grade was succesfully created!");
+            }
         }
     }
 
@@ -104,6 +120,27 @@ public class NewGradeController extends Controller implements Initializable {
         errorMsg.setTextFill(Paint.valueOf("green"));
     }
 
+    public void handleClose(){
+        dialogPane.setVisible(false);
+    }
+
+    public void handleAccept() throws IOException {
+        try{
+        char grade = (char) gradeInput.getValue();
+        String courseCode = (String) courseInput.getValue();
+        Integer score = (Integer) scoreInput.getValue();
+        String comment = commentInput.getText();
+        String trimmedCourse = courseCode.trim();
+        core.removeGrade(trimmedCourse);
+        handleClose();
+        core.newGrade(grade, trimmedCourse, score, comment);
+        errorMsg.setText("The grade was succesfully created!");
+        }catch (IOException e){
+            System.out.println("Could not remove prior grades");
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         title.setText("New grade");
@@ -111,7 +148,10 @@ public class NewGradeController extends Controller implements Initializable {
         scoreInput.setItems(populateScore());
         gradeInput.setItems(populateGrade());
         courseInput.setItems(populateCourse());
+        dialogPane.setVisible(false);
 
     }
+
+
 
 }

@@ -2,10 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -49,5 +51,28 @@
          </font>
       </Button>
       <Label fx:id="errorMsg" layoutX="84.0" layoutY="321.0" prefHeight="27.0" prefWidth="202.0" />
+      <DialogPane fx:id="dialogPane" layoutX="65.0" layoutY="181.0" prefHeight="165.0" prefWidth="399.0" style="-fx-background-color: ffff; -fx-border-color: black;">
+         <header>
+            <AnchorPane prefHeight="158.0" prefWidth="68.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="6.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have choosen a course that already has a grade attached to it? Are you sure you want to overwrite the last grade?" wrappingWidth="296.17236328125" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Courier New" size="14.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="closeButton" layoutX="222.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleClose" prefWidth="39.0" style="-fx-border-color: none; -fx-background-color: red;" text="No" textFill="#f8f8f8">
+                     <font>
+                        <Font name="Courier New Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="acceptButton" layoutX="113.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleAccept" prefWidth="37.0" style="-fx-border-color: none; -fx-background-color: #68BB59 #68BB59;" text="Yes" textFill="#f8f8f8">
+                     <font>
+                        <Font name="Courier New Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </header>
+      </DialogPane>
    </children>
 </AnchorPane>
