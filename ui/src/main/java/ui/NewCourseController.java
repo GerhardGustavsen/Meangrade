@@ -2,13 +2,15 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 
 import core.Validator;
 
-public class NewCourseController extends Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class NewCourseController extends Controller implements Initializable {
 
   @FXML
   private TextField iCode;
@@ -28,6 +30,7 @@ public class NewCourseController extends Controller {
   @FXML
   private Label errorMsg;
 
+
   private int grade;
   private int num;
 
@@ -36,14 +39,15 @@ public class NewCourseController extends Controller {
 
     if (checkEmpty() && checkInput()) {
       if (Validator.regex(iCode.getText(), "[A-Z]{3}\\d{4}")) {
-        errorMsg.setText("Sucsess!");
-        // SUCSESS!
-        core.newCourse(iCode.getText(), iName.getText(), grade, num, iDesc.getText());
+          errorMsg.setText("Sucsess!");
+          // SUCSESS!
+          core.newCourse(iCode.getText(), iName.getText(), grade, num, iDesc.getText());
+        }
       } else {
         errorMsg.setText("Course code must be 3 capital chars and 4 numbers");
       }
     }
-  }
+
 
   boolean checkEmpty() {
     if (!Validator.notEmpty(iCode.getText())) {
@@ -89,4 +93,8 @@ public class NewCourseController extends Controller {
     dash.initClickActions();
   }
 
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+
+  }
 }

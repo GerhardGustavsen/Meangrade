@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -131,5 +132,14 @@ public class Core {
 
     courses.add(course);
     courseHandler.saveCourse(course);
+  }
+
+  public void removeGrade(String code) throws IOException {
+    for (int i = 0; i < activeUser.getGrades().size(); i++) {
+      if (code.equals(activeUser.getGrades().get(i).getCode())) {
+        activeUser.getGrades().remove(i);
+      }
+    }
+    userHandler.saveGrade(activeUser);
   }
 }
