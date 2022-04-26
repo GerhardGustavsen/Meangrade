@@ -3,7 +3,7 @@ package json;
 import java.io.*;
 import java.util.Scanner;
 
-public class FileHandler {
+public class FileHandler implements FileInterface {
 
   private String path;
 
@@ -50,7 +50,7 @@ public class FileHandler {
     return new Scanner(file);
   }
 
-  public void deleteAll() throws IOException {
+  public void deleteAll(){
     createNewFile();
     try{
       new FileWriter(path, false).close();
