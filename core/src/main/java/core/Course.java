@@ -13,7 +13,7 @@ public class Course {
         setCode(c.trim());
         name = n.trim();
         description = d;
-        results = r;
+        setResults(r);
         score = new ArrayList<>();
     }
 
@@ -26,6 +26,14 @@ public class Course {
             this.code = code;
         }else{
             throw new IllegalArgumentException("Code format is invalid");
+        }
+    }
+
+    public void setResults(ArrayList<Integer> results) throws IllegalArgumentException{
+        if(resultsAreValid(results)){
+            this.results = results;
+        }else{
+            throw new IllegalArgumentException("All of the results must be an integer between 1-6");
         }
     }
 
@@ -54,7 +62,25 @@ public class Course {
         return sum / score.size();
     };
 
-    public void addScore(Integer i) {
-        score.add(i);
+    public void addScore(Integer score) throws IllegalArgumentException {
+        if(scoreIsValid(score)){
+            this.score.add(score);
+        }else{
+            throw new IllegalArgumentException("Score must be a number between 1-5");
+        }
+
     };
+
+    public boolean scoreIsValid(Integer score){
+        return score <= 5 && score >= 1;
+    }
+
+    public boolean resultsAreValid(ArrayList<Integer> results){
+        for(Integer result: results){
+            if (result > 6 || result < 1){
+                return false;
+            }
+        }
+        return true;
+    }
 }
