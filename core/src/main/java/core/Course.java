@@ -14,6 +14,7 @@ public class Course {
         name = n.trim();
         description = d;
         results = r;
+        score = new ArrayList<>();
     }
 
     public boolean codeIsValid(String code){
