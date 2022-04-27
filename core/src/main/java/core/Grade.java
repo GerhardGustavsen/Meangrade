@@ -1,6 +1,6 @@
 package core;
 
-public class Grade {
+public class Grade{
 
     private String code;
     private char grade;

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class UserHandler extends FileHandler {
   public UserHandler(String path) {
-    super("core/src/main/resources/json/users.txt");
+    super(path);
   }
 
   public void saveUser(User user) {
@@ -29,14 +29,7 @@ public class UserHandler extends FileHandler {
         .collect(Collectors.toList());
     Files.write(file.toPath(), users, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
   }
-  // TODO: Get all users
 
-  public void saveAllUsers(ArrayList<User> users) throws IOException {
-    deleteAll();
-    for (User user : users) {
-      write(userToString(user));
-    }
-  }
 
   public ArrayList<User> getAllUsers() {
     try {
@@ -71,8 +64,11 @@ public class UserHandler extends FileHandler {
     write(userToString(user));
   }
 
-  public User stringToUser(String data) {
+  public User stringToUser(String data)throws IllegalArgumentException {
     String[] parts = data.split("\\|");
+    if(parts.length != 3){
+      throw new IllegalArgumentException("Wrong format for the data string");
+    }
     ArrayList<String> userData = new ArrayList<>();
     for (String part : parts) {
       Matcher m = Pattern.compile(": (.*)").matcher(part);
@@ -80,7 +76,11 @@ public class UserHandler extends FileHandler {
         userData.add(m.group(1));
       }
     }
-    return new User(userData.get(0), userData.get(1), userData.get(2));
+    try{
+      return new User(userData.get(0), userData.get(1), userData.get(2));
+    }catch (IllegalArgumentException e){
+      throw new IllegalArgumentException("Each part of the string input was not properly formated");
+    }
   }
 
   public static String gradeToString(Grade grade) {

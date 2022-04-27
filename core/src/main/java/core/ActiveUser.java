@@ -12,7 +12,6 @@ public class ActiveUser extends User {
 
     public ActiveUser(String username, String passhash, String encryptedGrades, String pass) {
         super(username, passhash, encryptedGrades);
-
         password = pass;
     }
 

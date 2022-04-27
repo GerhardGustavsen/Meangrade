@@ -16,8 +16,6 @@ public class FileHandler implements FileInterface {
       File courseFile = new File(path);
       if (courseFile.createNewFile()) {
         System.out.println("The file was created: " + courseFile.getName());
-      } else {
-        System.out.println("File already exists.");
       }
     } catch (IOException e) {
       System.out.println("We were not able to create a new file.");
@@ -33,7 +31,6 @@ public class FileHandler implements FileInterface {
       courseWriter.write(string);
       out.newLine();
       out.close();
-      System.out.println("Successfully wrote to the file.");
     } catch (IOException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
