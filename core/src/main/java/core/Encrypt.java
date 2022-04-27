@@ -35,9 +35,14 @@ public class Encrypt {
     return encryptor.encrypt(uncrypted);
   }
 
-  public static String decrypt(String encrypted, String password) {
+  public static String decrypt(String encrypted, String password) throws IllegalArgumentException {
     StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
     encryptor.setPassword(password);
-    return encryptor.decrypt(encrypted);
+    String data = encryptor.decrypt(encrypted);
+    if(data == null){
+      throw new IllegalArgumentException("Wrong password");
+    }else{
+      return data;
+    }
   }
 }

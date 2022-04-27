@@ -1,5 +1,8 @@
 package core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Grade{
 
     private String code;
@@ -7,11 +10,13 @@ public class Grade{
     private Integer score;
     private String comment;
 
+    private final char[] validGrades = {'A', 'B', 'C', 'D', 'E', 'F'};
+
     public Grade(String c, char g, Integer s, String com) {
-        code = c;
-        grade = g;
-        score = s;
-        comment = com;
+        setCode(c);
+        setGrade(g);
+        setScore(s);
+        this.comment = com;
         // update course score!
     }
 
@@ -35,8 +40,44 @@ public class Grade{
         return getCode() + "\t\t\t\t\t\t\tGrade: " + getGrade();
     }
 
-    public void setScore(Integer i) {
-        score = i;
-        // update course score!
+    public void setScore(Integer score) throws IllegalArgumentException {
+        if (scoreIsValid(score)){
+            this.score = score;
+        }else{
+            throw new IllegalArgumentException("Score must be an number between 1-5");
+        }
     }
+
+    public void setGrade(char grade) throws IllegalArgumentException{
+        if(gradeIsValid(grade)){
+            this.grade = grade;
+        }else{
+            throw new IllegalArgumentException("Grade must be a character from A-F");
+        }
+    }
+
+    public void setCode(String code) throws IllegalArgumentException{
+        if(codeIsValid(code)){
+            this.code = code;
+        }else{
+            throw new IllegalArgumentException("Code must follow the following convention: AAA0000, 3 letter followed by 4 numbers");
+        }
+    }
+    public boolean codeIsValid(String code){
+        return Validator.regex(code, "[A-Z]{3}\\d{4}");
+    }
+
+    public boolean scoreIsValid(Integer score){
+        return score <= 5 && score >= 1;
+    }
+
+    public boolean gradeIsValid(char grade){
+       for (char validGrade:validGrades){
+           if(validGrade == grade){
+               return true;
+           }
+       }
+       return false;
+    }
+
 }

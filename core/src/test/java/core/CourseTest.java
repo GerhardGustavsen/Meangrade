@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Base64.Encoder;
 
 public class CourseTest {
 
@@ -77,7 +78,7 @@ public class CourseTest {
       testResults.add(4);
       testResults.add(1);
       testResults.add(5);
-      Assertions.assertTrue(course.checkIfResultsAreValid(testResults));
+      Assertions.assertTrue(course.resultsAreValid(testResults));
   }
 
   @Test
@@ -88,9 +89,8 @@ public class CourseTest {
     testResults.add(4);
     testResults.add(1);
     testResults.add(-5);
-    Assertions.assertFalse(course.checkIfResultsAreValid(testResults));
+    Assertions.assertFalse(course.resultsAreValid(testResults));
   }
-
 
 }
 

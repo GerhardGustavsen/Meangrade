@@ -30,7 +30,7 @@ public class Course {
     }
 
     public void setResults(ArrayList<Integer> results) throws IllegalArgumentException{
-        if(checkIfResultsAreValid(results)){
+        if(resultsAreValid(results)){
             this.results = results;
         }else{
             throw new IllegalArgumentException("All of the results must be an integer between 1-6");
@@ -63,7 +63,7 @@ public class Course {
     };
 
     public void addScore(Integer score) throws IllegalArgumentException {
-        if(checkIfScoreIsValid(score)){
+        if(scoreIsValid(score)){
             this.score.add(score);
         }else{
             throw new IllegalArgumentException("Score must be a number between 1-5");
@@ -71,11 +71,11 @@ public class Course {
 
     };
 
-    public boolean checkIfScoreIsValid(Integer score){
+    public boolean scoreIsValid(Integer score){
         return score <= 5 && score >= 1;
     }
 
-    public boolean checkIfResultsAreValid(ArrayList<Integer> results){
+    public boolean resultsAreValid(ArrayList<Integer> results){
         for(Integer result: results){
             if (result > 6 || result < 1){
                 return false;
