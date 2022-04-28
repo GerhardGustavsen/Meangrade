@@ -3,6 +3,9 @@ package ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
+import java.io.IOException;
+
 import core.Course;
 import core.Grade;
 
@@ -47,8 +50,9 @@ public class ViewGradeController extends Controller {
   }
 
   @FXML
-  void handleDelete(ActionEvent event) {
-    // FIX!
+  void handleDelete(ActionEvent event) throws IOException {
+    core.removeGrade(grade.getCode());
+    handleOpenDashboard(event);
   }
 
   public void SendGrade(Grade g) {

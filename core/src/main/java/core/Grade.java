@@ -17,7 +17,6 @@ public class Grade {
         setGrade(g);
         setScore(s);
         this.comment = com;
-        // update course score!
     }
 
     public String getCode() {
@@ -57,7 +56,7 @@ public class Grade {
                 System.out.println("In Grade getCourse(): |" + singleCourse.getCode() + "| != |" + code + "|");
             }
         }
-        // Throw error
+        new IllegalArgumentException("Could not find course!");
         return new Course("XXX0000", "Course not found!", "404", new ArrayList<>());
     }
 
@@ -97,7 +96,7 @@ public class Grade {
 
     public static char toChar(int i) {
         int a = 65;
-        return (char) (a + (6 - i));
+        return (char) (a + 6 - i);
     }
 
     public static int toInt(char c) {
