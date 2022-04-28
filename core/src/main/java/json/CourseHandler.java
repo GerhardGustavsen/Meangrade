@@ -1,7 +1,6 @@
 package json;
 
 import core.Course;
-import core.Validator;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,8 +13,6 @@ public class CourseHandler extends FileHandler {
   public CourseHandler(String path) {
     super(path);
   }
-
-  // TODO: Add addResult; lets just add an integer result to a course;
 
   public void saveCourse(Course course) {
     write(courseToString(course));

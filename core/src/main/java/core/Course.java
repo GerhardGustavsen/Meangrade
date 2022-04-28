@@ -77,7 +77,7 @@ public class Course {
 
     public String getAvrg() {
         double avrg = avrg(results);
-        System.out.println("Avrage grade: " + avrg);
+        //System.out.println("Avrage grade: " + avrg);
         char grade = Grade.toChar((int) avrg);
         int rest = (int) Math.round((avrg - (int) avrg) * 100);
         return String.valueOf(grade) + "." + rest;

@@ -32,7 +32,7 @@ public class FileHandler implements FileInterface {
       out.newLine();
       out.close();
     } catch (IOException e) {
-      System.out.println("An error occurred.");
+      //System.out.println("An error occurred.");
       e.printStackTrace();
     }
   }
@@ -52,7 +52,7 @@ public class FileHandler implements FileInterface {
     try{
       new FileWriter(path, false).close();
     }catch (IOException e) {
-      System.out.println("Could not delete file content");
+      //System.out.println("Could not delete file content");
       e.printStackTrace();
     }
   }

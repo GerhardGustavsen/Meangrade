@@ -20,6 +20,6 @@ public class CoreTest {
     String data = "";
     data.concat("hello");
     data.concat("hello");
-    System.out.println(data);
+    //System.out.println(data);
   }
 }

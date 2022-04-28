@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="title" layoutX="224.0" layoutY="16.0" text="Title">
          <font>
@@ -19,7 +19,7 @@
       <ComboBox fx:id="courseInput" layoutX="82.0" layoutY="65.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" />
       <ComboBox fx:id="gradeInput" layoutX="268.0" layoutY="65.0" prefHeight="27.0" prefWidth="67.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" />
       <ComboBox fx:id="scoreInput" layoutX="371.0" layoutY="65.0" prefHeight="27.0" prefWidth="67.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" />
-      <TextArea fx:id="commentInput" layoutX="84.0" layoutY="114.0" prefHeight="200.0" prefWidth="360.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" />
+      <TextArea fx:id="commentInput" layoutX="84.0" layoutY="114.0" prefHeight="200.0" prefWidth="360.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" AnchorPane.bottomAnchor="86.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="71.0" AnchorPane.topAnchor="114.0" />
       <Label fx:id="title1" layoutX="82.0" layoutY="49.0" text="Course Code">
          <font>
             <Font name="Courier New" size="14.0" />
@@ -40,7 +40,7 @@
             <Font name="Courier New" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="399.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleCreateGrade" style="-fx-background-color: #68BB59;" text="Save" textFill="WHITE">
+      <Button layoutX="399.0" layoutY="329.0" mnemonicParsing="false" onAction="#handleCreateGrade" style="-fx-background-color: #68BB59;" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="66.4">
          <font>
             <Font name="Courier New Bold" size="13.0" />
          </font>
@@ -51,7 +51,7 @@
          </font>
       </Button>
       <Label fx:id="errorMsg" layoutX="84.0" layoutY="321.0" prefHeight="27.0" prefWidth="202.0" />
-      <DialogPane fx:id="dialogPane" layoutX="65.0" layoutY="181.0" prefHeight="165.0" prefWidth="399.0" style="-fx-background-color: ffff; -fx-border-color: black;">
+      <DialogPane fx:id="dialogPane" layoutX="65.0" layoutY="181.0" prefHeight="165.0" prefWidth="399.0" style="-fx-background-color: ffff; -fx-border-color: black;" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="50.80000000000001" AnchorPane.topAnchor="181.0">
          <header>
             <AnchorPane prefHeight="158.0" prefWidth="68.0">
                <children>
@@ -60,12 +60,12 @@
                         <Font name="Courier New" size="14.0" />
                      </font>
                   </Text>
-                  <Button fx:id="closeButton" layoutX="222.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleClose" prefWidth="39.0" style="-fx-border-color: none; -fx-background-color: red;" text="No" textFill="#f8f8f8">
+                  <Button fx:id="closeButton" layoutX="222.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleClose" prefWidth="39.0" style="-fx-border-color: none; -fx-background-color: red;" text="No" textFill="#f8f8f8" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="142.99999999999997">
                      <font>
                         <Font name="Courier New Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="acceptButton" layoutX="113.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleAccept" prefWidth="37.0" style="-fx-border-color: none; -fx-background-color: #68BB59 #68BB59;" text="Yes" textFill="#f8f8f8">
+                  <Button fx:id="acceptButton" layoutX="113.0" layoutY="100.0" mnemonicParsing="false" onAction="#handleAccept" prefWidth="37.0" style="-fx-border-color: none; -fx-background-color: #68BB59 #68BB59;" text="Yes" textFill="#f8f8f8" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="113.0">
                      <font>
                         <Font name="Courier New Bold" size="13.0" />
                      </font>

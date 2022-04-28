@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,7 +30,7 @@ public class Core {
     if (realUser != null) {
       String pasHash = realUser.getPassHash();
       if (Encrypt.hash(pas).equals(pasHash)) {
-        System.out.println("LOGG INN SUCSESS!");
+        // System.out.println("LOGG INN SUCSESS!");
 
         String encryptedGrades = realUser.getEncryptedGrades();
         setActiveUser(username, pas, encryptedGrades);
@@ -54,11 +53,11 @@ public class Core {
     while (it.hasNext()) {
       User realUser = it.next();
       if (realUser.getName().equals(username)) {
-        System.out.println("Found user!");
+        // System.out.println("Found user!");
         user = realUser;
         break;
       } else {
-        System.out.println(realUser.getName() + " != " + username);
+        // System.out.println(realUser.getName() + " != " + username);
       }
     }
 
@@ -96,7 +95,7 @@ public class Core {
       }
 
     } else {
-      System.out.println("no data found!");
+      // System.out.println("no data found!");
     }
     activeUser.setGrades(grades);
   }
@@ -126,10 +125,11 @@ public class Core {
       if (c.getCode().equals(changedCourse.getCode())) {
         c.addScore(score);
         c.addGrade(Grade.toInt(grade));
-        System.out.println(c.getCode() + " scores are now: " + c.getScoreArray());
-        System.out.println(c.getCode() + " grades are now: " + c.getGradeArray());
+        // System.out.println(c.getCode() + " scores are now: " + c.getScoreArray());
+        // System.out.println(c.getCode() + " grades are now: " + c.getGradeArray());
       } else {
-        System.out.println("in core newGrade(): |" + c.getCode() + "| != |" + changedCourse.getCode() + "|");
+        // System.out.println("in core newGrade(): |" + c.getCode() + "| != |" +
+        // changedCourse.getCode() + "|");
       }
     }
     courseHandler.saveCourses(courses);

@@ -2,13 +2,9 @@ package ui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import core.Validator;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class NewCourseController extends Controller {
 

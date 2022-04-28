@@ -23,14 +23,14 @@ public class ActiveUser extends User {
     public void addGrade(Grade grade) {
         grades.add(grade);
 
-        System.out.println("grades: " + grades);
+        //System.out.println("grades: " + grades);
 
         String data = "";
         for (Grade oneGrade : grades) {
             data = data + UserHandler.gradeToString(oneGrade);
             data = data + "&";
 
-            System.out.println(oneGrade);
+            //System.out.println(oneGrade);
         }
         setEncryptedGrades(Encrypt.encrypt(data, password));
     }

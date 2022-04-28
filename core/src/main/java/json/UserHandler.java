@@ -41,7 +41,7 @@ public class UserHandler extends FileHandler {
       }
       return users;
     } catch (FileNotFoundException e) {
-      System.out.println("Could not fetch the courses");
+      //System.out.println("Could not fetch the courses");
       e.printStackTrace();
     }
     return null;

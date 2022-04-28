@@ -85,7 +85,7 @@ public class NewGradeController extends Controller implements Initializable {
             Integer score = (Integer) scoreInput.getValue();
             String comment = commentInput.getText();
             String trimmedCourse = courseCode.trim();
-            System.out.println(trimmedCourse.equals("TDT1000"));
+            // System.out.println(trimmedCourse.equals("TDT1000"));
             if (codeInList(trimmedCourse)) {
                 dialogPane.setVisible(true);
             } else {
@@ -136,7 +136,7 @@ public class NewGradeController extends Controller implements Initializable {
             core.newGrade(grade, trimmedCourse, score, comment);
             errorMsg.setText("The grade was succesfully created!");
         } catch (IOException e) {
-            System.out.println("Could not remove prior grades");
+            // System.out.println("Could not remove prior grades");
             e.printStackTrace();
         }
     }

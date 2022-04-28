@@ -1,7 +1,6 @@
 package core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Grade {
 
@@ -43,7 +42,7 @@ public class Grade {
         if (scoreIsValid(score)) {
             this.score = score;
         } else {
-            System.out.println("Score was " + String.valueOf(score));
+            // System.out.println("Score was " + String.valueOf(score));
             throw new IllegalArgumentException("Score must be an number between 1-5!");
         }
     }
@@ -53,7 +52,8 @@ public class Grade {
             if (singleCourse.getCode().equals(code)) {
                 return singleCourse;
             } else {
-                System.out.println("In Grade getCourse(): |" + singleCourse.getCode() + "| != |" + code + "|");
+                // System.out.println("In Grade getCourse(): |" + singleCourse.getCode() + "| !=
+                // |" + code + "|");
             }
         }
         new IllegalArgumentException("Could not find course!");

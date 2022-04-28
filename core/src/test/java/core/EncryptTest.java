@@ -12,7 +12,7 @@ public class EncryptTest {
   String encryptedData;
 
   @BeforeEach
-  void init(){
+  void init() {
     String pas = "123";
     String data = "Hello";
     String encryptedData = Encrypt.encrypt(data, pas);
@@ -20,7 +20,7 @@ public class EncryptTest {
 
   @Test
   @DisplayName("Test that hashing the same string returns same hash")
-  void testHashingTwoStringWithSameResult(){
+  void testHashingTwoStringWithSameResult() {
     String beforeHash = "testString";
     String afterHash = Encrypt.hash(beforeHash);
     Assertions.assertNotEquals(beforeHash, afterHash);
@@ -31,7 +31,7 @@ public class EncryptTest {
 
   @Test
   @DisplayName("Can encrypt and decrypt string")
-  void canDecryptSring(){
+  void canDecryptSring() {
     Assertions.assertNotEquals(data, encryptedData);
     String decryptedData = Encrypt.decrypt(encryptedData, pas);
     Assertions.assertEquals(data, decryptedData);
@@ -39,16 +39,18 @@ public class EncryptTest {
 
   @Test
   @DisplayName("Cannot decrypt with wrong password")
-  void cannotDecyptWithWrongPassword(){
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {Encrypt.decrypt(data, "wrong password");
+  void cannotDecyptWithWrongPassword() {
+    Assertions.assertThrows(IllegalArgumentException.class, () -> {
+      Encrypt.decrypt(data, "wrong password");
     });
   }
 
   @Test
   @DisplayName("Cannot encrypt with empty password")
-  void canEncryptWithEmptyPassword(){
+  void canEncryptWithEmptyPassword() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
-    String data = Encrypt.encrypt("Hello", "");
-    System.out.println(data);});
+      String data = Encrypt.encrypt("Hello", "");
+      // System.out.println(data);
+    });
   }
 }
