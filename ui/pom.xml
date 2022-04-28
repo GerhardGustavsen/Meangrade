@@ -27,7 +27,11 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>16</version>
-        </dependency>
+        </dependency><dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-base</artifactId>
+        <version>16</version>
+    </dependency>
 
         <!-- junit testing with jupiter -->
         <dependency>

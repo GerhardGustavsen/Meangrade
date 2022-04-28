@@ -16,29 +16,29 @@ public class UserHandlerTest {
 
   @BeforeEach
   void init(){
-    testHandler.deleteAll();
-    testHandler.saveUser(new User("Test", "test", "data"));
+    this.testHandler.deleteAll();
+    this.testHandler.saveUser(new User("Test", "test", "data"));
   }
 
   @Test
   @DisplayName("Can save user")
   void canSaveUser() throws FileNotFoundException {
     User user  = new User("hello", "sir", "data");
-    testHandler.saveUser(user);
-    Assertions.assertEquals(user.getName(), testHandler.getUser("hello").getName());
+    this.testHandler.saveUser(user);
+    Assertions.assertEquals(user.getName(), this.testHandler.getUser("hello").getName());
   }
 
 
   @Test
   @DisplayName("Can get all users")
   void canGetUser() throws IOException {
-    Assertions.assertNotNull(testHandler.getUser("Test"));
+    Assertions.assertNotNull(this.testHandler.getUser("Test"));
   }
 
   @Test
   @DisplayName("Can get all users")
   void canGetAllUsers(){
-    ArrayList<User> users = testHandler.getAllUsers();
+    ArrayList<User> users = this.testHandler.getAllUsers();
     for(User user: users){
       Assertions.assertNotNull(user);
     }
@@ -47,15 +47,15 @@ public class UserHandlerTest {
   @Test
   @DisplayName("Can delete user")
   void canDeleteUser() throws IOException {
-    Assertions.assertNotNull(testHandler.getUser("Test"));
-    testHandler.deleteUser("Test");
-    Assertions.assertNull(testHandler.getUser("Test"));
+    Assertions.assertNotNull(this.testHandler.getUser("Test"));
+    this.testHandler.deleteUser("Test");
+    Assertions.assertNull(this.testHandler.getUser("Test"));
   }
 
   @Test
   @DisplayName("Can convert string to User")
   void canConvertStringToCourse(){
-    User course = testHandler.stringToUser("Username: Test| HashPassword: test| Grades: data\n");
+    User course = this.testHandler.stringToUser("Username: Test| HashPassword: test| Grades: data\n");
     //if course is not null that means that the function has returned a Course;
     Assertions.assertNotNull(course);
   }
@@ -65,7 +65,7 @@ public class UserHandlerTest {
   void cannotConvertStringToCourseWithWrongInput(){
     //if course is not null that means that the function has returned a Course;
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
-      testHandler.stringToUser("Wrong input data");
+      this.testHandler.stringToUser("Wrong input data");
     });
   }
 }

@@ -1,5 +1,6 @@
 package core;
 
+import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,9 +14,9 @@ public class EncryptTest {
 
   @BeforeEach
   void init() {
-    String pas = "123";
-    String data = "Hello";
-    String encryptedData = Encrypt.encrypt(data, pas);
+    this.pas = "123";
+    this.data = "Hello";
+    this.encryptedData = Encrypt.encrypt(data, pas);
   }
 
   @Test
@@ -32,16 +33,16 @@ public class EncryptTest {
   @Test
   @DisplayName("Can encrypt and decrypt string")
   void canDecryptSring() {
-    Assertions.assertNotEquals(data, encryptedData);
-    String decryptedData = Encrypt.decrypt(encryptedData, pas);
-    Assertions.assertEquals(data, decryptedData);
+    Assertions.assertNotEquals(this.data, this.encryptedData);
+    String decryptedData = Encrypt.decrypt(this.encryptedData, this.pas);
+    Assertions.assertEquals(this.data, decryptedData);
   }
 
   @Test
   @DisplayName("Cannot decrypt with wrong password")
   void cannotDecyptWithWrongPassword() {
-    Assertions.assertThrows(IllegalArgumentException.class, () -> {
-      Encrypt.decrypt(data, "wrong password");
+    Assertions.assertThrows(EncryptionOperationNotPossibleException.class, () -> {
+      Encrypt.decrypt(this.data, "wrong password");
     });
   }
 
@@ -49,8 +50,7 @@ public class EncryptTest {
   @DisplayName("Cannot encrypt with empty password")
   void canEncryptWithEmptyPassword() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
-      String data = Encrypt.encrypt("Hello", "");
-      // System.out.println(data);
+      Encrypt.encrypt("Hello", "");
     });
   }
 }

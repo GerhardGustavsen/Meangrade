@@ -15,41 +15,41 @@ public class CourseTest {
   void init() {
     ArrayList<Integer> results = new ArrayList<>();
     results.add(1);
-    course = new Course("TDT4100", "name", "description", results, results);
+    this.course = new Course("TDT4100", "name", "description", results, results);
   }
 
   @Test
   @DisplayName("Test valid code")
   void canCheckValidCode() {
-    Assertions.assertTrue(course.codeIsValid("TDT1000"));
+    Assertions.assertTrue(this.course.codeIsValid("TDT1000"));
   }
 
   @Test
   @DisplayName("Can check invalid code length")
   void canCheckInvalidCode() {
-    Assertions.assertFalse(course.codeIsValid("TDT100"));
+    Assertions.assertFalse(this.course.codeIsValid("TDT100"));
   }
 
   @Test
   @DisplayName("Can check invalid code format")
   void canCheckInvalidCodeFormat() {
-    Assertions.assertFalse(course.codeIsValid("1000TDT"));
+    Assertions.assertFalse(this.course.codeIsValid("1000TDT"));
   }
 
   @Test
   @DisplayName("Get score avarage")
   void canGetScoreAvarage() {
-    course.addScore(1);
-    course.addScore(2);
-    course.addScore(3);
-    Assertions.assertEquals(2, course.getScore());
+    this.course.addScore(1);
+    this.course.addScore(2);
+    this.course.addScore(3);
+    Assertions.assertEquals(1.75, this.course.getScore());
   }
 
   @Test
   @DisplayName("Cannot add negative score")
   void cannotAddInvalidScore() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
-      course.addScore(-1);
+      this.course.addScore(-1);
     });
   }
 
@@ -57,7 +57,7 @@ public class CourseTest {
   @DisplayName("Cannot add score bigger than 5")
   void cannotAddScoreBiggerThanFive() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
-      course.addScore(6);
+      this.course.addScore(6);
     });
   }
 
@@ -65,7 +65,7 @@ public class CourseTest {
   @DisplayName("Cannot add 0 as score value")
   void cannotAddZeroScoreValue() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
-      course.addScore(0);
+      this.course.addScore(0);
     });
   }
 
@@ -77,7 +77,7 @@ public class CourseTest {
     testResults.add(4);
     testResults.add(1);
     testResults.add(5);
-    Assertions.assertTrue(course.resultsAreValid(testResults));
+    Assertions.assertTrue(this.course.resultsAreValid(testResults));
   }
 
   @Test
@@ -88,7 +88,7 @@ public class CourseTest {
     testResults.add(4);
     testResults.add(1);
     testResults.add(-5);
-    Assertions.assertFalse(course.resultsAreValid(testResults));
+    Assertions.assertFalse(this.course.resultsAreValid(testResults));
   }
 
 }

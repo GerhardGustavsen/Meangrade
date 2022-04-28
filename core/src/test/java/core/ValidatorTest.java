@@ -158,5 +158,4 @@ public class ValidatorTest {
     Assertions.assertFalse(Validator.notEmpty(null));
   }
 
-
 }
