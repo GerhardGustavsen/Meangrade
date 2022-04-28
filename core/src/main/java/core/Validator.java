@@ -5,13 +5,13 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
-  String username;
-  String password;
-  String repassword;
+  private String username;
+  private String password;
+  private String repassword;
 
-  String usermsg = "";
-  String pasmsg = "";
-  String repasmsg = "";
+  private String usermsg = "";
+  private String pasmsg = "";
+  private String repasmsg = "";
 
   public Validator(String un, String pas, String repas) {
     username = un;
