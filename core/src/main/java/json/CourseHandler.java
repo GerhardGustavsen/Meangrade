@@ -40,10 +40,10 @@ public class CourseHandler extends FileHandler {
     return null;
   }
 
-  public Course stringToCourse(String data) throws IllegalArgumentException{
+  public Course stringToCourse(String data) throws IllegalArgumentException {
     try {
       String[] parts = data.split("\\|");
-      if (parts.length != 4){
+      if (parts.length != 5) {
         throw new IllegalArgumentException("The data is not properly formated");
       }
       ArrayList<String> courseData = new ArrayList<>();
@@ -54,11 +54,14 @@ public class CourseHandler extends FileHandler {
         }
       }
       ArrayList<Integer> list = (resultsToArray(courseData.get(3)));
-      return new Course(courseData.get(0), courseData.get(1), courseData.get(2), list);
-    }catch (IllegalArgumentException e){
+      ArrayList<Integer> list2 = (resultsToArray(courseData.get(4)));
+
+      return new Course(courseData.get(0), courseData.get(1), courseData.get(2), list, list2);
+    } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("The data provided was wrong!");
     }
   }
+
   public ArrayList<Course> getAllCourses() throws FileNotFoundException {
     try {
       Scanner reader = read();
@@ -77,12 +80,12 @@ public class CourseHandler extends FileHandler {
 
   public String courseToString(Course course) {
     return "Code: " + course.getCode() + " | Name: " + course.getName() + " | Description: " + course.getDesc()
-        + " | Results: " + course.getRes().toString();
+        + " | Results: " + course.getRes().toString() + " | Scores: " + course.getScoreArray().toString();
   }
 
   public ArrayList<Integer> resultsToArray(String data) throws IllegalArgumentException {
     // Regular expression to digits
-    try{
+    try {
       String regex = "([0-9]+)";
       // Creating a pattern object
       Pattern pattern = Pattern.compile(regex);
@@ -95,8 +98,9 @@ public class CourseHandler extends FileHandler {
         result.add(number);
       }
       return result;
-    }catch(IllegalArgumentException e){
-      throw new IllegalArgumentException("Wrong data input, the string has to have the following format [<int>, <int>, ...]");
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException(
+          "Wrong data input, the string has to have the following format [<int>, <int>, ...]");
     }
 
   }

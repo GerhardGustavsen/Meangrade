@@ -9,11 +9,11 @@ public class Course {
     private ArrayList<Integer> score;
     private ArrayList<Integer> results;
 
-    public Course(String c, String n, String d, ArrayList<Integer> r) {
+    public Course(String c, String n, String d, ArrayList<Integer> r, ArrayList<Integer> s) {
         setCode(c.trim());
         name = n.trim();
         description = d;
-        score = new ArrayList<>();
+        score = s;
         setResults(r);
     }
 

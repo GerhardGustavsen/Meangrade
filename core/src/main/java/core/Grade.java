@@ -57,7 +57,7 @@ public class Grade {
             }
         }
         new IllegalArgumentException("Could not find course!");
-        return new Course("XXX0000", "Course not found!", "404", new ArrayList<>());
+        return new Course("XXX0000", "Course not found!", "404", new ArrayList<>(), new ArrayList<>());
     }
 
     public void setGrade(char grade) throws IllegalArgumentException {

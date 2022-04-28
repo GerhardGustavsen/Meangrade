@@ -17,13 +17,13 @@ public class CourseHandlerTest {
   Course course;
 
   @BeforeEach
-  void init(){
+  void init() {
     testHandler.deleteAll();
     ArrayList<Integer> list = new ArrayList<>();
     list.add(1);
     list.add(4);
     list.add(5);
-    this.course = new Course("TDT1000", "Java", "This is a java boy", list);
+    this.course = new Course("TDT1000", "Java", "This is a java boy", list, list);
   }
 
   @Test
@@ -41,10 +41,10 @@ public class CourseHandlerTest {
   void canGetAllCourses() throws IOException {
     ArrayList<Integer> list = new ArrayList<>();
     ArrayList<Course> testCourses = new ArrayList<>();
-    Course course1 = new Course("TDT1000", "Java", "This is a description", list);
-    Course course2 = new Course("TDT1001", "Java1", "This is a description", list);
-    Course course3 = new Course("TDT1002", "Java2", "This is a description", list);
-    Course course4 = new Course("TDT1003", "Java3", "This is a description", list);
+    Course course1 = new Course("TDT1000", "Java", "This is a description", list, list);
+    Course course2 = new Course("TDT1001", "Java1", "This is a description", list, list);
+    Course course3 = new Course("TDT1002", "Java2", "This is a description", list, list);
+    Course course4 = new Course("TDT1003", "Java3", "This is a description", list, list);
     testCourses.add(course1);
     testCourses.add(course2);
     testCourses.add(course3);
@@ -52,7 +52,7 @@ public class CourseHandlerTest {
 
     testHandler.saveCourses(testCourses);
     ArrayList<Course> courses = testHandler.getAllCourses();
-    for (int i =0; i < 4; i++){
+    for (int i = 0; i < 4; i++) {
       Assertions.assertEquals(courses.get(i).getName(), courses.get(i).getName());
     }
   }
@@ -67,17 +67,15 @@ public class CourseHandlerTest {
 
   @Test
   @DisplayName("Can convert string to Course")
-  void canConvertStringToCourse(){
+  void canConvertStringToCourse() {
     Course course = testHandler.stringToCourse("Code: TDT1000 | Name: Java | Description: Test | Results: [1, 4, 5]\n");
-    //if course is not null that means that the function has returned a Course;
+    // if course is not null that means that the function has returned a Course;
     Assertions.assertNotNull(course);
   }
 
-
-
   @Test
   @DisplayName("Throw error with wrong string")
-  void stringToCourseThrowsErrorForFormat(){
+  void stringToCourseThrowsErrorForFormat() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
       Course course = testHandler.stringToCourse("Wrong input!");
     });
@@ -85,7 +83,7 @@ public class CourseHandlerTest {
 
   @Test
   @DisplayName("Throw error if code format is wrong")
-  void stringToCourseThrowsForWrongCode(){
+  void stringToCourseThrowsForWrongCode() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
       testHandler.stringToCourse("Code: TDT100 | Name: Java | Description: Test | Results: [1, 4, 5]");
     });
@@ -93,7 +91,7 @@ public class CourseHandlerTest {
 
   @Test
   @DisplayName("Can convert string to array")
-  void canConvertStringToArray(){
+  void canConvertStringToArray() {
     ArrayList<Integer> list = testHandler.resultsToArray("[1, 2, 4, 5]");
     Assertions.assertNotNull(list);
   }

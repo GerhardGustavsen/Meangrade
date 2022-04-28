@@ -73,7 +73,7 @@ public class NewCourseController extends Controller implements Initializable {
     } else {
       grade = Validator.toInt(iGrade.getText());
     }
-    if (!(grade > 1 && grade <= 6)) {
+    if (!(grade >= 1 && grade <= 6)) {
       errorMsg.setText("Grade must be between 1 and 6!");
       return false;
     } else if (Validator.toInt(iNum.getText()) == null) {

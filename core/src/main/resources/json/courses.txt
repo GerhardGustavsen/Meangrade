@@ -1,2 +1,1 @@
-Code: AAA0000 | Name: test course | Description: test desc         | Results: [1,1,1,1,1,1,1,1,5,5,5,5,5,5,6,6,6,6,6,6,6]
-Code: DAS2001 | Name: 214234 | Description: 3453 5 3 g dsfg | Results: []
+Code: TDT1001 | Name: test score | Description: test test test | Results: [6, 4] | Scores: [3, 5]

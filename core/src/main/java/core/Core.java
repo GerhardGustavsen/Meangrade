@@ -142,7 +142,7 @@ public class Core {
       allGrades.add(grade);
     }
 
-    Course course = new Course(code, name, desc, allGrades);
+    Course course = new Course(code, name, desc, allGrades, new ArrayList<Integer>());
 
     courses.add(course);
     courseHandler.saveCourse(course);

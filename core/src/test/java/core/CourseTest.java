@@ -10,14 +10,13 @@ import java.util.Base64.Encoder;
 
 public class CourseTest {
 
-
   Course course;
 
   @BeforeEach
   void init() {
     ArrayList<Integer> results = new ArrayList<>();
     results.add(1);
-    course = new Course("TDT4100", "name", "description", results);
+    course = new Course("TDT4100", "name", "description", results, results);
   }
 
   @Test
@@ -40,7 +39,7 @@ public class CourseTest {
 
   @Test
   @DisplayName("Get score avarage")
-  void canGetScoreAvarage(){
+  void canGetScoreAvarage() {
     course.addScore(1);
     course.addScore(2);
     course.addScore(3);
@@ -49,14 +48,15 @@ public class CourseTest {
 
   @Test
   @DisplayName("Cannot add negative score")
-  void cannotAddInvalidScore(){
+  void cannotAddInvalidScore() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
       course.addScore(-1);
     });
   }
+
   @Test
   @DisplayName("Cannot add score bigger than 5")
-  void cannotAddScoreBiggerThanFive(){
+  void cannotAddScoreBiggerThanFive() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
       course.addScore(6);
     });
@@ -64,7 +64,7 @@ public class CourseTest {
 
   @Test
   @DisplayName("Cannot add 0 as score value")
-  void cannotAddZeroScoreValue(){
+  void cannotAddZeroScoreValue() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
       course.addScore(0);
     });
@@ -72,18 +72,18 @@ public class CourseTest {
 
   @Test
   @DisplayName("Can add valid result list")
-  void canAddValidResults(){
-      ArrayList<Integer> testResults = new ArrayList<>();
-      testResults.add(2);
-      testResults.add(4);
-      testResults.add(1);
-      testResults.add(5);
-      Assertions.assertTrue(course.resultsAreValid(testResults));
+  void canAddValidResults() {
+    ArrayList<Integer> testResults = new ArrayList<>();
+    testResults.add(2);
+    testResults.add(4);
+    testResults.add(1);
+    testResults.add(5);
+    Assertions.assertTrue(course.resultsAreValid(testResults));
   }
 
   @Test
   @DisplayName("Cannot add invalid result list")
-  void cannotAddInvalidResults(){
+  void cannotAddInvalidResults() {
     ArrayList<Integer> testResults = new ArrayList<>();
     testResults.add(3);
     testResults.add(4);
@@ -93,4 +93,3 @@ public class CourseTest {
   }
 
 }
-
