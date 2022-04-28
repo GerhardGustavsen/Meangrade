@@ -89,8 +89,8 @@ public class Course {
 
     public char getMode() {
         if (results != null && results.size() > 0) {
-            Integer[] gradeList = { 0, 0, 0, 0, 0, 0 };
-            // - - - - - - - - - - -F -E -D -C -B -A
+            Integer[] gradeList = { 0, 0, 0, 0, 0, 0, 0 };
+            // - - - - - - - - - - -X -F -E -D -C -B -A
             for (Integer i : results) {
                 gradeList[i]++;
             }
