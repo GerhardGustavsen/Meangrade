@@ -10,10 +10,31 @@ public class Course {
     private ArrayList<Integer> results;
 
     public Course(String c, String n, String d, ArrayList<Integer> r) {
-        code = c;
-        name = n;
+        setCode(c.trim());
+        name = n.trim();
         description = d;
-        results = r;
+        setResults(r);
+        score = new ArrayList<>();
+    }
+
+    public boolean codeIsValid(String code) {
+        return Validator.regex(code, "[A-Z]{3}\\d{4}");
+    }
+
+    public void setCode(String code) {
+        if (codeIsValid(code)) {
+            this.code = code;
+        } else {
+            throw new IllegalArgumentException("Code format is invalid");
+        }
+    }
+
+    public void setResults(ArrayList<Integer> results) throws IllegalArgumentException {
+        if (resultsAreValid(results)) {
+            this.results = results;
+        } else {
+            throw new IllegalArgumentException("All of the results must be an integer between 1-6");
+        }
     }
 
     public String getCode() {
@@ -36,8 +57,13 @@ public class Course {
         return avrg(score);
     };
 
-    public void addScore(Integer i) {
-        score.add(i);
+    public void addScore(Integer score) throws IllegalArgumentException {
+        if (scoreIsValid(score)) {
+            this.score.add(score);
+        } else {
+            throw new IllegalArgumentException("Score must be a number between 1-5");
+        }
+
     };
 
     public Double getAvrg() {
@@ -54,7 +80,7 @@ public class Course {
         Integer[] gradeList = { 0, 0, 0, 0, 0, 0 };
         // - - - - - - - - - - -F -E -D -C -B -A
         for (Integer i : results) {
-            gradeList[i]++;
+            gradeList[i - 1]++;
         }
 
         int modeCount = 0;
@@ -81,5 +107,19 @@ public class Course {
     private static char toChar(int i) {
         int a = 65;
         return (char) (a + i);
+    }
+
+    public boolean scoreIsValid(Integer score) {
+        return score <= 5 && score >= 1;
+    }
+
+    public boolean resultsAreValid(ArrayList<Integer> results) {
+        for (Integer result : results) {
+            if (result > 6 || result < 1) {
+                return false;
+            }
+        }
+        return true;
+
     }
 }
