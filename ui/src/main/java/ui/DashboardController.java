@@ -65,6 +65,7 @@ public class DashboardController extends Controller {
   private void OpenGrade(Grade g) {
     ViewGradeController viewGrade = new ViewGradeController();
     viewGrade.SendGrade(g);
+    viewGrade.Poppulate();
     openFXML(viewGrade, "ViewGrade.fxml");
   }
 

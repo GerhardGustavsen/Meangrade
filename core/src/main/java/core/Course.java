@@ -33,15 +33,53 @@ public class Course {
     };
 
     public double getScore() {
-        Double sum = 0.0;
-        for (Integer i : score) {
-            sum = sum + i;
-        }
-
-        return sum / score.size();
+        return avrg(score);
     };
 
     public void addScore(Integer i) {
         score.add(i);
     };
+
+    public Double getAvrg() {
+        return avrg(results);
+    };
+
+    public char getMean() {
+        int mean = results.get((int) (results.size() / 2));
+
+        return toChar(mean);
+    };
+
+    public char getMode() {
+        Integer[] gradeList = { 0, 0, 0, 0, 0, 0 };
+        // - - - - - - - - - - -F -E -D -C -B -A
+        for (Integer i : results) {
+            gradeList[i]++;
+        }
+
+        int modeCount = 0;
+        int mode = 0;
+        for (int i = 0; i < 6; i++) {
+            if (gradeList[i] > modeCount) {
+                modeCount = gradeList[i];
+                mode = i;
+            }
+        }
+
+        return toChar(mode);
+    };
+
+    private static double avrg(ArrayList<Integer> list) {
+        Double sum = 0.0;
+        for (Integer i : list) {
+            sum = sum + i;
+        }
+
+        return sum / list.size();
+    }
+
+    private static char toChar(int i) {
+        int a = 65;
+        return (char) (a + i);
+    }
 }
