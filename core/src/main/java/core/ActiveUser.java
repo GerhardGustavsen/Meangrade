@@ -6,13 +6,18 @@ import json.UserHandler;
 
 public class ActiveUser extends User {
 
-    private String password;
+    private final String password;
 
     private ArrayList<Grade> grades = new ArrayList<Grade>();
 
-    public ActiveUser(String username, String passhash, String encryptedGrades, String pass) {
+    public ActiveUser(String username, String passhash, String encryptedGrades, String pass) throws IllegalArgumentException{
         super(username, passhash, encryptedGrades);
-        password = pass;
+        Validator validator = new Validator("", pass, "");
+        if(validator.vpas()){
+            password = pass;
+        }else{
+            throw new IllegalArgumentException("Wrong password format");
+        }
     }
 
     public void addGrade(Grade grade) {
@@ -41,4 +46,5 @@ public class ActiveUser extends User {
     public String getPass() {
         return password;
     }
+
 }

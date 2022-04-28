@@ -27,7 +27,7 @@ public class Validator {
     return (vUserName() & vpas());
   }
 
-  private boolean vpas() {
+  public boolean vpas() {
     if (notEmpty(password)) {
 
       String upperCaseChars = "(.*[A-Z].*)";
@@ -56,10 +56,9 @@ public class Validator {
     }
     pasmsg = "Password can't be empty!";
     return false;
-
   }
 
-  private boolean vrepas() {
+  public boolean vrepas() {
     if (notEmpty(repassword)) {
       if (!repassword.equals(password)) {
         repasmsg = "Password does not mach!";
@@ -71,7 +70,7 @@ public class Validator {
     return false;
   }
 
-  private boolean vUserName() {
+  public boolean vUserName() {
     if (notEmpty(username)) {
       return true;
     }
@@ -109,10 +108,6 @@ public class Validator {
   public static boolean regex(String string, String regex) {
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(string);
-    if (!m.matches()) {
-      return false;
-    }
-
-    return true;
+    return m.matches();
   }
 }
