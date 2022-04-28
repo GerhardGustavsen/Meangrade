@@ -4,36 +4,83 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
+
+import core.Course;
 import core.Grade;
 
 public class ViewGradeController extends Controller {
 
   Grade grade;
+  Course course;
 
   @FXML
-  public Label titleLabel;
+  private Label courseLabel;
 
   @FXML
-  public Label descriptionLabel;
+  private Label gradeLabel;
 
   @FXML
-  public Label medianLabel;
+  private Label avrgGrade;
 
   @FXML
-  public Label avarageLabel;
+  private Label meanGrade;
 
   @FXML
-  public Label modeLabel;
+  private Label modeGrade;
 
   @FXML
-  void handleOpenDashboard(ActionEvent event) {
+  private Label courseScore;
+
+  @FXML
+  private Label yourScore;
+
+  @FXML
+  private Label description;
+
+  @FXML
+  private Label notes;
+
+  @FXML
+  private void handleOpenDashboard(ActionEvent event) {
     DashboardController dash = new DashboardController();
     openFXML(dash, "Dashboard.fxml");
     dash.poppulateListView();
     dash.initClickActions();
   }
 
-  void SendGrade(Grade g) {
+  @FXML
+  void handleDelete(ActionEvent event) throws IOException {
+    core.removeGrade(grade.getCode());
+    handleOpenDashboard(event);
+  }
+
+  public void SendGrade(Grade g) {
     grade = g;
   }
+
+  public void Poppulate() {
+    courseLabel.setText(grade.getCode() + ":");
+    gradeLabel.setText(String.valueOf(grade.getGrade()));
+
+    course = grade.getCourse(core);
+
+    avrgGrade.setText(String.valueOf(course.getAvrg()));
+    meanGrade.setText(String.valueOf(course.getMean()));
+    modeGrade.setText(String.valueOf(course.getMode()));
+
+    courseScore.setText(toStars((int) course.getScore()));
+    yourScore.setText(toStars(grade.getScore()));
+
+    description.setText(course.getDesc());
+    notes.setText(grade.getComment());
+  }
+
+  private String toStars(int stars) {
+    if (stars == 0) {
+      return "No rating";
+    }
+    return "★".repeat(stars) + "☆".repeat(5 - stars);
+  }
+
 }

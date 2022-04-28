@@ -13,26 +13,26 @@ public class Course {
         setCode(c.trim());
         name = n.trim();
         description = d;
-        setResults(r);
         score = new ArrayList<>();
+        setResults(r);
     }
 
-    public boolean codeIsValid(String code){
+    public boolean codeIsValid(String code) {
         return Validator.regex(code, "[A-Z]{3}\\d{4}");
     }
 
     public void setCode(String code) {
-        if (codeIsValid(code)){
+        if (codeIsValid(code)) {
             this.code = code;
-        }else{
+        } else {
             throw new IllegalArgumentException("Code format is invalid");
         }
     }
 
-    public void setResults(ArrayList<Integer> results) throws IllegalArgumentException{
-        if(resultsAreValid(results)){
+    public void setResults(ArrayList<Integer> results) throws IllegalArgumentException {
+        if (resultsAreValid(results)) {
             this.results = results;
-        }else{
+        } else {
             throw new IllegalArgumentException("All of the results must be an integer between 1-6");
         }
     }
@@ -54,33 +54,93 @@ public class Course {
     };
 
     public double getScore() {
-        Double sum = 0.0;
-        for (Integer i : score) {
-            sum = sum + i;
-        }
-
-        return sum / score.size();
+        return avrg(score);
     };
 
     public void addScore(Integer score) throws IllegalArgumentException {
-        if(scoreIsValid(score)){
+        if (numBetwean(score, 1, 5)) {
             this.score.add(score);
-        }else{
-            throw new IllegalArgumentException("Score must be a number between 1-5");
+        } else {
+            throw new IllegalArgumentException("Score must be a number between 1 and 5");
         }
 
     };
 
-    public boolean scoreIsValid(Integer score){
-        return score <= 5 && score >= 1;
+    public void addGrade(Integer grade) throws IllegalArgumentException {
+        if (numBetwean(grade, 1, 6)) {
+            this.results.add(grade);
+        } else {
+            throw new IllegalArgumentException("Grade must be a number between 1 and 6\nGrade was " + grade);
+        }
+
+    };
+
+    public String getAvrg() {
+        double avrg = avrg(results);
+        System.out.println("Avrage grade: " + avrg);
+        char grade = Grade.toChar((int) avrg);
+        int rest = (int) Math.round((avrg - (int) avrg) * 100);
+        return String.valueOf(grade) + "." + rest;
+    };
+
+    public char getMean() {
+        if (results != null && results.size() > 0) {
+            int mean = results.get((int) (results.size() / 2));
+            return Grade.toChar(mean);
+        }
+        return 'X';
+    };
+
+    public char getMode() {
+        if (results != null && results.size() > 0) {
+            Integer[] gradeList = { 0, 0, 0, 0, 0, 0, 0 };
+            // - - - - - - - - - - -X -F -E -D -C -B -A
+            for (Integer i : results) {
+                gradeList[i]++;
+            }
+
+            int modeCount = 0;
+            int mode = 0;
+            for (int i = 0; i < 6; i++) {
+                if (gradeList[i] > modeCount) {
+                    modeCount = gradeList[i];
+                    mode = i;
+                }
+            }
+
+            return Grade.toChar(mode);
+        }
+        return 'X';
+    };
+
+    private static double avrg(ArrayList<Integer> list) {
+        Double sum = 0.0;
+        for (Integer i : list) {
+            sum = sum + i;
+        }
+
+        return sum / list.size();
     }
 
-    public boolean resultsAreValid(ArrayList<Integer> results){
-        for(Integer result: results){
-            if (result > 6 || result < 1){
+    public boolean numBetwean(Integer num, Integer low, Integer high) {
+        return num <= high && num >= low;
+    }
+
+    public boolean resultsAreValid(ArrayList<Integer> results) {
+        for (Integer result : results) {
+            if (result > 6 || result < 1) {
                 return false;
             }
         }
         return true;
+
+    }
+
+    public ArrayList<Integer> getScoreArray() {
+        return score;
+    }
+
+    public ArrayList<Integer> getGradeArray() {
+        return results;
     }
 }

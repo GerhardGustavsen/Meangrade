@@ -42,7 +42,6 @@ public class NewGradeController extends Controller implements Initializable {
     @FXML
     private DialogPane dialogPane;
 
-
     @FXML
     void handleOpenDashboard(ActionEvent event) {
         DashboardController dash = new DashboardController();
@@ -62,7 +61,7 @@ public class NewGradeController extends Controller implements Initializable {
 
     private ObservableList<Integer> populateScore() {
         ArrayList<Integer> score = new ArrayList<>();
-        for (int i = 1; i < 11; i++) {
+        for (int i = 1; i < 6; i++) {
             score.add(i);
         }
         return FXCollections.observableArrayList(score);
@@ -73,14 +72,14 @@ public class NewGradeController extends Controller implements Initializable {
         return FXCollections.observableArrayList(grades);
     }
 
-    boolean codeInList(String code){
+    boolean codeInList(String code) {
         return core.getActiveUser().getGrades().stream()
                 .anyMatch(grade -> grade.getCode().equals(code));
     }
 
     @FXML
     void handleCreateGrade() throws IOException {
-        if(checkInput()){
+        if (checkInput()) {
             char grade = (char) gradeInput.getValue();
             String courseCode = (String) courseInput.getValue();
             Integer score = (Integer) scoreInput.getValue();
@@ -89,53 +88,54 @@ public class NewGradeController extends Controller implements Initializable {
             System.out.println(trimmedCourse.equals("TDT1000"));
             if (codeInList(trimmedCourse)) {
                 dialogPane.setVisible(true);
-            }else{
+            } else {
                 core.newGrade(grade, trimmedCourse, score, comment);
                 errorMsg.setText("The grade was succesfully created!");
             }
         }
     }
 
-    private boolean checkInput(){
+    private boolean checkInput() {
         setErrorColor();
-        if(courseInput.getValue()== null){
+        if (courseInput.getValue() == null) {
             errorMsg.setText("Please select a course code!");
-        }else if(gradeInput.getValue()== null){
+        } else if (gradeInput.getValue() == null) {
             errorMsg.setText("Please select a grade!");
-        }else if(scoreInput.getValue() == null){
+        } else if (scoreInput.getValue() == null) {
             errorMsg.setText("Please select a score!");
-        }else if(commentInput.getText().equals("")){
+        } else if (commentInput.getText().equals("")) {
             errorMsg.setText("The comment cannot be empty!");
-        }else{
+        } else {
             setSuccessColor();
             return true;
         }
         return false;
     }
 
-    private void setErrorColor(){
+    private void setErrorColor() {
         errorMsg.setTextFill(Paint.valueOf("red"));
     }
-    private void setSuccessColor(){
+
+    private void setSuccessColor() {
         errorMsg.setTextFill(Paint.valueOf("green"));
     }
 
-    public void handleClose(){
+    public void handleClose() {
         dialogPane.setVisible(false);
     }
 
     public void handleAccept() throws IOException {
-        try{
-        char grade = (char) gradeInput.getValue();
-        String courseCode = (String) courseInput.getValue();
-        Integer score = (Integer) scoreInput.getValue();
-        String comment = commentInput.getText();
-        String trimmedCourse = courseCode.trim();
-        core.removeGrade(trimmedCourse);
-        handleClose();
-        core.newGrade(grade, trimmedCourse, score, comment);
-        errorMsg.setText("The grade was succesfully created!");
-        }catch (IOException e){
+        try {
+            char grade = (char) gradeInput.getValue();
+            String courseCode = (String) courseInput.getValue();
+            Integer score = (Integer) scoreInput.getValue();
+            String comment = commentInput.getText();
+            String trimmedCourse = courseCode.trim();
+            core.removeGrade(trimmedCourse);
+            handleClose();
+            core.newGrade(grade, trimmedCourse, score, comment);
+            errorMsg.setText("The grade was succesfully created!");
+        } catch (IOException e) {
             System.out.println("Could not remove prior grades");
             e.printStackTrace();
         }
@@ -151,7 +151,5 @@ public class NewGradeController extends Controller implements Initializable {
         dialogPane.setVisible(false);
 
     }
-
-
 
 }

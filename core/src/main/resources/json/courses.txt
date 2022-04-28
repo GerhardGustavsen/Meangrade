@@ -1,4 +1,2 @@
-Code: TDT1000 | Name: Java | Description: This is a java boy | Results: [1, 4, 5]
-Code: TDT1001 | Name: Java2 | Description: This is a java boy | Results: [1, 4, 5]
-Code: TDT1002 | Name: Java3 | Description: This is a java boy | Results: [1, 4, 5]
-Code: TDT1234 | Name: Test Course | Description: This is a test course | Results: [5, 5, 5, 5, 5]
+Code: AAA0000 | Name: test course | Description: test desc         | Results: [1,1,1,1,1,1,1,1,5,5,5,5,5,5,6,6,6,6,6,6,6]
+Code: DAS2001 | Name: 214234 | Description: 3453 5 3 g dsfg | Results: []

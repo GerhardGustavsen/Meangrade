@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
+import javafx.scene.paint.Color;
 import core.Validator;
 
 import java.net.URL;
@@ -30,24 +30,25 @@ public class NewCourseController extends Controller implements Initializable {
   @FXML
   private Label errorMsg;
 
-
   private int grade;
   private int num;
 
   @FXML
   void handleOnSave(ActionEvent event) {
 
-    if (checkEmpty() && checkInput()) {
-      if (Validator.regex(iCode.getText(), "[A-Z]{3}\\d{4}")) {
-          errorMsg.setText("Sucsess!");
+    if (checkEmpty()) {
+      if (checkInput()) {
+        if (Validator.regex(iCode.getText(), "[A-Z]{3}\\d{4}")) {
+          errorMsg.setTextFill(Color.GREEN);
+          errorMsg.setText("The course was succesfully created!");
           // SUCSESS!
           core.newCourse(iCode.getText(), iName.getText(), grade, num, iDesc.getText());
+        } else {
+          errorMsg.setText("Course code must be 3 capital chars and 4 numbers");
         }
-      } else {
-        errorMsg.setText("Course code must be 3 capital chars and 4 numbers");
       }
     }
-
+  }
 
   boolean checkEmpty() {
     if (!Validator.notEmpty(iCode.getText())) {
