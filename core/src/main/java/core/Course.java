@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Course {
     private String code;
     private String name;
-    private String description;
+    private final String description;
     private ArrayList<Integer> score;
     private ArrayList<Integer> results;
 

@@ -8,7 +8,7 @@ public class Grade {
     private String code;
     private char grade;
     private Integer score;
-    private String comment;
+    private final String comment;
 
     private final char[] validGrades = { 'A', 'B', 'C', 'D', 'E', 'F' };
 
