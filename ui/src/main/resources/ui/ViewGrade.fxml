@@ -53,7 +53,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="avrgGrade" contentDisplay="CENTER" prefHeight="24.0" prefWidth="1000.0" text="4.5" textAlignment="CENTER">
+                  <Label fx:id="avrgGrade" contentDisplay="CENTER" prefHeight="24.0" prefWidth="1000.0" text="X.X" textAlignment="CENTER">
                      <font>
                         <Font name="Courier New" size="20.0" />
                      </font>
@@ -73,7 +73,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="meanGrade" contentDisplay="CENTER" prefHeight="24.0" prefWidth="1000.0" text="B" textAlignment="CENTER">
+                  <Label fx:id="meanGrade" contentDisplay="CENTER" prefHeight="24.0" prefWidth="1000.0" text="X" textAlignment="CENTER">
                      <font>
                         <Font name="Courier New" size="20.0" />
                      </font>
@@ -93,7 +93,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="modeGrade" contentDisplay="CENTER" prefHeight="24.0" prefWidth="1000.0" text="C" textAlignment="CENTER">
+                  <Label fx:id="modeGrade" contentDisplay="CENTER" prefHeight="24.0" prefWidth="1000.0" text="X" textAlignment="CENTER">
                      <font>
                         <Font name="Courier New" size="20.0" />
                      </font>
@@ -145,7 +145,7 @@
             </HBox>
             <HBox prefHeight="27.0" prefWidth="754.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="24.0" prefWidth="1000.0" text="Course description" textAlignment="CENTER" underline="true">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="24.0" prefWidth="1000.0" text="Course description:" textAlignment="CENTER" underline="true">
                      <font>
                         <Font name="Courier New" size="16.0" />
                      </font>
@@ -171,7 +171,7 @@
             </HBox>
             <HBox prefWidth="643.0">
                <children>
-                  <Label fx:id="description" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="10000.0" prefWidth="1000.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." textAlignment="RIGHT" wrapText="true">
+                  <Label fx:id="description" alignment="TOP_RIGHT" contentDisplay="CENTER" prefHeight="10000.0" prefWidth="1000.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." textAlignment="RIGHT" wrapText="true">
                      <font>
                         <Font name="Courier New" size="12.0" />
                      </font>
@@ -179,7 +179,7 @@
                         <Insets left="30.0" right="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label fx:id="notes" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="10000.0" prefWidth="1000.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." wrapText="true">
+                  <Label fx:id="notes" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="10000.0" prefWidth="1000.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." wrapText="true">
                      <font>
                         <Font name="Courier New" size="12.0" />
                      </font>

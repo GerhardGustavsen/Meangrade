@@ -48,7 +48,7 @@ public class ViewGradeController extends Controller {
 
   @FXML
   void handleDelete(ActionEvent event) {
-
+    // FIX!
   }
 
   public void SendGrade(Grade g) {
@@ -56,7 +56,7 @@ public class ViewGradeController extends Controller {
   }
 
   public void Poppulate() {
-    courseLabel.setText(grade.getCode());
+    courseLabel.setText(grade.getCode() + ":");
     gradeLabel.setText(String.valueOf(grade.getGrade()));
 
     course = grade.getCourse(core);
@@ -67,10 +67,13 @@ public class ViewGradeController extends Controller {
 
     courseScore.setText(toStars((int) course.getScore()));
     yourScore.setText(toStars(grade.getScore()));
+
+    description.setText(course.getDesc());
+    notes.setText(grade.getComment());
   }
 
   private String toStars(int stars) {
-    if (stars == -1) {
+    if (stars == 0) {
       return "No rating";
     }
     return "★".repeat(stars) + "☆".repeat(5 - stars);

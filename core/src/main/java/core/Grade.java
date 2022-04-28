@@ -44,14 +44,17 @@ public class Grade {
         if (scoreIsValid(score)) {
             this.score = score;
         } else {
-            throw new IllegalArgumentException("Score must be an number between 1-5");
+            System.out.println("Score was " + String.valueOf(score));
+            throw new IllegalArgumentException("Score must be an number between 1-5!");
         }
     }
 
     public Course getCourse(Core core) {
         for (Course singleCourse : core.getCourses()) {
-            if (singleCourse.getName() == code) {
+            if (singleCourse.getCode().equals(code)) {
                 return singleCourse;
+            } else {
+                System.out.println("In Grade getCourse(): |" + singleCourse.getCode() + "| != |" + code + "|");
             }
         }
         // Throw error
@@ -90,6 +93,16 @@ public class Grade {
             }
         }
         return false;
+    }
+
+    public static char toChar(int i) {
+        int a = 65;
+        return (char) (a + (6 - i));
+    }
+
+    public static int toInt(char c) {
+        int a = 65;
+        return (int) (a + 6 - c);
     }
 
 }

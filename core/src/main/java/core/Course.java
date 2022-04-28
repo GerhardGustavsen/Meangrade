@@ -13,8 +13,8 @@ public class Course {
         setCode(c.trim());
         name = n.trim();
         description = d;
-        setResults(r);
         score = new ArrayList<>();
+        setResults(r);
     }
 
     public boolean codeIsValid(String code) {
@@ -58,10 +58,19 @@ public class Course {
     };
 
     public void addScore(Integer score) throws IllegalArgumentException {
-        if (scoreIsValid(score)) {
+        if (numBetwean(score, 1, 5)) {
             this.score.add(score);
         } else {
-            throw new IllegalArgumentException("Score must be a number between 1-5");
+            throw new IllegalArgumentException("Score must be a number between 1 and 5");
+        }
+
+    };
+
+    public void addGrade(Integer grade) throws IllegalArgumentException {
+        if (numBetwean(grade, 1, 6)) {
+            this.results.add(grade);
+        } else {
+            throw new IllegalArgumentException("Grade must be a number between 1 and 6\nGrade was " + grade);
         }
 
     };
@@ -71,28 +80,33 @@ public class Course {
     };
 
     public char getMean() {
-        int mean = results.get((int) (results.size() / 2));
-
-        return toChar(mean);
+        if (results != null && results.size() > 0) {
+            int mean = results.get((int) (results.size() / 2));
+            return Grade.toChar(mean);
+        }
+        return 'X';
     };
 
     public char getMode() {
-        Integer[] gradeList = { 0, 0, 0, 0, 0, 0 };
-        // - - - - - - - - - - -F -E -D -C -B -A
-        for (Integer i : results) {
-            gradeList[i - 1]++;
-        }
-
-        int modeCount = 0;
-        int mode = 0;
-        for (int i = 0; i < 6; i++) {
-            if (gradeList[i] > modeCount) {
-                modeCount = gradeList[i];
-                mode = i;
+        if (results != null && results.size() > 0) {
+            Integer[] gradeList = { 0, 0, 0, 0, 0, 0 };
+            // - - - - - - - - - - -F -E -D -C -B -A
+            for (Integer i : results) {
+                gradeList[i]++;
             }
-        }
 
-        return toChar(mode);
+            int modeCount = 0;
+            int mode = 0;
+            for (int i = 0; i < 6; i++) {
+                if (gradeList[i] > modeCount) {
+                    modeCount = gradeList[i];
+                    mode = i;
+                }
+            }
+
+            return Grade.toChar(mode);
+        }
+        return 'X';
     };
 
     private static double avrg(ArrayList<Integer> list) {
@@ -104,13 +118,8 @@ public class Course {
         return sum / list.size();
     }
 
-    private static char toChar(int i) {
-        int a = 65;
-        return (char) (a + i);
-    }
-
-    public boolean scoreIsValid(Integer score) {
-        return score <= 5 && score >= 1;
+    public boolean numBetwean(Integer num, Integer low, Integer high) {
+        return num <= high && num >= low;
     }
 
     public boolean resultsAreValid(ArrayList<Integer> results) {
@@ -121,5 +130,13 @@ public class Course {
         }
         return true;
 
+    }
+
+    public ArrayList<Integer> getScoreArray() {
+        return score;
+    }
+
+    public ArrayList<Integer> getGradeArray() {
+        return results;
     }
 }

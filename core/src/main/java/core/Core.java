@@ -119,6 +119,20 @@ public class Core {
     Grade newGrade = new Grade(courseCode, grade, score, comment);
     activeUser.addGrade(newGrade);
     userHandler.saveGrade(activeUser);
+
+    // Uppdate course with the new score:
+    Course changedCourse = newGrade.getCourse(this);
+    for (Course c : courses) {
+      if (c.getCode().equals(changedCourse.getCode())) {
+        c.addScore(score);
+        c.addGrade(Grade.toInt(grade));
+        System.out.println(c.getCode() + " scores are now: " + c.getScoreArray());
+        System.out.println(c.getCode() + " grades are now: " + c.getGradeArray());
+      } else {
+        System.out.println("in core newGrade(): |" + c.getCode() + "| != |" + changedCourse.getCode() + "|");
+      }
+    }
+    courseHandler.saveCourses(courses);
   }
 
   public void newCourse(String code, String name, int grade, int num, String desc) {
