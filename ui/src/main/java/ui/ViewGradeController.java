@@ -69,18 +69,10 @@ public class ViewGradeController extends Controller {
     meanGrade.setText(String.valueOf(course.getMean()));
     modeGrade.setText(String.valueOf(course.getMode()));
 
-    courseScore.setText(toStars((int) course.getScore()));
-    yourScore.setText(toStars(grade.getScore()));
+    courseScore.setText(Course.toStars((int) course.getScore()));
+    yourScore.setText(Course.toStars(grade.getScore()));
 
     description.setText(course.getDesc());
     notes.setText(grade.getComment());
   }
-
-  private String toStars(int stars) {
-    if (stars == 0) {
-      return "No rating";
-    }
-    return "★".repeat(stars) + "☆".repeat(5 - stars);
-  }
-
 }

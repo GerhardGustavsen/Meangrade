@@ -48,9 +48,7 @@ public class LogginController extends Controller {
 
   @FXML
   void handleBtnReg(ActionEvent e) {
-    clear();
-    Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
-        passwordRepeatField.getText());
+    Validator validator = click();
 
     if (core.getuser(usernameTextField.getText()) == null) {
       if (validator.register()) {
@@ -62,15 +60,13 @@ public class LogginController extends Controller {
         show(validator);
       }
     } else {
-      usermsg.setText("Username is taken!");
+      usermsg.setText("Username is already taken!");
     }
   }
 
   @FXML
   void handleBtnLog(ActionEvent e) {
-    clear();
-    Validator validator = new Validator(usernameTextField.getText(), passwordTextField.getText(),
-        passwordRepeatField.getText());
+    Validator validator = click();
 
     if (validator.logginn()) {
       if (core.logginn(usernameTextField.getText(), passwordTextField.getText())) {
@@ -83,6 +79,12 @@ public class LogginController extends Controller {
     }
   }
 
+  Validator click() {
+    clear();
+    return new Validator(usernameTextField.getText(), passwordTextField.getText(),
+        passwordRepeatField.getText());
+  }
+
   void openDash() {
     DashboardController dash = new DashboardController();
     openFXML(dash, "Dashboard.fxml");
@@ -91,14 +93,8 @@ public class LogginController extends Controller {
   }
 
   void clear() {
-    // Error msg:
-    usermsg.setText("");
-    pasmsg.setText("");
-    repasmsg.setText("");
-    // Error stars:
-    userstar.setVisible(false);
-    passtar.setVisible(false);
-    repasstar.setVisible(false);
+    Validator clear = new Validator("", "", "");
+    show(clear);
   }
 
   void show(Validator v) {
