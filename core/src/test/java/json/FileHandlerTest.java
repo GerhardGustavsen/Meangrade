@@ -36,7 +36,6 @@ public class FileHandlerTest {
     fileHandler.deleteAll();
     Assertions.assertThrows(NoSuchElementException.class, () -> {
       Scanner scanner2 = fileHandler.read();
-      String data = scanner2.nextLine();
     });
   }
 
