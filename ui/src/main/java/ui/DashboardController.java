@@ -38,13 +38,9 @@ public class DashboardController extends Controller {
   }
 
   void poppulateListView() {
-    // Add TRY???
-    // Populating listview:
-
     for (Grade grade : core.getActiveUser().getGrades()) {
       gradeCollection.add(grade);
     }
-
     gradeList.setItems(gradeCollection);
   }
 
@@ -68,30 +64,5 @@ public class DashboardController extends Controller {
     viewGrade.SendGrade(g);
     viewGrade.Poppulate();
   }
-
-  /*
-   * @Override
-   * public void initialize(URL location, ResourceBundle resources) {
-   * ObservableList<Grade> loading = FXCollections.observableArrayList();
-   * loading.add(new Grade("Loading...", 'X'));
-   * 
-   * Thread one = new Thread() {
-   * public void run() {
-   * try {
-   * while (core == null) {
-   * gradeList.setItems(loading);
-   * Thread.sleep(100);
-   * }
-   * 
-   * } catch (InterruptedException e) {
-   * // TODO Auto-generated catch block
-   * e.printStackTrace();
-   * }
-   * }
-   * };
-   * 
-   * one.start();
-   * }
-   */
 
 }

@@ -143,4 +143,11 @@ public class Course {
     public ArrayList<Integer> getGradeArray() {
         return results;
     }
+
+    public static String toStars(int stars) {
+        if (stars == 0) {
+            return "No rating";
+        }
+        return "★".repeat(stars) + "☆".repeat(5 - stars);
+    }
 }

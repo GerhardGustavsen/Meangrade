@@ -10,7 +10,7 @@ import core.Validator;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NewCourseController extends Controller implements Initializable {
+public class NewCourseController extends Controller {
 
   @FXML
   private TextField iCode;
@@ -92,10 +92,5 @@ public class NewCourseController extends Controller implements Initializable {
     openFXML(dash, "Dashboard.fxml");
     dash.poppulateListView();
     dash.initClickActions();
-  }
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-
   }
 }
