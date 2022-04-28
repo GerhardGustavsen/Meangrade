@@ -1,1 +1,1 @@
-Code: TDT1001 | Name: test score | Description: test test test | Results: [6, 4] | Scores: [3, 5]
+Code: TDT1001 | Name: test score | Description: test test test  | Results: [6, 4, 6, 5] | Scores: [3, 5, 3, 4]

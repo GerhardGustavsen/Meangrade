@@ -9,12 +9,12 @@ public class Course {
     private ArrayList<Integer> score;
     private ArrayList<Integer> results;
 
-    public Course(String c, String n, String d, ArrayList<Integer> r, ArrayList<Integer> s) {
-        setCode(c.trim());
-        name = n.trim();
-        description = d;
-        score = s;
-        setResults(r);
+    public Course(String code, String name, String description, ArrayList<Integer> results, ArrayList<Integer> score) {
+        setCode(code.trim());
+        this.name = name.trim();
+        this.description = description;
+        this.score = score;
+        setResults(results);
     }
 
     public boolean codeIsValid(String code) {
@@ -38,19 +38,19 @@ public class Course {
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     };
 
     public String getName() {
-        return name;
+        return this.name;
     };
 
     public String getDesc() {
-        return description;
+        return this.description;
     };
 
     public ArrayList<Integer> getRes() {
-        return results;
+        return this.results;
     };
 
     public double getScore() {
@@ -118,7 +118,8 @@ public class Course {
         for (Integer i : list) {
             sum = sum + i;
         }
-
+        System.out.println(sum);
+        System.out.println(list.size());
         return sum / list.size();
     }
 
@@ -137,11 +138,7 @@ public class Course {
     }
 
     public ArrayList<Integer> getScoreArray() {
-        return score;
-    }
-
-    public ArrayList<Integer> getGradeArray() {
-        return results;
+        return this.score;
     }
 
     public static String toStars(int stars) {

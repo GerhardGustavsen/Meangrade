@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="531.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="561.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <PasswordField fx:id="passwordTextField" layoutX="190.0" layoutY="159.0" prefHeight="36.0" prefWidth="318.0">
+        <PasswordField fx:id="passwordTextField" layoutX="190.0" layoutY="162.0" prefHeight="36.0" prefWidth="318.0">
             <font>
                 <Font name="Courier New Bold" size="18.0" />
             </font>
@@ -19,12 +19,12 @@
                 <Font name="Courier New Bold" size="18.0" />
             </font>
         </Label>
-        <Label layoutX="22.0" layoutY="165.0" text="Password:" AnchorPane.leftAnchor="22.0">
+        <Label layoutX="22.0" layoutY="169.0" text="Password:" AnchorPane.leftAnchor="22.0">
             <font>
                 <Font name="Courier New Bold" size="18.0" />
             </font>
         </Label>
-        <Label layoutX="22.0" layoutY="219.0" text="Repeat Pasword:" AnchorPane.leftAnchor="22.0">
+        <Label layoutX="22.0" layoutY="231.0" text="Repeat Pasword:" AnchorPane.leftAnchor="22.0">
             <font>
                 <Font name="Courier New Bold" size="18.0" />
             </font>
@@ -34,12 +34,12 @@
                 <Font name="Courier New Bold" size="18.0" />
             </font>
         </TextField>
-        <Button fx:id="btreg" layoutX="19.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleBtnReg" prefHeight="35.0" prefWidth="234.0" text="Register user">
+        <Button fx:id="btreg" layoutX="22.0" layoutY="276.0" mnemonicParsing="false" onAction="#handleBtnReg" prefHeight="35.0" prefWidth="234.0" text="Register user">
             <font>
                 <Font name="Courier New Bold" size="18.0" />
             </font>
         </Button>
-        <Button fx:id="btlog" layoutX="274.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleBtnLog" prefHeight="35.0" prefWidth="234.0" text="Log in">
+        <Button fx:id="btlog" layoutX="273.0" layoutY="276.0" mnemonicParsing="false" onAction="#handleBtnLog" prefHeight="35.0" prefWidth="234.0" text="Log in">
             <font>
                 <Font name="Courier New Bold" size="18.0" />
             </font>
@@ -49,37 +49,37 @@
                 <Font name="Courier New Bold" size="65.0" />
             </font>
         </Label>
-        <Label fx:id="passtar" layoutX="478.0" layoutY="168.0" text="*" textFill="RED" visible="false">
+        <Label fx:id="passtar" layoutX="490.0" layoutY="160.0" text="*" textFill="RED" visible="false">
             <font>
                 <Font name="Calibri" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="repasstar" layoutX="478.0" layoutY="221.0" text="*" textFill="RED" visible="false">
+        <Label fx:id="repasstar" layoutX="490.0" layoutY="220.0" text="*" textFill="RED" visible="false">
             <font>
                 <Font name="Calibri" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="userstar" layoutX="331.0" layoutY="114.0" text="*" textFill="RED" visible="false">
+        <Label fx:id="userstar" layoutX="331.0" layoutY="103.0" text="*" textFill="RED" visible="false">
             <font>
                 <Font name="Calibri" size="18.0" />
             </font>
         </Label>
-        <Label fx:id="usermsg" layoutX="149.0" layoutY="97.0" textFill="RED">
+        <Label fx:id="usermsg" layoutX="149.0" layoutY="88.0" textFill="RED">
             <font>
                 <Font name="Centaur" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="pasmsg" layoutX="149.0" layoutY="152.0" textFill="RED">
+        <Label fx:id="pasmsg" layoutX="149.0" layoutY="141.0" textFill="RED">
             <font>
                 <Font name="Centaur" size="14.0" />
             </font>
         </Label>
-        <Label fx:id="repasmsg" layoutX="149.0" layoutY="207.0" textFill="RED">
+        <Label fx:id="repasmsg" layoutX="149.0" layoutY="204.0" textFill="RED">
             <font>
                 <Font name="Centaur" size="14.0" />
             </font>
         </Label>
-        <PasswordField fx:id="passwordRepeatField" layoutX="190.0" layoutY="213.0" prefHeight="36.0" prefWidth="318.0">
+        <PasswordField fx:id="passwordRepeatField" layoutX="190.0" layoutY="224.0" prefHeight="36.0" prefWidth="318.0">
             <font>
                 <Font name="Courier New Bold" size="18.0" />
             </font>

@@ -11,27 +11,27 @@ public class Grade {
 
     private final char[] validGrades = { 'A', 'B', 'C', 'D', 'E', 'F' };
 
-    public Grade(String c, char g, Integer s, String com) {
-        setCode(c);
-        setGrade(g);
-        setScore(s);
-        this.comment = com;
+    public Grade(String code, char grade, Integer score, String comment) {
+        setCode(code);
+        setGrade(grade);
+        setScore(score);
+        this.comment = comment;
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     };
 
     public char getGrade() {
-        return grade;
+        return this.grade;
     };
 
     public Integer getScore() {
-        return score;
+        return this.score;
     }
 
     public String getComment() {
-        return comment;
+        return this.comment;
     }
 
     public String toString() {
@@ -51,12 +51,8 @@ public class Grade {
         for (Course singleCourse : core.getCourses()) {
             if (singleCourse.getCode().equals(code)) {
                 return singleCourse;
-            } else {
-                // System.out.println("In Grade getCourse(): |" + singleCourse.getCode() + "| !=
-                // |" + code + "|");
             }
         }
-        new IllegalArgumentException("Could not find course!");
         return new Course("XXX0000", "Course not found!", "404", new ArrayList<>(), new ArrayList<>());
     }
 

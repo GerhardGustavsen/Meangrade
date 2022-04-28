@@ -5,29 +5,29 @@ public class User {
     private final String passHash;
     private String encryptedGrades;
 
-    public User(String u, String p, String g) throws IllegalArgumentException{
-        if(u != null && p != null){
-            username = u;
-            passHash = p;
-            encryptedGrades = g;
+    public User(String username, String password, String grades) throws IllegalArgumentException{
+        if(username != null && password != null){
+            this.username = username;
+            this.passHash = password;
+            encryptedGrades = grades;
         }else{
             throw new IllegalArgumentException("Neither username nor passwordHash can be empty");
         }
     }
 
     public String getName() {
-        return username;
+        return this.username;
     }
 
     public String getPassHash() {
-        return passHash;
+        return this.passHash;
     }
 
     public String getEncryptedGrades() {
-        return encryptedGrades;
+        return this.encryptedGrades;
     }
 
     public void setEncryptedGrades(String s) {
-        encryptedGrades = s;
+        this.encryptedGrades = s;
     }
 }

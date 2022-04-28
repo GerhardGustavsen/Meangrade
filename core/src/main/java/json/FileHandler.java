@@ -13,7 +13,7 @@ public class FileHandler implements FileInterface {
 
   public void createNewFile() {
     try {
-      File courseFile = new File(path);
+      File courseFile = new File(this.path);
       if (courseFile.createNewFile()) {
         System.out.println("The file was created: " + courseFile.getName());
       }
@@ -26,7 +26,7 @@ public class FileHandler implements FileInterface {
   public void write(String string) {
     createNewFile();
     try {
-      FileWriter courseWriter = new FileWriter(path, true);
+      FileWriter courseWriter = new FileWriter(this.path, true);
       BufferedWriter out = new BufferedWriter(courseWriter);
       courseWriter.write(string);
       out.newLine();
@@ -38,19 +38,19 @@ public class FileHandler implements FileInterface {
   }
 
   public File getFile(){
-    return new File(path);
+    return new File(this.path);
   }
 
   public Scanner read() throws FileNotFoundException {
     createNewFile();
-    File file = new File(path);
+    File file = new File(this.path);
     return new Scanner(file);
   }
 
   public void deleteAll(){
     createNewFile();
     try{
-      new FileWriter(path, false).close();
+      new FileWriter(this.path, false).close();
     }catch (IOException e) {
       //System.out.println("Could not delete file content");
       e.printStackTrace();

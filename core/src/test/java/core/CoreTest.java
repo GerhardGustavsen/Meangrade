@@ -7,9 +7,6 @@ import java.io.FileNotFoundException;
 
 public class CoreTest {
 
-
-
-
   public CoreTest() throws FileNotFoundException {
   }
 

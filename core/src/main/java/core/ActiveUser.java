@@ -10,11 +10,11 @@ public class ActiveUser extends User {
 
     private ArrayList<Grade> grades = new ArrayList<Grade>();
 
-    public ActiveUser(String username, String passhash, String encryptedGrades, String pass) throws IllegalArgumentException{
+    public ActiveUser(String username, String passhash, String encryptedGrades, String password) throws IllegalArgumentException{
         super(username, passhash, encryptedGrades);
-        Validator validator = new Validator("", pass, "");
+        Validator validator = new Validator("", password, "");
         if(validator.vpas()){
-            password = pass;
+            this.password = password;
         }else{
             throw new IllegalArgumentException("Wrong password format");
         }
@@ -32,19 +32,19 @@ public class ActiveUser extends User {
 
             //System.out.println(oneGrade);
         }
-        setEncryptedGrades(Encrypt.encrypt(data, password));
+        setEncryptedGrades(Encrypt.encrypt(data, this.password));
     }
 
-    public void setGrades(ArrayList<Grade> g) {
-        grades = g;
+    public void setGrades(ArrayList<Grade> grades) {
+        this.grades = grades;
     }
 
     public ArrayList<Grade> getGrades() {
-        return grades;
+        return this.grades;
     }
 
     public String getPass() {
-        return password;
+        return this.password;
     }
 
 }

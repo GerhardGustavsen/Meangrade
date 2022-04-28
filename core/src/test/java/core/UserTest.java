@@ -13,5 +13,4 @@ public class UserTest {
       new User(null, null, null);
     });
   }
-
 }
