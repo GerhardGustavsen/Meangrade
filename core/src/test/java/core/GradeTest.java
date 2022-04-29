@@ -11,41 +11,41 @@ public class GradeTest {
 
   @BeforeEach
   void init() {
-    grade = new Grade("TDT4100", 'A', 5, "comment");
+    this.grade = new Grade("TDT4100", 'A', 5, "comment");
   }
 
   @Test
   @DisplayName("Test valid code")
   void canCheckValidCode() {
-    Assertions.assertTrue(grade.codeIsValid("TDT1000"));
+    Assertions.assertTrue(this.grade.codeIsValid("TDT1000"));
   }
   @Test
   @DisplayName("Can check invalid code length")
   void canCheckInvalidCode() {
-    Assertions.assertFalse(grade.codeIsValid("TDT100"));
+    Assertions.assertFalse(this.grade.codeIsValid("TDT100"));
   }
 
   @Test
   @DisplayName("Can check invalid code format")
   void canCheckInvalidCodeFormat() {
-    Assertions.assertFalse(grade.codeIsValid("1000TDT"));
+    Assertions.assertFalse(this.grade.codeIsValid("1000TDT"));
   }
 
   @Test
   @DisplayName("Cannot set invalid score")
   void cannotSetInvalidScore(){
-    Assertions.assertTrue(grade.scoreIsValid(4));
-    Assertions.assertFalse(grade.scoreIsValid(-4));
-    Assertions.assertFalse(grade.scoreIsValid(0));
-    Assertions.assertFalse(grade.scoreIsValid(7));
+    Assertions.assertTrue(this.grade.scoreIsValid(4));
+    Assertions.assertFalse(this.grade.scoreIsValid(-4));
+    Assertions.assertFalse(this.grade.scoreIsValid(0));
+    Assertions.assertFalse(this.grade.scoreIsValid(7));
   }
 
   @Test
   @DisplayName("Cannot set invalid grade")
   void cannotSetInvalidGrade(){
-    Assertions.assertTrue(grade.gradeIsValid('A'));
-    Assertions.assertTrue(grade.gradeIsValid('C'));
-    Assertions.assertFalse(grade.gradeIsValid('G'));
-    Assertions.assertFalse(grade.gradeIsValid('a'));
+    Assertions.assertTrue(this.grade.gradeIsValid('A'));
+    Assertions.assertTrue(this.grade.gradeIsValid('C'));
+    Assertions.assertFalse(this.grade.gradeIsValid('G'));
+    Assertions.assertFalse(this.grade.gradeIsValid('a'));
   }
 }

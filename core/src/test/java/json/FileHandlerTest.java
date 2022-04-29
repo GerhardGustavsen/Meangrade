@@ -12,18 +12,18 @@ public class FileHandlerTest {
 
 
   private final String path = "src/test/resources/json/testFile.txt";
-  FileHandler fileHandler = new FileHandler(path);
+  FileHandler fileHandler = new FileHandler(this.path);
 
   @BeforeEach
   void init(){
-    fileHandler.deleteAll();
+    this.fileHandler.deleteAll();
   }
 
   @Test
   @DisplayName("Can read from file")
   void canReadFromFile() throws FileNotFoundException {
-    fileHandler.write("Hello");
-    Scanner scanner = fileHandler.read();
+    this.fileHandler.write("Hello");
+    Scanner scanner = this.fileHandler.read();
     Assertions.assertEquals("Hello", scanner.nextLine());
   }
 
@@ -31,20 +31,21 @@ public class FileHandlerTest {
   @Test
   @DisplayName("Can delete file content")
   void canDeleteFileContent() throws FileNotFoundException {
-    Scanner scanner = fileHandler.read();
+    this.fileHandler.write("Hello");
+    Scanner scanner = this.fileHandler.read();
     Assertions.assertEquals("Hello", scanner.nextLine());
-    fileHandler.deleteAll();
+    this.fileHandler.deleteAll();
     Assertions.assertThrows(NoSuchElementException.class, () -> {
-      Scanner scanner2 = fileHandler.read();
+      this.fileHandler.read().nextLine();
     });
   }
 
   @Test
   @DisplayName("Can write to file")
   void canWriteToFile() throws FileNotFoundException {
-    fileHandler.deleteAll();
-    fileHandler.write("This is the second line");
-    Scanner scanner = fileHandler.read();
+    this.fileHandler.deleteAll();
+    this.fileHandler.write("This is the second line");
+    Scanner scanner = this.fileHandler.read();
     String data = scanner.nextLine();
     Assertions.assertEquals("This is the second line", data);
   }
@@ -52,12 +53,12 @@ public class FileHandlerTest {
   @Test
   @DisplayName("Can write multiple lines")
   void canWriteMultipleLines() throws FileNotFoundException {
-    fileHandler.deleteAll();
+    this.fileHandler.deleteAll();
     List<String> tests = Arrays.asList("First Line", "Second Line", "Third Line");
-    fileHandler.write("First Line");
-    fileHandler.write("Second Line");
-    fileHandler.write("Third Line");
-    Scanner scanner = fileHandler.read();
+    this.fileHandler.write("First Line");
+    this.fileHandler.write("Second Line");
+    this.fileHandler.write("Third Line");
+    Scanner scanner = this.fileHandler.read();
     ArrayList<String> lines = new ArrayList<>();
     while(scanner.hasNextLine()){
       String data = scanner.nextLine();

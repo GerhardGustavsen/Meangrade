@@ -43,7 +43,7 @@ public class Core {
   public void loggOut() throws FileNotFoundException {
     this.users = userHandler.getAllUsers();
     this.courses = courseHandler.getAllCourses();
-    activeUser = null;
+    this.activeUser = null;
   }
 
   public User getuser(String username) {
@@ -65,7 +65,7 @@ public class Core {
   }
 
   private void setActiveUser(String username, String password, String encryptedGrades) {
-    activeUser = new ActiveUser(username, Encrypt.hash(password), encryptedGrades, password);
+    this.activeUser = new ActiveUser(username, Encrypt.hash(password), encryptedGrades, password);
 
     // decrypt the grades:
     ArrayList<Grade> grades = new ArrayList<Grade>();
@@ -93,31 +93,28 @@ public class Core {
 
         grades.add(grade);
       }
-
-    } else {
-      // System.out.println("no data found!");
     }
     activeUser.setGrades(grades);
   }
 
   public void newProfile(String username, String pas) {
     User user = new User(username, Encrypt.hash(pas), "");
-    users.add(user);
+    this.users.add(user);
     userHandler.saveUser(user);
   }
 
   public ActiveUser getActiveUser() {
-    return activeUser;
+    return this.activeUser;
   }
 
   public ArrayList<Course> getCourses() {
-    return courses;
+    return this.courses;
   }
 
   public void newGrade(char grade, String courseCode, int score, String comment) throws IOException {
     Grade newGrade = new Grade(courseCode, grade, score, comment);
-    activeUser.addGrade(newGrade);
-    userHandler.saveGrade(activeUser);
+    this.activeUser.addGrade(newGrade);
+    this.userHandler.saveGrade(activeUser);
 
     // Uppdate course with the new score:
     Course changedCourse = newGrade.getCourse(this);
@@ -125,11 +122,6 @@ public class Core {
       if (c.getCode().equals(changedCourse.getCode())) {
         c.addScore(score);
         c.addGrade(Grade.toInt(grade));
-        // System.out.println(c.getCode() + " scores are now: " + c.getScoreArray());
-        // System.out.println(c.getCode() + " grades are now: " + c.getGradeArray());
-      } else {
-        // System.out.println("in core newGrade(): |" + c.getCode() + "| != |" +
-        // changedCourse.getCode() + "|");
       }
     }
     courseHandler.saveCourses(courses);
@@ -137,23 +129,22 @@ public class Core {
 
   public void newCourse(String code, String name, int grade, int num, String desc) {
     ArrayList<Integer> allGrades = new ArrayList<Integer>();
-
     for (int i = 0; i < num; i++) {
       allGrades.add(grade);
     }
 
     Course course = new Course(code, name, desc, allGrades, new ArrayList<Integer>());
 
-    courses.add(course);
-    courseHandler.saveCourse(course);
+    this.courses.add(course);
+    this.courseHandler.saveCourse(course);
   }
 
   public void removeGrade(String code) throws IOException {
-    for (int i = 0; i < activeUser.getGrades().size(); i++) {
-      if (code.equals(activeUser.getGrades().get(i).getCode())) {
-        activeUser.getGrades().remove(i);
+    for (int i = 0; i < this.activeUser.getGrades().size(); i++) {
+      if (code.equals(this.activeUser.getGrades().get(i).getCode())) {
+        this.activeUser.getGrades().remove(i);
       }
     }
-    userHandler.saveGrade(activeUser);
+    this.userHandler.saveGrade(this.activeUser);
   }
 }
