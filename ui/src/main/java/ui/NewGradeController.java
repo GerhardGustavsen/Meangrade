@@ -25,13 +25,13 @@ public class NewGradeController extends Controller implements Initializable {
     private Label title;
 
     @FXML
-    private ComboBox scoreInput;
+    private ComboBox<Integer> scoreInput;
 
     @FXML
-    private ComboBox gradeInput;
+    private ComboBox<Character> gradeInput;
 
     @FXML
-    private ComboBox courseInput;
+    private ComboBox<String> courseInput;
 
     @FXML
     private TextArea commentInput;

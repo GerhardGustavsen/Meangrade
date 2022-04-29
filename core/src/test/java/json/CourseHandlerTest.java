@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 public class CourseHandlerTest {
 
@@ -68,7 +67,8 @@ public class CourseHandlerTest {
   @Test
   @DisplayName("Can convert string to Course")
   void canConvertStringToCourse() {
-    Course course = testHandler.stringToCourse("Code: TDT1001 | Name: test score | Description: test test test | Results: [6, 4] | Scores: [3, 5]");
+    Course course = testHandler.stringToCourse(
+        "Code: TDT1001 | Name: test score | Description: test test test | Results: [6, 4] | Scores: [3, 5]");
     // if course is not null that means that the function has returned a Course;
     Assertions.assertNotNull(course);
   }
@@ -77,7 +77,7 @@ public class CourseHandlerTest {
   @DisplayName("Throw error with wrong string")
   void stringToCourseThrowsErrorForFormat() {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
-      Course course = testHandler.stringToCourse("Wrong input!");
+      testHandler.stringToCourse("Wrong input!");
     });
   }
 
