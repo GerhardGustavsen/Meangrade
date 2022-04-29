@@ -5,14 +5,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public interface FileInterface {
-  public void createNewFile();
+  public abstract void createNewFile();
 
-  public void write(String string);
+  public abstract void write(String string);
 
-  public File getFile();
+  public abstract File getFile();
 
-  public Scanner read() throws FileNotFoundException;
+  public abstract Scanner read() throws FileNotFoundException;
 
-  public void deleteAll();
+  public abstract void deleteAll();
 
-  }
+}
