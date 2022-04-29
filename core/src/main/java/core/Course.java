@@ -77,7 +77,7 @@ public class Course {
 
     public String getAvrg() {
         double avrg = avrg(results);
-        //System.out.println("Avrage grade: " + avrg);
+        // System.out.println("Avrage grade: " + avrg);
         char grade = Grade.toChar((int) avrg);
         int rest = (int) Math.round((avrg - (int) avrg) * 100);
         return String.valueOf(grade) + "." + rest;
@@ -118,8 +118,8 @@ public class Course {
         for (int i : list) {
             sum = sum + i;
         }
-        System.out.println(sum);
-        System.out.println(list.size());
+        // System.out.println(sum);
+        // System.out.println(list.size());
         return sum / list.size();
     }
 
