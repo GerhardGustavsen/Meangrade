@@ -39,9 +39,9 @@ public class Encrypt {
     StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
     encryptor.setPassword(password);
     String data = encryptor.decrypt(encrypted);
-    if(data == null){
+    if (data == null) {
       throw new IllegalArgumentException("Wrong password");
-    }else{
+    } else {
       return data;
     }
   }

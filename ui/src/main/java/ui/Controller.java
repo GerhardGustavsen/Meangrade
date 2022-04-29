@@ -9,10 +9,10 @@ import java.io.IOException;
 
 import core.Core;
 
-public class Controller {
+abstract class Controller {
 
-  Core core;
-  Stage stage;
+  protected Core core;
+  protected Stage stage;
 
   protected void openFXML(Controller controller, String fxmlPath) {
 
@@ -23,6 +23,7 @@ public class Controller {
       controller.sendCore(core);
       controller.sendStage(stage);
       Parent root = loader.load();
+      controller.Poppulate();
 
       if (core.getActiveUser() != null)
         stage.setTitle("User: " + core.getActiveUser().getName());
@@ -36,11 +37,13 @@ public class Controller {
     }
   }
 
-  public void sendCore(Core c) {
+  private void sendCore(Core c) {
     core = c;
   }
 
   private void sendStage(Stage s) {
     stage = s;
   }
+
+  abstract void Poppulate();
 }

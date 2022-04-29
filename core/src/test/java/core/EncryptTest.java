@@ -15,7 +15,7 @@ public class EncryptTest {
   void init() {
     String pas = "123";
     String data = "Hello";
-    String encryptedData = Encrypt.encrypt(data, pas);
+    encryptedData = Encrypt.encrypt(data, pas);
   }
 
   @Test

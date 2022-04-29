@@ -6,12 +6,12 @@ public class Grade {
 
     private String code;
     private char grade;
-    private Integer score;
+    private int score;
     private final String comment;
 
     private final char[] validGrades = { 'A', 'B', 'C', 'D', 'E', 'F' };
 
-    public Grade(String c, char g, Integer s, String com) {
+    public Grade(String c, char g, int s, String com) {
         setCode(c);
         setGrade(g);
         setScore(s);
@@ -38,7 +38,7 @@ public class Grade {
         return getCode() + "\t\t\t\t\t\t\tGrade: " + getGrade();
     }
 
-    public void setScore(Integer score) throws IllegalArgumentException {
+    public void setScore(int score) throws IllegalArgumentException {
         if (scoreIsValid(score)) {
             this.score = score;
         } else {

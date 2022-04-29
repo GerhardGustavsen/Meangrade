@@ -30,7 +30,6 @@ public class UserHandler extends FileHandler {
     Files.write(file.toPath(), users, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
   }
 
-
   public ArrayList<User> getAllUsers() {
     try {
       Scanner reader = read();
@@ -41,7 +40,7 @@ public class UserHandler extends FileHandler {
       }
       return users;
     } catch (FileNotFoundException e) {
-      //System.out.println("Could not fetch the courses");
+      // System.out.println("Could not fetch the courses");
       e.printStackTrace();
     }
     return null;
@@ -64,9 +63,9 @@ public class UserHandler extends FileHandler {
     write(userToString(user));
   }
 
-  public User stringToUser(String data)throws IllegalArgumentException {
+  public User stringToUser(String data) throws IllegalArgumentException {
     String[] parts = data.split("\\|");
-    if(parts.length != 3){
+    if (parts.length != 3) {
       throw new IllegalArgumentException("Wrong format for the data string");
     }
     ArrayList<String> userData = new ArrayList<>();
@@ -76,9 +75,9 @@ public class UserHandler extends FileHandler {
         userData.add(m.group(1));
       }
     }
-    try{
+    try {
       return new User(userData.get(0), userData.get(1), userData.get(2));
-    }catch (IllegalArgumentException e){
+    } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("Each part of the string input was not properly formated");
     }
   }

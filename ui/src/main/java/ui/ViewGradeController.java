@@ -45,8 +45,8 @@ public class ViewGradeController extends Controller {
   private void handleOpenDashboard(ActionEvent event) {
     DashboardController dash = new DashboardController();
     openFXML(dash, "Dashboard.fxml");
-    dash.poppulateListView();
-    dash.initClickActions();
+    // dash.poppulateListView();
+    // dash.initClickActions();
   }
 
   @FXML
@@ -59,7 +59,8 @@ public class ViewGradeController extends Controller {
     grade = g;
   }
 
-  public void Poppulate() {
+  @Override
+  void Poppulate() {
     courseLabel.setText(grade.getCode() + ":");
     gradeLabel.setText(String.valueOf(grade.getGrade()));
 

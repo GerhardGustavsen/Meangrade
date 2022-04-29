@@ -57,7 +57,7 @@ public class Course {
         return avrg(score);
     };
 
-    public void addScore(Integer score) throws IllegalArgumentException {
+    public void addScore(int score) throws IllegalArgumentException {
         if (numBetwean(score, 1, 5)) {
             this.score.add(score);
         } else {
@@ -66,7 +66,7 @@ public class Course {
 
     };
 
-    public void addGrade(Integer grade) throws IllegalArgumentException {
+    public void addGrade(int grade) throws IllegalArgumentException {
         if (numBetwean(grade, 1, 6)) {
             this.results.add(grade);
         } else {
@@ -93,9 +93,9 @@ public class Course {
 
     public char getMode() {
         if (results != null && results.size() > 0) {
-            Integer[] gradeList = { 0, 0, 0, 0, 0, 0, 0 };
+            int[] gradeList = { 0, 0, 0, 0, 0, 0, 0 };
             // - - - - - - - - - - -X -F -E -D -C -B -A
-            for (Integer i : results) {
+            for (int i : results) {
                 gradeList[i]++;
             }
 
@@ -115,19 +115,19 @@ public class Course {
 
     private static double avrg(ArrayList<Integer> list) {
         Double sum = 0.0;
-        for (Integer i : list) {
+        for (int i : list) {
             sum = sum + i;
         }
 
         return sum / list.size();
     }
 
-    public boolean numBetwean(Integer num, Integer low, Integer high) {
+    public boolean numBetwean(int num, int low, int high) {
         return num <= high && num >= low;
     }
 
     public boolean resultsAreValid(ArrayList<Integer> results) {
-        for (Integer result : results) {
+        for (int result : results) {
             if (result > 6 || result < 1) {
                 return false;
             }

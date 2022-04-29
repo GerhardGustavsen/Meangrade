@@ -50,7 +50,7 @@ public class DashboardController extends Controller {
       @Override
       public void handle(MouseEvent arg0) {
         if (gradeList.getSelectionModel().getSelectedItem() != null) {
-          //System.out.println(gradeList.getSelectionModel().getSelectedItem().getCode());
+          // System.out.println(gradeList.getSelectionModel().getSelectedItem().getCode());
           // Open gradeview :)
           OpenGrade(gradeList.getSelectionModel().getSelectedItem());
         }
@@ -60,9 +60,15 @@ public class DashboardController extends Controller {
 
   private void OpenGrade(Grade g) {
     ViewGradeController viewGrade = new ViewGradeController();
-    openFXML(viewGrade, "ViewGrade.fxml");
     viewGrade.SendGrade(g);
-    viewGrade.Poppulate();
+    openFXML(viewGrade, "ViewGrade.fxml");
+    // viewGrade.Poppulate();
+  }
+
+  @Override
+  void Poppulate() {
+    poppulateListView();
+    initClickActions();
   }
 
 }

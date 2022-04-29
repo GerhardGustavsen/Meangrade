@@ -88,8 +88,8 @@ public class LogginController extends Controller {
   void openDash() {
     DashboardController dash = new DashboardController();
     openFXML(dash, "Dashboard.fxml");
-    dash.poppulateListView();
-    dash.initClickActions();
+    // dash.poppulateListView();
+    // dash.initClickActions();
   }
 
   void clear() {
@@ -107,5 +107,9 @@ public class LogginController extends Controller {
     userstar.setVisible(usermsg.getText() != "");
     passtar.setVisible(pasmsg.getText() != "");
     repasstar.setVisible(repasmsg.getText() != "");
+  }
+
+  @Override
+  void Poppulate() {
   }
 }

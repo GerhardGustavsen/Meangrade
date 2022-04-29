@@ -91,7 +91,7 @@ public class CourseHandler extends FileHandler {
 
       ArrayList<Integer> result = new ArrayList<>();
       while (matcher.find()) {
-        Integer number = Integer.parseInt(matcher.group());
+        int number = Integer.parseInt(matcher.group());
         result.add(number);
       }
       return result;

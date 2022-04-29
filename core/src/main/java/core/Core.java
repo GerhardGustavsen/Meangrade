@@ -17,8 +17,8 @@ public class Core {
 
   private ActiveUser activeUser;
 
-  UserHandler userHandler = new UserHandler("core/src/main/resources/json/users.txt");
-  CourseHandler courseHandler = new CourseHandler("core/src/main/resources/json/courses.txt");
+  final UserHandler userHandler = new UserHandler("core/src/main/resources/json/users.txt");
+  final CourseHandler courseHandler = new CourseHandler("core/src/main/resources/json/courses.txt");
 
   public Core() throws FileNotFoundException {
     this.users = userHandler.getAllUsers();
@@ -114,7 +114,7 @@ public class Core {
     return courses;
   }
 
-  public void newGrade(char grade, String courseCode, Integer score, String comment) throws IOException {
+  public void newGrade(char grade, String courseCode, int score, String comment) throws IOException {
     Grade newGrade = new Grade(courseCode, grade, score, comment);
     activeUser.addGrade(newGrade);
     userHandler.saveGrade(activeUser);

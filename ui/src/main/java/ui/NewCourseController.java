@@ -86,7 +86,11 @@ public class NewCourseController extends Controller {
   void handleOpenDashboard(ActionEvent event) {
     DashboardController dash = new DashboardController();
     openFXML(dash, "Dashboard.fxml");
-    dash.poppulateListView();
-    dash.initClickActions();
+    //dash.poppulateListView();
+    //dash.initClickActions();
+  }
+
+  @Override
+  void Poppulate() {
   }
 }

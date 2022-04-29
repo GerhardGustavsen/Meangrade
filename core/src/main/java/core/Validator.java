@@ -93,7 +93,7 @@ public class Validator {
   }
 
   public static Integer toInt(String strNum) {
-    Integer i;
+    int i;
     if (strNum == null || strNum == "") {
       return 0;
     }

@@ -46,8 +46,8 @@ public class NewGradeController extends Controller implements Initializable {
     void handleOpenDashboard(ActionEvent event) {
         DashboardController dash = new DashboardController();
         openFXML(dash, "Dashboard.fxml");
-        dash.poppulateListView();
-        dash.initClickActions();
+        // dash.poppulateListView();
+        // dash.initClickActions();
     }
 
     /**
@@ -82,7 +82,7 @@ public class NewGradeController extends Controller implements Initializable {
         if (checkInput()) {
             char grade = (char) gradeInput.getValue();
             String courseCode = (String) courseInput.getValue();
-            Integer score = (Integer) scoreInput.getValue();
+            int score = (int) scoreInput.getValue();
             String comment = commentInput.getText();
             String trimmedCourse = courseCode.trim();
             // System.out.println(trimmedCourse.equals("TDT1000"));
@@ -128,7 +128,7 @@ public class NewGradeController extends Controller implements Initializable {
         try {
             char grade = (char) gradeInput.getValue();
             String courseCode = (String) courseInput.getValue();
-            Integer score = (Integer) scoreInput.getValue();
+            int score = (int) scoreInput.getValue();
             String comment = commentInput.getText();
             String trimmedCourse = courseCode.trim();
             core.removeGrade(trimmedCourse);
@@ -150,6 +150,10 @@ public class NewGradeController extends Controller implements Initializable {
         courseInput.setItems(populateCourse());
         dialogPane.setVisible(false);
 
+    }
+
+    @Override
+    void Poppulate() {
     }
 
 }
